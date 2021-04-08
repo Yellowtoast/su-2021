@@ -2,25 +2,10 @@ import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/step1.dart';
-
-class DonateState1_4InputData {
-  DonateState1_4InputData({this.season, this.gender});
-
-  final String season;
-  final String gender;
-}
-
-class DonateState1_4OutputData {
-  DonateState1_4OutputData({this.clothType, this.size});
-
-  final String clothType;
-  final String size;
-}
+import 'package:schooluniform/pages/donate/uniform/types/donateState1_4Data.dart';
+import 'package:schooluniform/pages/donate/uniform/widgets/selectClothType.dart';
 
 class DonateStep1_4 extends StatefulWidget {
-  static String url = "/donate/uniform/1-4";
-
   @override
   DonateStep1_4State createState() => DonateStep1_4State();
 }
@@ -34,27 +19,6 @@ class DonateStep1_4State extends State<DonateStep1_4> {
     setState(() {
       clothType = g;
     });
-  }
-
-  InputDecoration deco(String hintText) {
-    return InputDecoration(
-      counterStyle: TextStyle(
-        height: double.minPositive,
-      ),
-      counterText: "",
-      enabledBorder: InputBorder.none,
-      border: InputBorder.none,
-      focusedBorder: InputBorder.none,
-      isDense: true,
-      labelStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-      ),
-      contentPadding: EdgeInsets.all(0),
-      hintText: hintText,
-      hintStyle: TextStyle(
-          fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xffb7b7b7)),
-    );
   }
 
   @override
@@ -80,300 +44,53 @@ class DonateStep1_4State extends State<DonateStep1_4> {
               ),
             ),
             data.season == "동복"
-                ? GestureDetector(
-                    onTap: () => handleClothType("자켓"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "자켓"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "자켓"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "자켓",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                ? SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "자켓",
+                    onClick: () => handleClothType("자켓"),
                   )
                 : Container(),
             data.season == "동복" || data.season == "하복"
-                ? GestureDetector(
-                    onTap: () => handleClothType("셔츠"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "셔츠"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "셔츠"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "셔츠",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                ? SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "셔츠",
+                    onClick: () => handleClothType("셔츠"),
                   )
-                : GestureDetector(
-                    onTap: () => handleClothType("상의"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "상의"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "상의"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "상의",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                : SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "상의",
+                    onClick: () => handleClothType("상의"),
                   ),
             data.season == "동복"
-                ? GestureDetector(
-                    onTap: () => handleClothType("조끼"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "조끼"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "조끼"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "조끼",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ))
+                ? SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "조끼",
+                    onClick: () => handleClothType("조끼"),
+                  )
                 : Container(),
             data.season == "동복" || data.season == "하복"
-                ? GestureDetector(
-                    onTap: () => handleClothType("바지"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "바지"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "바지"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "바지",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                ? SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "바지",
+                    onClick: () => handleClothType("바지"),
                   )
-                : GestureDetector(
-                    onTap: () => handleClothType("하의"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "하의"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "하의"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "하의",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                : SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "하의",
+                    onClick: () => handleClothType("하의"),
                   ),
             (data.season == "동복" || data.season == "하복") && data.gender == "여자"
-                ? GestureDetector(
-                    onTap: () => handleClothType("치마"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "치마"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "치마"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "치마",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                ? SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "치마",
+                    onClick: () => handleClothType("치마"),
                   )
                 : Container(),
             data.season == "동복" || data.season == "하복"
-                ? GestureDetector(
-                    onTap: () => handleClothType("넥타이"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: clothType == "넥타이"
-                                        ? Colors.black
-                                        : grey6)),
-                            child: clothType == "넥타이"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "넥타이",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                ? SelectClothTypeWidget(
+                    clothType: clothType,
+                    label: "넥타이",
+                    onClick: () => handleClothType("넥타이"),
                   )
                 : Container(),
             clothType == null

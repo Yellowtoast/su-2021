@@ -13,6 +13,7 @@ import 'package:schooluniform/configs/routes.dart';
 // import 'package:schooluniform/configs/collections.dart';
 import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/pages/donate/uniform/step1.dart';
+import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
 import 'package:schooluniform/pages/home/page.dart';
 import 'package:schooluniform/pages/policy/page.dart';
 import 'package:schooluniform/pages/user/donate/uniform/page.dart';

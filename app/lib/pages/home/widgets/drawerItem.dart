@@ -9,7 +9,7 @@ class DrawerItemWidget extends StatelessWidget {
   final String label;
   final String userInfoKey;
   final String url;
-  DrawerItemWidget(this.label, this.userInfoKey, this.url);
+  DrawerItemWidget({this.label, this.userInfoKey, this.url});
 
   @override
   Widget build(BuildContext context) {

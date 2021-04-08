@@ -5,8 +5,6 @@ import 'package:schooluniform/configs/data.dart';
 import 'package:schooluniform/constants/theme.dart';
 
 class DonateStep1_1 extends StatefulWidget {
-  static String url = "/donate/uniform/1-1";
-
   @override
   DonateStep1_1State createState() => DonateStep1_1State();
 }

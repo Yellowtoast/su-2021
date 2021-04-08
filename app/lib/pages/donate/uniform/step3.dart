@@ -4,13 +4,12 @@ import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/step1.dart';
-import 'package:schooluniform/pages/donate/uniform/step4.dart';
+import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
+import 'package:schooluniform/pages/donate/uniform/widgets/imageHandler.dart';
 
 class DonateStep3 extends StatefulWidget {
-  static String url = "/donate/uniform/3";
-
   @override
   DonateStep3State createState() => DonateStep3State();
 }
@@ -21,7 +20,7 @@ class DonateStep3State extends State<DonateStep3> {
   final picker = ImagePicker();
   ScrollController _controller = ScrollController();
 
-  addImageFrom(type) async {
+  handleImageAddFrom(type) async {
     final pickedFile = await picker.getImage(
         source: type == "camera" ? ImageSource.camera : ImageSource.gallery,
         maxHeight: 600,
@@ -41,7 +40,7 @@ class DonateStep3State extends State<DonateStep3> {
     Navigator.of(context).pop();
   }
 
-  removeImage(index) {
+  handleImageRemove(index) {
     setState(() {
       images.removeAt(index);
       Navigator.of(context).pop();
@@ -57,140 +56,6 @@ class DonateStep3State extends State<DonateStep3> {
         Navigator.of(context).pop();
       });
     }
-  }
-
-  addImage() {
-    showModalBottomSheet(
-        context: context,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        builder: (BuildContext context) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            height: 100 + MediaQuery.of(context).padding.bottom,
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).padding.bottom,
-                left: 16,
-                right: 16),
-            child: Row(
-              children: [
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: GestureDetector(
-                    onTap: () {
-                      addImageFrom("gallery");
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 46,
-                      decoration: BoxDecoration(
-                          color: grey3, borderRadius: BorderRadius.circular(8)),
-                      child: Text(
-                        "갤러리 보기",
-                        style: GoogleFonts.notoSans(fontSize: 14),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(right: 16),
-                ),
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: GestureDetector(
-                    onTap: () {
-                      addImageFrom("camera");
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 46,
-                      decoration: BoxDecoration(
-                          color: colorSig2,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Text("직접 촬영",
-                          style: GoogleFonts.notoSans(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
-  }
-
-  changeImage(index) {
-    showModalBottomSheet(
-        context: context,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        builder: (BuildContext context) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            height: 100 + MediaQuery.of(context).padding.bottom,
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).padding.bottom,
-                left: 16,
-                right: 16),
-            child: Row(
-              children: [
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: GestureDetector(
-                    onTap: () {
-                      removeImage(index);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 46,
-                      decoration: BoxDecoration(
-                          color: grey3, borderRadius: BorderRadius.circular(8)),
-                      child: Text(
-                        "사진 삭제",
-                        style: GoogleFonts.notoSans(fontSize: 14),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(right: 16),
-                ),
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: GestureDetector(
-                    onTap: () {
-                      handleImageChange(index);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 46,
-                      decoration: BoxDecoration(
-                          color: colorSig2,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Text("사진 교체",
-                          style: GoogleFonts.notoSans(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
   }
 
   @override
@@ -229,7 +94,12 @@ class DonateStep3State extends State<DonateStep3> {
                   Container(
                     margin: EdgeInsets.only(right: 8),
                     child: GestureDetector(
-                      onTap: () => changeImage(i),
+                      onTap: () => showModal(
+                          context: context,
+                          label1: "사진 삭제",
+                          onClickForLabel1: () => {handleImageRemove(i)},
+                          label2: "사진 교체",
+                          onClickForLabel2: () => {handleImageChange(i)}),
                       child: Container(
                         width: 80,
                         height: 80,
@@ -244,7 +114,14 @@ class DonateStep3State extends State<DonateStep3> {
                   ),
                 images.length < 10
                     ? GestureDetector(
-                        onTap: () => addImage(),
+                        onTap: () => showModal(
+                            context: context,
+                            label1: "갤러리 보기",
+                            onClickForLabel1: () =>
+                                {handleImageAddFrom("gallery")},
+                            label2: "직접 촬영",
+                            onClickForLabel2: () =>
+                                {handleImageAddFrom("camera")}),
                         child: Container(
                           width: 80,
                           height: 80,
@@ -291,7 +168,7 @@ class DonateStep3State extends State<DonateStep3> {
                   margin: EdgeInsets.only(top: 24),
                   child: GestureDetector(
                     onTap: () =>
-                        Navigator.of(context).pushNamed(DonateStep4.url,
+                        Navigator.of(context).pushNamed(Routes.donateStep4Url,
                             arguments: DonateInfo(
                               school: d.school,
                               gender: d.gender,

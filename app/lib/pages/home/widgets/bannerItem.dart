@@ -9,7 +9,7 @@ class BannerItemWidget extends StatelessWidget {
   final String label;
   final String secondaryLabel;
   BannerItemWidget(
-      this.bg, this.url, this.imageSrc, this.label, this.secondaryLabel);
+      {this.bg, this.url, this.imageSrc, this.label, this.secondaryLabel});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,11 @@ import 'package:schooluniform/constants/theme.dart';
 
 class CountUpItemWidget extends StatelessWidget {
   final String url;
-  final 
+  final String label;
+  final String condition;
+  final double secondaryLabel;
+  CountUpItemWidget(
+      {this.url, this.label, this.condition, this.secondaryLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +19,7 @@ class CountUpItemWidget extends StatelessWidget {
       child: Container(
           height: 76,
           child: GestureDetector(
-              onTap: () =>
-                  Navigator.of(context).pushNamed(url),
+              onTap: () => Navigator.of(context).pushNamed(url),
               child: Container(
                 color: Colors.transparent,
                 child: Column(
@@ -25,7 +28,7 @@ class CountUpItemWidget extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(bottom: 8),
                       child: Text(
-                        "최다 기부 학교",
+                        label,
                         style: GoogleFonts.notoSans(
                             fontSize: 12, color: textGrey2, height: 1.17),
                       ),
@@ -33,16 +36,14 @@ class CountUpItemWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                            '', // "${getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"]} ",
+                        Text(condition,
                             style: GoogleFonts.notoSans(
                                 fontSize: 12,
                                 color: textGrey2,
                                 fontWeight: FontWeight.bold)),
                         Countup(
                           begin: 0,
-                          end:
-                              100, //getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["totalDonate"].toDouble()
+                          end: secondaryLabel,
                           duration: Duration(seconds: 2),
                           separator: ",",
                           style: GoogleFonts.montserrat(

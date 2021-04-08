@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:733477305411:android:d191b3e6b1e07ba2f128f6",
+        "mobilesdk_app_id": "1:733477305411:android:4726e92751b142b6f128f6",
         "android_client_info": {
-          "package_name": "com.example.schooluniform"
+          "package_name": "com.daegubukgu.donations"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "733477305411-tnaporaii7tvi3rp9u5157j309hm62ah.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "733477305411-aak9vksbnlqn6qr2n250pull4ce7h9rk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.daegubukgu.donations"
+              }
             }
           ]
         }

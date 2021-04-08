@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header.dart';
 
 class DonateThingParking extends StatefulWidget {
-  static String url = "/donate/thing/parking";
-
   @override
   DonateThingParkingState createState() => DonateThingParkingState();
 }

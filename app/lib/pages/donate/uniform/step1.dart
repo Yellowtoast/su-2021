@@ -3,57 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/step1-1.dart';
-import 'package:schooluniform/pages/donate/uniform/step1-2.dart';
-import 'package:schooluniform/pages/donate/uniform/step1-3.dart';
-import 'package:schooluniform/pages/donate/uniform/step1-4.dart';
-import 'package:schooluniform/pages/donate/uniform/step3.dart';
 
-class Uniform {
-  Uniform({this.school, this.gender, this.season, this.clothType, this.size});
-
-  final String school;
-  final String gender;
-  final String season;
-  final String clothType;
-  final String size;
-
-  Map<String, dynamic> toJSON() => {
-        "school": school,
-        "gender": gender,
-        "season": season,
-        "clothType": clothType,
-        "size": size,
-      };
-}
-
-class DonateInfo {
-  DonateInfo(
-      {this.school,
-      this.gender,
-      this.season,
-      this.uniforms,
-      this.images,
-      this.deliveryType,
-      this.name,
-      this.phone,
-      this.address});
-
-  final String school;
-  final String gender;
-  final String season;
-
-  final List uniforms;
-  final List images;
-  final String deliveryType;
-  final String name;
-  final String phone;
-  final String address;
-}
+import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
+import 'package:schooluniform/pages/donate/uniform/types/donateState1_4Data.dart';
+import 'package:schooluniform/pages/donate/uniform/types/uniform.dart';
 
 class DonateStep1 extends StatefulWidget {
-  static String url = "/donate/uniform/1";
-
   @override
   DonateStep1State createState() => DonateStep1State();
 }

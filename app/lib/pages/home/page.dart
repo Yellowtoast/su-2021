@@ -1,4 +1,3 @@
-import 'package:countup/countup.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -13,11 +12,12 @@ import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/data.dart';
-import 'package:schooluniform/pages/home/widgets/bannerItem.dart';
 import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 
 import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/pages/home/widgets/bannerItem.dart';
+import 'package:schooluniform/pages/home/widgets/countUpItem.dart';
 import 'package:schooluniform/pages/home/widgets/drawerItem.dart';
 import 'package:schooluniform/pages/home/widgets/swipeBannerItem.dart';
 
@@ -196,11 +196,18 @@ class HomePageState extends State<HomePage> {
                           height: 20),
                     )),
               ),
-              DrawerItemWidget('장바구니', "totalAlarmsCart", Routes.userCartUrl),
               DrawerItemWidget(
-                  '교복 구매 내역', "totalAlarmsShop", Routes.userPurchaseUniformUrl),
+                  label: '장바구니',
+                  userInfoKey: "totalAlarmsCart",
+                  url: Routes.userCartUrl),
               DrawerItemWidget(
-                  '교복 기부 내역', "totalAlarmsDonate", Routes.userDonateUniformUrl),
+                  label: '교복 구매 내역',
+                  userInfoKey: "totalAlarmsShop",
+                  url: Routes.userPurchaseUniformUrl),
+              DrawerItemWidget(
+                  label: '교복 기부 내역',
+                  userInfoKey: "totalAlarmsDonate",
+                  url: Routes.userDonateUniformUrl),
               GestureDetector(
                 onTap: () =>
                     Navigator.of(context).pushNamed(Routes.userSupportUrl),
@@ -240,13 +247,17 @@ class HomePageState extends State<HomePage> {
                     },
                     children: [
                       SwipeBannerItemWidget(
-                          Routes.donateStep1Url, "assets/img/banner1.png"),
+                          url: Routes.donateStep1Url,
+                          imageSrc: "assets/img/banner1.png"),
                       SwipeBannerItemWidget(
-                          Routes.shopFilterUrl, "assets/img/banner2.png"),
+                          url: Routes.shopFilterUrl,
+                          imageSrc: "assets/img/banner2.png"),
                       SwipeBannerItemWidget(
-                          Routes.supportUrl, "assets/img/banner3.png"),
-                      SwipeBannerItemWidget(Routes.donateThingParkingUrl,
-                          "assets/img/banner4.png"),
+                          url: Routes.supportUrl,
+                          imageSrc: "assets/img/banner3.png"),
+                      SwipeBannerItemWidget(
+                          url: Routes.donateThingParkingUrl,
+                          imageSrc: "assets/img/banner4.png"),
                     ],
                   ),
                   Positioned(
@@ -301,48 +312,13 @@ class HomePageState extends State<HomePage> {
                   ),
                   Row(
                     children: [
-                      Flexible(
-                        flex: 1,
-                        fit: FlexFit.tight,
-                        child: Container(
-                          height: 76,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 8),
-                                  child: Text(
-                                    "누적 교복 기부 횟수",
-                                    style: GoogleFonts.notoSans(
-                                        fontSize: 12,
-                                        color: textGrey2,
-                                        height: 1.17),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Countup(
-                                      begin: 0,
-                                      end: infoStore.localInfo["totalDonate"] ==
-                                              0
-                                          ? infoStore.localInfo["totalDonate"]
-                                              .toDouble()
-                                          : 100,
-                                      duration: Duration(seconds: 2),
-                                      separator: ",",
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: textGrey2),
-                                    ),
-                                    Text(" 회",
-                                        style: GoogleFonts.notoSans(
-                                            fontSize: 12, color: textGrey2)),
-                                  ],
-                                ),
-                              ]),
-                        ),
+                      CountUpItemWidget(
+                        url: Routes.rankingSchoolUrl,
+                        label: "최다 기부 학교",
+                        condition: '',
+                        secondaryLabel: 100,
+                        //infoStore.localInfo["totalDonate"]
+                        //infoStore.localInfo["totalDonate"].toDouble()
                       ),
                       Container(
                         width: 1,
@@ -350,60 +326,14 @@ class HomePageState extends State<HomePage> {
                         color: grey2,
                         child: null,
                       ),
-                      // Flexible(
-                      //   flex: 1,
-                      //   fit: FlexFit.tight,
-                      //   child: Container(
-                      //       height: 76,
-                      //       child: GestureDetector(
-                      //           onTap: () => Navigator.of(context)
-                      //               .pushNamed(Routes.rankingSchoolUrl),
-                      //           child: Container(
-                      //             color: Colors.transparent,
-                      //             child: Column(
-                      //               mainAxisAlignment: MainAxisAlignment.center,
-                      //               children: [
-                      //                 Container(
-                      //                   margin: EdgeInsets.only(bottom: 8),
-                      //                   child: Text(
-                      //                     "최다 기부 학교",
-                      //                     style: GoogleFonts.notoSans(
-                      //                         fontSize: 12,
-                      //                         color: textGrey2,
-                      //                         height: 1.17),
-                      //                   ),
-                      //                 ),
-                      //                 Row(
-                      //                   mainAxisAlignment:
-                      //                       MainAxisAlignment.center,
-                      //                   children: [
-                      //                     Text(
-                      //                         '', // "${getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"]} ",
-                      //                         style: GoogleFonts.notoSans(
-                      //                             fontSize: 12,
-                      //                             color: textGrey2,
-                      //                             fontWeight: FontWeight.bold)),
-                      //                     Countup(
-                      //                       begin: 0,
-                      //                       end:
-                      //                           100, //getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["totalDonate"].toDouble()
-                      //                       duration: Duration(seconds: 2),
-                      //                       separator: ",",
-                      //                       style: GoogleFonts.montserrat(
-                      //                           fontSize: 14,
-                      //                           fontWeight: FontWeight.bold,
-                      //                           color: textGrey2),
-                      //                     ),
-                      //                     Text(" 회",
-                      //                         style: GoogleFonts.notoSans(
-                      //                             fontSize: 12,
-                      //                             color: textGrey2)),
-                      //                   ],
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ))),
-                      // ),
+                      CountUpItemWidget(
+                        url: Routes.rankingSchoolUrl,
+                        label: "최다 기부 학교",
+                        condition: '',
+                        secondaryLabel: 100,
+                        //getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"]
+                        //getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"].toDouble()
+                      ),
                     ],
                   ),
                   Container(
@@ -414,28 +344,28 @@ class HomePageState extends State<HomePage> {
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
                           child: BannerItemWidget(
-                              grey2,
-                              Routes.donateStep1Url,
-                              "assets/img/bookie-banner-1.png",
-                              "중고 교복 기부 바로가기",
-                              "후배들을 위해 따뜻한 마음을 전해보세요"),
+                              bg: grey2,
+                              url: Routes.donateStep1Url,
+                              imageSrc: "assets/img/bookie-banner-1.png",
+                              label: "중고 교복 기부 바로가기",
+                              secondaryLabel: "후배들을 위해 따뜻한 마음을 전해보세요"),
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
                           child: BannerItemWidget(
-                              Color(0xffeae1f2),
-                              Routes.shopFilterUrl,
-                              "assets/img/bookie-banner-0.png",
-                              "교복 구매 바로가기",
-                              "기부된 교복을 무료로 나눠드려요"),
+                              bg: Color(0xffeae1f2),
+                              url: Routes.shopFilterUrl,
+                              imageSrc: "assets/img/bookie-banner-0.png",
+                              label: "교복 구매 바로가기",
+                              secondaryLabel: "기부된 교복을 무료로 나눠드려요"),
                         ),
                         Container(
                           child: BannerItemWidget(
-                              Color(0xffE5DDCB),
-                              Routes.supportUrl,
-                              "assets/img/bookie-banner-2.png",
-                              "후원하러 가기",
-                              "어려운 이들에게 희망을 나눠주세요"),
+                              bg: Color(0xffE5DDCB),
+                              url: Routes.supportUrl,
+                              imageSrc: "assets/img/bookie-banner-2.png",
+                              label: "후원하러 가기",
+                              secondaryLabel: "어려운 이들에게 희망을 나눠주세요"),
                         )
                       ],
                     ),

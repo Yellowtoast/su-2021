@@ -1,11 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header2.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/pages/donate/uniform/widgets/selectGender.dart';
 
 class DonateStep1_2 extends StatefulWidget {
-  static String url = "/donate/uniform/1-2";
-
   @override
   DonateStep1_2State createState() => DonateStep1_2State();
 }
@@ -41,75 +39,15 @@ class DonateStep1_2State extends State<DonateStep1_2> {
                           fontSize: 24, fontWeight: FontWeight.w300, height: 1),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () => handleGender("남자"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color:
-                                        gender == "남자" ? Colors.black : grey6)),
-                            child: gender == "남자"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "남자",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                  SelectGenderWidget(
+                    gender: gender,
+                    label: "남자",
+                    onClick: () => handleGender("남자"),
                   ),
-                  GestureDetector(
-                    onTap: () => handleGender("여자"),
-                    child: Container(
-                      height: 46,
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 18,
-                            height: 18,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color:
-                                        gender == "여자" ? Colors.black : grey6)),
-                            child: gender == "여자"
-                                ? Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black),
-                                  )
-                                : Container(),
-                          ),
-                          Text(
-                            "여자",
-                            style: GoogleFonts.notoSans(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
+                  SelectGenderWidget(
+                    gender: gender,
+                    label: "여자",
+                    onClick: () => handleGender("여자"),
                   ),
                 ],
               ),
