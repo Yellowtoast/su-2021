@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "733477305411",
+    "project_id": "su-2021",
+    "storage_bucket": "su-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733477305411:android:d191b3e6b1e07ba2f128f6",
+        "android_client_info": {
+          "package_name": "com.example.schooluniform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733477305411-tnaporaii7tvi3rp9u5157j309hm62ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3nmjUbHzcKpjZvOzCAyNu0klrwfRDyBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733477305411-tnaporaii7tvi3rp9u5157j309hm62ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
