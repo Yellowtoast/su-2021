@@ -14,9 +14,6 @@ class ShopShowDirectPage extends StatefulWidget {
   ShopShowDirectPage({this.code});
 
   final String code;
-
-  static String url = "/shop/show/direct";
-
   @override
   ShopShowDirectPageState createState() => ShopShowDirectPageState();
 }

@@ -4,10 +4,10 @@ import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/components/loading.dart';
+import 'package:schooluniform/configs/routes.dart';
 // import 'package:schooluniform/configs/collections.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/shop/buy/uniform/step1.dart';
 import 'package:schooluniform/pages/shop/show/pageDirect.dart';
 
 class UserCartPage extends StatefulWidget {
@@ -62,9 +62,9 @@ class UserCartPageState extends State<UserCartPage> {
       //     loading = false;
       //   });
       // } else {
-      //   setState(() {
-      //     loading = false;
-      //   });
+      setState(() {
+        loading = false;
+      });
       // }
     } catch (err) {
       print(err);
@@ -78,7 +78,6 @@ class UserCartPageState extends State<UserCartPage> {
 
   Future<void> deleteCart(id) async {
     // User u = FirebaseAuth.instance.currentUser;
-
     showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
@@ -241,7 +240,7 @@ class UserCartPageState extends State<UserCartPage> {
                         onTap: () {
                           Navigator.of(context).pop();
                           Navigator.of(context)
-                              .pushNamed(ShopStep1.url, arguments: id);
+                              .pushNamed(Routes.shopStep1Url, arguments: id);
                         },
                         child: Container(
                           width: (MediaQuery.of(context).size.width / 2) - 40,
@@ -333,7 +332,7 @@ class UserCartPageState extends State<UserCartPage> {
             ),
             GestureDetector(
               onTap: () => Navigator.of(context)
-                  .pushNamed(ShopShowDirectPage.url, arguments: data["id"]),
+                  .pushNamed(Routes.shopShowDirectUrl, arguments: data["id"]),
               child: Row(
                 children: [
                   Container(

@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header2.dart';
 
 class PolicyPage extends StatefulWidget {
-  static String url = "/policy";
-
   @override
   PolicyPageState createState() => PolicyPageState();
 }

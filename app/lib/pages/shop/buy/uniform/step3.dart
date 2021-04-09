@@ -36,8 +36,6 @@ class ShopUniformInputData {
 }
 
 class ShopStep3 extends StatefulWidget {
-  static String url = "/shop/uniform/3";
-
   @override
   ShopStep3State createState() => ShopStep3State();
 }

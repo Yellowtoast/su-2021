@@ -14,6 +14,7 @@ import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/pages/donate/uniform/step1.dart';
 import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
+import 'package:schooluniform/pages/donate/uniform/widgets/input.dart';
 import 'package:schooluniform/pages/home/page.dart';
 import 'package:schooluniform/pages/policy/page.dart';
 import 'package:schooluniform/pages/user/donate/uniform/page.dart';
@@ -265,122 +266,56 @@ class DonateStep5State extends State<DonateStep5> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 8),
-                child: Text(
-                  "이름",
-                  style: GoogleFonts.notoSans(fontSize: 12),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 24),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: grey3)),
-                  child: TextField(
+                  margin: EdgeInsets.only(bottom: 24),
+                  child: InputWidget(
+                    label: "이름",
                     onChanged: (text) {
                       setState(() {
                         name = text;
                       });
                     },
-                    cursorColor: colorSig1,
-                    keyboardType: TextInputType.text,
-                    decoration: deco("기부자 이름을 적어주세요"),
+                    placeholder: "기부자 이름을 적어주세요",
                     maxLength: 10,
-                  ),
-                ),
-              ),
+                  )),
               Container(
-                margin: EdgeInsets.only(bottom: 8),
-                child: Text(
-                  "전화번호",
-                  style: GoogleFonts.notoSans(fontSize: 12),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 24),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: grey3)),
-                  child: TextField(
+                  margin: EdgeInsets.only(bottom: 24),
+                  child: InputWidget(
+                    label: "전화번호",
                     onChanged: (text) {
                       setState(() {
                         phone = text;
                       });
                     },
-                    cursorColor: colorSig1,
-                    keyboardType: TextInputType.phone,
-                    decoration: deco("- 생략"),
+                    placeholder: "- 생략",
                     maxLength: 11,
-                  ),
-                ),
-              ),
+                  )),
               d.deliveryType == "수거 요청"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 8),
-                          child: Text(
-                            "주소",
-                            style: GoogleFonts.notoSans(fontSize: 12),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 24),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 14),
-                            decoration: BoxDecoration(
-                                border: Border.all(width: 1, color: grey3)),
-                            child: TextField(
-                              onChanged: (text) {
-                                setState(() {
-                                  address = text;
-                                });
-                              },
-                              cursorColor: colorSig1,
-                              keyboardType: TextInputType.streetAddress,
-                              decoration: deco("수거할 주소를 입력해주세요"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                  ? Container(
+                      margin: EdgeInsets.only(bottom: 24),
+                      child: InputWidget(
+                        label: "주소",
+                        onChanged: (text) {
+                          setState(() {
+                            address = text;
+                          });
+                        },
+                        placeholder: "수거할 주소를 입력해주세요",
+                        maxLength: 50,
+                      ))
                   : Container(),
               d.deliveryType == "복지센터 방문"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 8),
-                          child: Text(
-                            "동 행정복지센터",
-                            style: GoogleFonts.notoSans(fontSize: 12),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 24),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 14),
-                            decoration: BoxDecoration(
-                                border: Border.all(width: 1, color: grey3)),
-                            child: TextField(
-                              onChanged: (text) {
-                                setState(() {
-                                  address = text;
-                                });
-                              },
-                              cursorColor: colorSig1,
-                              keyboardType: TextInputType.streetAddress,
-                              decoration: deco("방문할 동 행정복지센터를 입력해주세요 ex.태전1동"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                  ? Container(
+                      margin: EdgeInsets.only(bottom: 24),
+                      child: InputWidget(
+                        label: "동 행정복지센터",
+                        onChanged: (text) {
+                          setState(() {
+                            address = text;
+                          });
+                        },
+                        placeholder: "방문할 동 행정복지센터를 입력해주세요 ex.태전1동",
+                        maxLength: 50,
+                      ))
                   : Container(),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),

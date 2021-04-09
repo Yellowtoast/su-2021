@@ -18,8 +18,6 @@ class ShopUniformShowArg {
 }
 
 class ShopShowPage extends StatefulWidget {
-  static String url = "/shop/show";
-
   @override
   ShopShowPageState createState() => ShopShowPageState();
 }

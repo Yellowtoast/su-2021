@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/stores.dart';
 
 import 'package:schooluniform/constants/theme.dart';
@@ -8,8 +9,6 @@ import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ShopStep2 extends StatefulWidget {
-  static String url = "/shop/uniform/2";
-
   @override
   ShopStep2State createState() => ShopStep2State();
 }
@@ -183,7 +182,7 @@ class ShopStep2State extends State<ShopStep2> {
                           margin: EdgeInsets.only(top: 24),
                           child: GestureDetector(
                             onTap: () => Navigator.of(context).pushNamed(
-                                ShopStep3.url,
+                                Routes.shopStep3Url,
                                 arguments: ShopUniformInputData(
                                     code: d.code,
                                     certFront: d.certFront,

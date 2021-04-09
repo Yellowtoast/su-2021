@@ -2,20 +2,9 @@ import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/header2.dart';
 import 'package:schooluniform/constants/theme.dart';
-
-class ShopListClothFilterData {
-  ShopListClothFilterData({
-    this.season,
-    this.clothType,
-  });
-
-  final String season;
-  final List<dynamic> clothType;
-}
+import 'package:schooluniform/pages/shop/list/types/clothFilterData.dart';
 
 class ShopListClothFilter extends StatefulWidget {
-  static String url = "/shop/uniform/list/filter/cloth";
-
   @override
   ShopListClothFilterState createState() => ShopListClothFilterState();
 }

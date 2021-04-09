@@ -1,12 +1,12 @@
 import 'package:clipboard/clipboard.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:schooluniform/pages/support/widgets/supportModal.dart';
+import 'package:schooluniform/pages/support/widgets/recModal.dart';
 
 class SupportPage extends StatefulWidget {
   static String url = "/support";
@@ -25,13 +25,6 @@ class SupportPageState extends State<SupportPage> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22.0),
         gradient: gradSig,
-        // boxShadow: [
-        //   BoxShadow(
-        //       offset: Offset(0, 12),
-        //       blurRadius: 32,
-        //       spreadRadius: -8,
-        //       color: colorSig1)
-        // ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -63,194 +56,6 @@ class SupportPageState extends State<SupportPage> {
     super.initState();
     fToast = FToast();
     fToast.init(context);
-  }
-
-  void openSupportModal() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => Dialog(
-            insetPadding: EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            child: Container(
-              height: 206,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      width: MediaQuery.of(context).size.width - 32,
-                      child: GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 6),
-                              child: Image(
-                                  image:
-                                      AssetImage("assets/icon/close-white.png"),
-                                  width: 16,
-                                  height: 16),
-                            ),
-                            Text(
-                              "닫기",
-                              style: GoogleFonts.notoSans(
-                                  fontSize: 14, color: Colors.white),
-                            )
-                          ],
-                        ),
-                      )),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 32,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 170,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "대구은행 040-05-002917-3",
-                            style: GoogleFonts.notoSans(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                height: 1),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(bottom: 16),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(bottom: 24),
-                            child: Text(
-                              "예금주 : 사회복지공동모금회 대구",
-                              style: GoogleFonts.notoSans(
-                                  fontSize: 14,
-                                  color: Color(0xff666666),
-                                  height: 1),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: handleCopy,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: grey2,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              child: Text(
-                                "계좌번호 복사",
-                                style: GoogleFonts.notoSans(fontSize: 12),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )));
-  }
-
-  void openRecModal() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => Dialog(
-            insetPadding: EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            child: Container(
-              height: 206,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      width: MediaQuery.of(context).size.width - 32,
-                      child: GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 6),
-                              child: Image(
-                                  image:
-                                      AssetImage("assets/icon/close-white.png"),
-                                  width: 16,
-                                  height: 16),
-                            ),
-                            Text(
-                              "닫기",
-                              style: GoogleFonts.notoSans(
-                                  fontSize: 14, color: Colors.white),
-                            )
-                          ],
-                        ),
-                      )),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 32,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 170,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "기부 영수증 발급을 원하시는 분은\n아래 연락처로 연락 해주세요",
-                            style: GoogleFonts.notoSans(
-                                fontSize: 14,
-                                color: Color(0xff888888),
-                                height: 1.57),
-                            textAlign: TextAlign.center,
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(bottom: 24),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              "대구광역시 북구청 담당자",
-                              style:
-                                  GoogleFonts.notoSans(fontSize: 14, height: 1),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => launch(
-                                "tel:${infoStore.localInfo["officePhoneDonation"]}"),
-                            child: Text(
-                              infoStore.localInfo["officePhoneDonation"],
-                              style: GoogleFonts.notoSans(
-                                  fontSize: 14,
-                                  color: colorSubBlue,
-                                  decoration: TextDecoration.underline),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )));
   }
 
   @override
@@ -488,92 +293,6 @@ class SupportPageState extends State<SupportPage> {
                             height: 1.57,
                             color: Color(0xff444444)),
                       )),
-                  // Container(
-                  //   width: MediaQuery.of(context).size.width - 32,
-                  //   padding: EdgeInsets.symmetric(vertical: 28),
-                  //   margin: EdgeInsets.only(bottom: 32),
-                  //   decoration: BoxDecoration(
-                  //       color: Colors.white,
-                  //       borderRadius: BorderRadius.all(Radius.circular(16)),
-                  //       boxShadow: [
-                  //         BoxShadow(
-                  //             offset: Offset(0, 8),
-                  //             blurRadius: 36,
-                  //             spreadRadius: -8,
-                  //             color: Color(0x0d000000))
-                  //       ]),
-                  //   child: Column(
-                  //     children: [
-                  //       Text("사회복지공동모금회 대구",
-                  //           style:
-                  //               GoogleFonts.notoSans(fontSize: 20, height: 1)),
-                  //       Container(
-                  //         margin: EdgeInsets.only(bottom: 16),
-                  //       ),
-                  //       Text(
-                  //         "대구은행 040-05-0029173",
-                  //         style: GoogleFonts.notoSans(
-                  //             fontSize: 14,
-                  //             color: Color(0xff666666),
-                  //             height: 1),
-                  //       ),
-                  //       Container(
-                  //         margin: EdgeInsets.only(bottom: 20),
-                  //       ),
-                  //       GestureDetector(
-                  //         onTap: handleCopy,
-                  //         child: Container(
-                  //           decoration: BoxDecoration(
-                  //               color: grey2,
-                  //               borderRadius:
-                  //                   BorderRadius.all(Radius.circular(8))),
-                  //           padding: EdgeInsets.symmetric(
-                  //               horizontal: 22, vertical: 9),
-                  //           child: Text(
-                  //             "계좌번호 복사",
-                  //             style: GoogleFonts.notoSans(fontSize: 12),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  // Container(
-                  //   alignment: Alignment.center,
-                  //   child: Text(
-                  //     "기부 영수증 발급을 원하시는 분은\n담당자에게 연락 해주세요",
-                  //     style: GoogleFonts.notoSans(
-                  //       fontSize: 14,
-                  //       color: Color(0xff888888),
-                  //       height: 1.7,
-                  //     ),
-                  //     textAlign: TextAlign.center,
-                  //   ),
-                  // ),
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 24, bottom: 10),
-                  //   alignment: Alignment.center,
-                  //   child: Text(
-                  //     "대구광역시 북구청 담당자",
-                  //     style: GoogleFonts.notoSans(fontSize: 14, height: 1),
-                  //   ),
-                  // ),
-                  // Container(
-                  //   alignment: Alignment.center,
-                  //   child: Observer(
-                  //     builder: (_) => GestureDetector(
-                  //       onTap: () => launch(
-                  //           "tel:${infoStore.localInfo["officePhoneDonation"]}"),
-                  //       child: Text(
-                  //         infoStore.localInfo["officePhoneDonation"],
-                  //         style: GoogleFonts.notoSans(
-                  //             fontSize: 14,
-                  //             color: colorSubBlue,
-                  //             decoration: TextDecoration.underline),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
               Positioned(
@@ -589,7 +308,9 @@ class SupportPageState extends State<SupportPage> {
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
                           child: GestureDetector(
-                              onTap: openSupportModal,
+                              onTap: () => openSupportModal(
+                                  context: context,
+                                  onClick: () => handleCopy()),
                               child: Container(
                                 width: MediaQuery.of(context).size.width - 32,
                                 height: 52,
@@ -616,7 +337,7 @@ class SupportPageState extends State<SupportPage> {
                               )),
                         ),
                         GestureDetector(
-                            onTap: openRecModal,
+                            onTap: () => openRecModal(context: context),
                             child: Container(
                               width: MediaQuery.of(context).size.width - 32,
                               height: 52,

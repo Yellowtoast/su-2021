@@ -1,23 +1,19 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/configs/collections.dart';
+
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/shop/list/filterCloth.dart';
-import 'package:schooluniform/pages/shop/list/filterGender.dart';
+import 'package:schooluniform/pages/shop/list/types/pageArg.dart';
+import 'package:schooluniform/pages/shop/list/types/clothFilterData.dart';
+
+import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/components/loading.dart';
+import 'package:schooluniform/pages/shop/list/widgets/filterCloth.dart';
+import 'package:schooluniform/pages/shop/list/widgets/filterGender.dart';
+
 import 'package:schooluniform/pages/shop/show/page.dart';
 
-class ShopListPageArg {
-  ShopListPageArg({this.schoolName});
-
-  final String schoolName;
-}
-
 class ShopListPage extends StatefulWidget {
-  static String url = "/shop/list";
-
   @override
   ShopListPageState createState() => ShopListPageState();
 }
@@ -44,24 +40,24 @@ class ShopListPageState extends State<ShopListPage> {
       // collectionUniforms
       //     .where("filter-school", isEqualTo: arg.schoolName)
       //     .where("status", isEqualTo: "교복보유중");
-      var ref;
+      // var ref;
 
-      if (filterGender != null)
-        ref = ref.where("filter-gender", isEqualTo: filterGender);
-      if (filterSeason != null)
-        ref = ref.where("filter-season", isEqualTo: filterSeason);
-      if (filterClothType.length != 0)
-        ref = ref.where("filter-clothType", arrayContainsAny: filterClothType);
+      // if (filterGender != null)
+      //   ref = ref.where("filter-gender", isEqualTo: filterGender);
+      // if (filterSeason != null)
+      //   ref = ref.where("filter-season", isEqualTo: filterSeason);
+      // if (filterClothType.length != 0)
+      //   ref = ref.where("filter-clothType", arrayContainsAny: filterClothType);
 
-      var querySnapshot = await ref.limit(8).get();
-      var l = [];
-      for (var doc in querySnapshot.docs) l.add({"id": doc.id, ...doc.data()});
+      // var querySnapshot = await ref.limit(8).get();
+      // var l = [];
+      // for (var doc in querySnapshot.docs) l.add({"id": doc.id, ...doc.data()});
       setState(() {
         loading = false;
-        list = l;
-        if (querySnapshot.docs.length > 0) {
-          lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        }
+        //   list = l;
+        //   if (querySnapshot.docs.length > 0) {
+        //     lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        //   }
       });
     } catch (err) {
       print(err);
@@ -130,27 +126,27 @@ class ShopListPageState extends State<ShopListPage> {
           //     .where("filter-school", isEqualTo: arg.schoolName)
           //     .where("status", isEqualTo: "교복보유중");
 
-          if (filterGender != null)
-            ref = ref.where("filter-gender", isEqualTo: filterGender);
-          if (filterSeason != null)
-            ref = ref.where("filter-season", isEqualTo: filterSeason);
-          if (filterClothType.length != 0)
-            ref = ref.where("filter-clothType",
-                arrayContainsAny: filterClothType);
+          // if (filterGender != null)
+          //   ref = ref.where("filter-gender", isEqualTo: filterGender);
+          // if (filterSeason != null)
+          //   ref = ref.where("filter-season", isEqualTo: filterSeason);
+          // if (filterClothType.length != 0)
+          //   ref = ref.where("filter-clothType",
+          //       arrayContainsAny: filterClothType);
 
-          var querySnapshot =
-              await ref.startAfterDocument(lastDoc).limit(8).get();
-          var l = [];
-          for (var doc in querySnapshot.docs)
-            l.add({"id": doc.id, ...doc.data()});
+          // var querySnapshot =
+          //     await ref.startAfterDocument(lastDoc).limit(8).get();
+          // var l = [];
+          // for (var doc in querySnapshot.docs)
+          //   l.add({"id": doc.id, ...doc.data()});
           setState(() {
             infiniteScrollRunnig = false;
-            list = list + l;
-            if (querySnapshot.docs.length > 0) {
-              lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-            } else {
-              lastDoc = null;
-            }
+            // list = list + l;
+            // if (querySnapshot.docs.length > 0) {
+            //   lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+            // } else {
+            //   lastDoc = null;
+            // }
           });
         } catch (err) {
           print(err);

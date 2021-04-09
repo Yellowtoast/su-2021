@@ -4,8 +4,6 @@ import 'package:schooluniform/components/header2.dart';
 import 'package:schooluniform/constants/theme.dart';
 
 class ShopListGenderFilter extends StatefulWidget {
-  static String url = "/shop/uniform/list/filter/gender";
-
   @override
   ShopListGenderFilterState createState() => ShopListGenderFilterState();
 }
