@@ -72,8 +72,8 @@ class ShopFilterPageState extends State<ShopFilterPage>
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      ListViewWidget(data: middleSchools),
-                      ListViewWidget(data: highSchools),
+                      ListViewWidget(data: middleSchools, ref: 'middleSchool'),
+                      ListViewWidget(data: highSchools, ref: 'highSchool'),
                     ],
                   ),
                 ),

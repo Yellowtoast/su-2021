@@ -6,8 +6,9 @@ import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/pages/shop/list/types/pageArg.dart';
 
 class ListViewWidget extends StatelessWidget {
-  final dynamic data;
-  ListViewWidget({this.data});
+  final List data;
+  final String ref;
+  ListViewWidget({this.data, this.ref});
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +43,7 @@ class ListViewWidget extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsets.only(top: 2),
                           child: Text(
-                            '1',
-                            // infoStore.localInfo[data][i]["totalStock"]
-                            //             .toString()
+                            infoStore.localInfo[ref][i]["totalStock"].toString(),
                             style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 height: 1,

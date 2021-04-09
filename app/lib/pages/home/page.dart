@@ -314,11 +314,9 @@ class HomePageState extends State<HomePage> {
                     children: [
                       CountUpItemWidget(
                         url: Routes.rankingSchoolUrl,
-                        label: "최다 기부 학교",
+                        label: "교복 기부 횟수",
                         condition: '',
-                        secondaryLabel: 100,
-                        //infoStore.localInfo["totalDonate"]
-                        //infoStore.localInfo["totalDonate"].toDouble()
+                        secondaryLabel: infoStore.localInfo["totalDonate"].toDouble(),
                       ),
                       Container(
                         width: 1,
@@ -329,10 +327,8 @@ class HomePageState extends State<HomePage> {
                       CountUpItemWidget(
                         url: Routes.rankingSchoolUrl,
                         label: "최다 기부 학교",
-                        condition: '',
-                        secondaryLabel: 100,
-                        //getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"]
-                        //getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"].toDouble()
+                        condition: getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"],
+                        secondaryLabel: getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["totalDonate"].toDouble(),
                       ),
                     ],
                   ),

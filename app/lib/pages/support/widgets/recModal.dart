@@ -78,11 +78,10 @@ void openRecModal({
                           ),
                         ),
                         GestureDetector(
-                          // onTap: () => launch(
-                          //     "tel:${infoStore.localInfo["officePhoneDonation"]}"),
+                          onTap: () => launch(
+                              "tel:${infoStore.localInfo["officePhoneDonation"]}"),
                           child: Text(
-                            '',
-                            // infoStore.localInfo["officePhoneDonation"],
+                            infoStore.localInfo["officePhoneDonation"],
                             style: GoogleFonts.notoSans(
                                 fontSize: 14,
                                 color: colorSubBlue,

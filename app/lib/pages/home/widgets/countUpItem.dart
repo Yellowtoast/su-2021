@@ -36,7 +36,7 @@ class CountUpItemWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(condition,
+                        Text(condition == '' ? '' : condition,
                             style: GoogleFonts.notoSans(
                                 fontSize: 12,
                                 color: textGrey2,

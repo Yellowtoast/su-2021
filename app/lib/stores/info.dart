@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mobx/mobx.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:schooluniform/configs/collections.dart';
+import 'package:schooluniform/utils/common/get.dart';
 
 part 'info.g.dart';
 
@@ -17,7 +16,7 @@ abstract class InfoStoreBase with Store {
   @action
   Future<void> initData() async {
     List<Future<dynamic>> futures = [
-      // common.get()
+      getCommon()
     ];
 
     String fcmToken = await FirebaseMessaging.instance.getToken();
@@ -29,9 +28,7 @@ abstract class InfoStoreBase with Store {
       "totalAlarmsCart": 0,
       "fcm": fcmToken,
     };
-
-    print(fcmToken);
-
+    
     // FirebaseAuth auth = FirebaseAuth.instance;
     // User user = auth.currentUser;
     // if (user == null) {
@@ -42,9 +39,9 @@ abstract class InfoStoreBase with Store {
     //   futures.add(collectionUsers.doc(user.uid).update({"fcm": fcmToken}));
     // }
 
-    // List res = await Future.wait(futures);
+    List res = await Future.wait(futures);
 
-    localInfo = userInitialData;
+    localInfo = res[0];
     userInfo = userInitialData;
   }
 
