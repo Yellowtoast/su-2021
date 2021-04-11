@@ -25,7 +25,7 @@ import 'package:schooluniform/pages/support/page.dart';
 import 'package:schooluniform/pages/user/cart/page.dart';
 import 'package:schooluniform/pages/user/donate/uniform/page.dart';
 import 'package:schooluniform/pages/user/purchase/uniform/page.dart';
-import 'package:schooluniform/pages/user/purchase/uniform/reject.dart';
+import 'package:schooluniform/pages/user/purchase/uniform/reject/reject.dart';
 import 'package:schooluniform/pages/user/support/page.dart';
 
 class Routes {

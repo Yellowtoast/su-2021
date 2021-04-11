@@ -7,7 +7,7 @@ import 'package:schooluniform/components/loading.dart';
 // import 'package:schooluniform/configs/collections.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/user/purchase/uniform/reject.dart';
+import 'package:schooluniform/pages/user/purchase/uniform/reject/reject.dart';
 
 class UserPurchaseUniformPage extends StatefulWidget {
   static String url = "/user/uniform/purchase";

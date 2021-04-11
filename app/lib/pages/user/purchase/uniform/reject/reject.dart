@@ -11,8 +11,6 @@ import 'package:schooluniform/constants/theme.dart';
 class UserPurchaseUniformRejectPage extends StatefulWidget {
   UserPurchaseUniformRejectPage({this.code});
 
-  static String url = "/user/uniform/purchase/reject";
-
   final String code;
 
   @override
