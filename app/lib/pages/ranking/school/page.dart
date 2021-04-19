@@ -2,13 +2,10 @@ import "package:flutter/material.dart";
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/configs/data.dart';
-import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
 
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/pages/ranking/school/widgets/listView.dart';
-import 'package:schooluniform/utils/getRankingSchool.dart';
 
 class RankingSchoolPage extends StatefulWidget {
   @override
@@ -76,8 +73,8 @@ class RankingSchoolPageState extends State<RankingSchoolPage>
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      RankingSchoolListViewWidget(ref: "middleSchool"),
-                      RankingSchoolListViewWidget(ref: "highSchool"),
+                      RankingSchoolListViewWidget(ref: "middleSchools"),
+                      RankingSchoolListViewWidget(ref: "highSchools"),
                     ],
                   ),
                 ),

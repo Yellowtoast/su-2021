@@ -1,13 +1,15 @@
 import "package:flutter/material.dart";
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/components/header.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/step5.dart';
 import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
+
+import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/pages/donate/uniform/widgets/selectDeliveryType.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DonateStep4 extends StatefulWidget {
   @override
@@ -99,15 +101,16 @@ class DonateStep4State extends State<DonateStep4> {
                           margin: EdgeInsets.only(top: 24),
                           child: GestureDetector(
                             onTap: () async {
-                              Navigator.of(context).pushNamed(DonateStep5.url,
-                                  arguments: DonateInfo(
-                                    school: d.school,
-                                    gender: d.gender,
-                                    season: d.season,
-                                    deliveryType: deliveryType,
-                                    images: d.images,
-                                    uniforms: d.uniforms,
-                                  ));
+                              Navigator.of(context)
+                                  .pushNamed(Routes.donateStep5Url,
+                                      arguments: DonateInfo(
+                                        school: d.school,
+                                        gender: d.gender,
+                                        season: d.season,
+                                        deliveryType: deliveryType,
+                                        images: d.images,
+                                        uniforms: d.uniforms,
+                                      ));
                             },
                             child: Container(
                               width: 52,

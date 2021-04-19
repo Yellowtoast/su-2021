@@ -1,11 +1,12 @@
 import "dart:io";
-
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:schooluniform/components/header.dart';
+
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
+
+import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
 
 class ShopStep1 extends StatefulWidget {

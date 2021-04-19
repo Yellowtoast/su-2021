@@ -1,12 +1,13 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/components/header.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/stores.dart';
 
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ShopStep2 extends StatefulWidget {
   @override

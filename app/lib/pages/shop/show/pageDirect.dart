@@ -1,14 +1,10 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/configs/routes.dart';
-// import 'package:schooluniform/configs/collections.dart';
-import 'package:schooluniform/configs/stores.dart';
+
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/shop/buy/uniform/step1.dart';
-import 'package:schooluniform/pages/user/cart/page.dart';
+import 'package:schooluniform/configs/routes.dart';
+
+import 'package:schooluniform/components/loading.dart';
 
 class ShopShowDirectPage extends StatefulWidget {
   ShopShowDirectPage({this.code});
@@ -115,13 +111,13 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
   void addToCart() async {
     // User u = FirebaseAuth.instance.currentUser;
 
-    var payload = {
-      "id": data["code"],
-      "thumbnail": data["images"][0],
-      "title": data["uniforms"].length - 1 == 0
-          ? "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]}"
-          : "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]} 외 ${data["uniforms"].length - 1}",
-    };
+    // var payload = {
+    //   "id": data["code"],
+    //   "thumbnail": data["images"][0],
+    //   "title": data["uniforms"].length - 1 == 0
+    //       ? "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]}"
+    //       : "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]} 외 ${data["uniforms"].length - 1}",
+    // };
 
     showDialog(
       context: context,

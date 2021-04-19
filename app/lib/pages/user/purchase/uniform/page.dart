@@ -1,17 +1,14 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/loading.dart';
-// import 'package:schooluniform/configs/collections.dart';
+
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/user/purchase/uniform/reject/reject.dart';
+
+import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/components/loading.dart';
+import 'package:schooluniform/pages/user/purchase/uniform/widgets/card.dart';
 
 class UserPurchaseUniformPage extends StatefulWidget {
-  static String url = "/user/uniform/purchase";
-
   @override
   UserPurchaseUniformPageState createState() => UserPurchaseUniformPageState();
 }
@@ -24,12 +21,12 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
     try {
       // User u = FirebaseAuth.instance.currentUser;
 
-      List<Future<dynamic>> futures = [
-        // getLogsUniformShop(u.uid).get(),
-        // collectionUsers.doc(u.uid).get(),
-      ];
+      // List<Future<dynamic>> futures = [
+      // getLogsUniformShop(u.uid).get(),
+      // collectionUsers.doc(u.uid).get(),
+      // ];
 
-      var res = await Future.wait(futures);
+      // var res = await Future.wait(futures);
 
       // DocumentSnapshot doc = res[0];
       // DocumentSnapshot doc1 = res[1];
@@ -73,68 +70,6 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
     request();
   }
 
-  Widget card(data) {
-    return GestureDetector(
-      onTap: () {
-        if (data["showStatus"] == "거절") {
-          Navigator.of(context).pushNamed(UserPurchaseUniformRejectPage.url,
-              arguments: data["uniformId"]);
-        }
-      },
-      child: Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 64,
-                  height: 64,
-                  margin: EdgeInsets.only(right: 16),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(data["thumbnail"]),
-                        fit: BoxFit.cover),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width - 144,
-                      margin: EdgeInsets.only(bottom: 8),
-                      child: Text(
-                        data["title"] ??
-                            "afdadfasdfasdfasdfasdfasfdasdfasfdasfdasfdasdf",
-                        style: GoogleFonts.notoSans(fontSize: 14, height: 1.57),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(data["showStatus"],
-                        style: GoogleFonts.notoSans(
-                            fontSize: 12,
-                            color: data["showStatus"] != "거절"
-                                ? colorSubBlue
-                                : colorRejectRed)),
-                  ],
-                )
-              ],
-            ),
-            data["showStatus"] == "거절"
-                ? (Icon(
-                    Icons.help_outline_outlined,
-                    color: colorRejectRed,
-                    size: 20,
-                  ))
-                : Container(),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +86,7 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
           ? LoadingPage()
           : ListView(
               children: [
-                for (var d in list) card(d),
+                for (var d in list) card(context: context, data: d),
               ],
             ),
     );

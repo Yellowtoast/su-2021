@@ -1,27 +1,26 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+import 'dart:async';
+import 'dart:math';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'dart:math';
-// import 'dart:io';
+import 'package:schooluniform/configs/api/info/update.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:schooluniform/configs/api/uniform/request.dart';
+import 'package:schooluniform/configs/api/networkHandler.dart';
+import 'package:schooluniform/configs/api/user/logs/uniform/donate/create.dart';
+import 'package:schooluniform/configs/routes.dart';
+import 'package:schooluniform/configs/stores.dart';
+import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
 
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/configs/routes.dart';
-// import 'package:schooluniform/configs/collections.dart';
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/step1.dart';
-import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
 import 'package:schooluniform/pages/donate/uniform/widgets/input.dart';
-import 'package:schooluniform/pages/home/page.dart';
-import 'package:schooluniform/pages/policy/page.dart';
-import 'package:schooluniform/pages/user/donate/uniform/page.dart';
+import 'package:schooluniform/pages/donate/uniform/widgets/requestModal.dart';
 
 class DonateStep5 extends StatefulWidget {
-  static String url = "/donate/uniform/5";
-
   @override
   DonateStep5State createState() => DonateStep5State();
 }
@@ -76,43 +75,30 @@ class DonateStep5State extends State<DonateStep5> {
       loading = true;
     });
 
-    // User user = FirebaseAuth.instance.currentUser;
-    // String uid = user.uid;
-
+    final prefs = await SharedPreferences.getInstance();
+    String uid = prefs.getString('userId');
     DonateInfo d = ModalRoute.of(context).settings.arguments;
     String id = getId();
 
-    // FirebaseStorage storage = FirebaseStorage.instance;
-    // Reference ref = storage.ref("daegu/bukgu/$id");
-
-    // int i = 1;
-    List<Future<dynamic>> futureImgUpload = [];
-    List<Future<dynamic>> futureImgUrlDownload = [];
+    List<Future<dynamic>> imagesUpload = [];
 
     d.images.forEach((image) async {
-      // futureImgUpload.add(ref.child('$i.png').putFile(File(image.path)));
-      // i += 1;
-    });
-
-    await Future.wait(futureImgUpload);
-
-    // i = 1;
-    d.images.forEach((image) {
-      // futureImgUrlDownload
-      //     .add(storage.ref("daegu/bukgu/$id/$i.png").getDownloadURL());
-      // i += 1;
+      var uploadPath =
+          NetworkHandler().putImage(filePath: File(image.path).path);
+      imagesUpload.add(uploadPath);
     });
 
     var images;
-    images = await Future.wait(futureImgUrlDownload);
+    images = await Future.wait(imagesUpload);
 
     var uniformValue = {
+      "uniformId": id,
       "totalImages": d.images.length,
       "images": images,
       "status": "기부승인요청",
       "code": id,
       "giverName": name,
-      // "giverUid": uid,
+      "giverUid": uid,
       "giverPhone": phone,
       "giverAddress": address,
       "giverDeliveryType": d.deliveryType,
@@ -130,112 +116,46 @@ class DonateStep5State extends State<DonateStep5> {
 
     uniformValue["filter-clothType"] = filterClothType;
 
-    // var commonUpdateInfo = {
-    // "totalDonate": FieldValue.increment(1),
-    // "totalBeforeStock": FieldValue.increment(1),
-    // "${d.school.indexOf("고등") == -1 ? "middleSchool" : "highSchool"}.${d.school}.totalDonate":
-    //     FieldValue.increment(1),
-    // };
+    var schoolLevel;
+    if (d.school.indexOf("고등") == -1) {
+      schoolLevel = "middleSchools";
+    } else {
+      schoolLevel = "highSchools";
+    }
 
-    // var log = {
-    //   "title": d.uniforms.length - 1 == 0
-    //       ? "${d.school} · ${d.gender} · ${d.uniforms[0].clothType}"
-    //       : "${d.school} · ${d.gender} · ${d.uniforms[0].clothType} 외 ${d.uniforms.length - 1}",
-    //   "uniformId": id,
-    //   "status": "기부승인요청",
-    //   "showStatus": d.deliveryType == "수거 요청" ? "수거요청" : "방문필요",
-    //   "thumbnail": images[0],
-    // };
+    var commonUpdateInfo = {
+      "totalDonate": infoStore.localInfo["totalDonate"] + 1,
+      "totalBeforeStock": infoStore.localInfo["totalBeforeStock"] + 1,
+      "schoolDonate": [
+        schoolLevel,
+        d.school,
+        infoStore.localInfo[schoolLevel][d.school]["totalDonate"]
+      ],
+    };
 
-    // var doc = await getLogsUniformDonate(uid).get();
+    var log = {
+      "title": d.uniforms.length - 1 == 0
+          ? "${d.school} · ${d.gender} · ${d.uniforms[0].clothType}"
+          : "${d.school} · ${d.gender} · ${d.uniforms[0].clothType} 외 ${d.uniforms.length - 1}",
+      "uniformId": id,
+      "status": "기부승인요청",
+      "showStatus": d.deliveryType == "수거 요청" ? "수거요청" : "방문필요",
+      "thumbnail": images[0],
+    };
+
+    String token = prefs.getString('x-access-token');
 
     List<Future<dynamic>> futures = [
-      // collectionUniforms.doc(id).set(uniformValue),
-      // common.update(commonUpdateInfo),
-      // doc.exists
-      //     ? getLogsUniformDonate(uid).update({
-      //         "index": FieldValue.arrayUnion([id]),
-      //         id: log,
-      //       })
-      //     : getLogsUniformDonate(uid).set({
-      //         "index": [id],
-      //         id: log,
-      //       }),
+      requestUniformDonate(token: token, data: uniformValue),
+      updateInfo(token: token, data: commonUpdateInfo),
+      createLogsUniformDonate(token: token, data: log),
     ];
 
     try {
       await Future.wait(futures);
       Navigator.of(context).pushNamedAndRemoveUntil(Routes.userDonateUniformUrl,
           (route) => route.settings.name == Routes.homeUrl);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => Dialog(
-            insetPadding: EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            child: Container(
-              width: MediaQuery.of(context).size.width - 32,
-              padding:
-                  EdgeInsets.only(top: 36, bottom: 24, left: 16, right: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-              ),
-              child: Container(
-                height: 155,
-                child: Column(
-                  children: [
-                    Text(
-                      "알림",
-                      style: GoogleFonts.notoSans(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 12),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 24),
-                      child: Text(
-                        "교복은 센터 확인 후\n앱에 등록되어 다른유저에게 공개됩니다",
-                        style: GoogleFonts.notoSans(
-                            fontSize: 14,
-                            color: Color(0xff444444),
-                            height: 1.57),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 64,
-                            alignment: Alignment.center,
-                            height: 52,
-                            decoration: BoxDecoration(
-                              gradient: gradSig,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Text(
-                              "확인",
-                              style: GoogleFonts.notoSans(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            )),
-      );
+      requestModal(context: context);
     } catch (err) {
       print(err);
     }

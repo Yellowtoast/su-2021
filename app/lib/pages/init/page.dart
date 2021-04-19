@@ -1,11 +1,10 @@
-// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/stores.dart';
-// import 'package:schooluniform/constants/theme.dart';
 
 class InitPage extends StatefulWidget {
   @override
@@ -118,6 +117,7 @@ class InitPageState extends State<InitPage> {
       // }
       Navigator.of(context).pushReplacementNamed(Routes.homeUrl);
     } catch (err) {
+      print('5555555');
       print(err);
     }
   }

@@ -1,6 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mobx/mobx.dart';
-import 'package:schooluniform/configs/api/common/get.dart';
+import 'package:schooluniform/configs/api/user/get.dart';
+import 'package:schooluniform/configs/api/user/signin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:schooluniform/configs/api/info/get.dart';
 
 part 'info.g.dart';
 
@@ -15,32 +19,42 @@ abstract class InfoStoreBase with Store {
 
   @action
   Future<void> initData() async {
-    List<Future<dynamic>> futures = [getCommon()];
+    List<Future<dynamic>> futures = [getInfoData()];
 
     String fcmToken = await FirebaseMessaging.instance.getToken();
+    final prefs = await SharedPreferences.getInstance();
 
     var userInitialData = {
-      "totalAlarms": 0,
+      "total": 0,
       "totalAlarmsDonate": 0,
       "totalAlarmsShop": 0,
       "totalAlarmsCart": 0,
       "fcm": fcmToken,
     };
 
-    // FirebaseAuth auth = FirebaseAuth.instance;
-    // User user = auth.currentUser;
-    // if (user == null) {
-    //   UserCredential u = await auth.signInAnonymously();
-    //   futures.add(collectionUsers.doc(u.user.uid).set(userInitialData));
-    // } else {
-    //   futures.add(collectionUsers.doc(user.uid).get());
-    //   futures.add(collectionUsers.doc(user.uid).update({"fcm": fcmToken}));
-    // }
+    var token = prefs.getString('x-access-token');
+    var uid = prefs.getString('userId');
+
+    try {
+      if (token == '' || uid == '') {
+        var newUser = await signInUser(fcm: fcmToken);
+        prefs.setString('x-access-token', newUser['token']);
+        prefs.setString('userId', newUser['userId']);
+      } else {
+        futures.add(getUser(targetUid: uid, token: token));
+      }
+    } catch (err) {
+      print(err);
+    }
 
     List res = await Future.wait(futures);
 
     localInfo = res[0];
-    userInfo = userInitialData;
+    if (token == '' || uid == '') {
+      userInfo = userInitialData;
+    } else {
+      userInfo = res[1]['alarms'];
+    }
   }
 
   @action

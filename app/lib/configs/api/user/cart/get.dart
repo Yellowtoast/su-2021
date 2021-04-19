@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:schooluniform/configs/api/configs.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 
 getUserCart({id}) async {
   final url = '${ApiConfig.USER_REF}/:$id/cart/list';

@@ -8,9 +8,6 @@ import 'package:schooluniform/pages/shop/list/types/clothFilterData.dart';
 
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/pages/shop/list/widgets/filterCloth.dart';
-import 'package:schooluniform/pages/shop/list/widgets/filterGender.dart';
-
 import 'package:schooluniform/pages/shop/show/page.dart';
 
 class ShopListPage extends StatefulWidget {
@@ -34,7 +31,7 @@ class ShopListPageState extends State<ShopListPage> {
 
   void request() async {
     try {
-      ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
+      // ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
 
       // var ref =
       // collectionUniforms
@@ -119,9 +116,9 @@ class ShopListPageState extends State<ShopListPage> {
         });
 
         try {
-          ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
+          // ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
 
-          var ref;
+          // var ref;
           // var ref = collectionUniforms
           //     .where("filter-school", isEqualTo: arg.schoolName)
           //     .where("status", isEqualTo: "교복보유중");

@@ -1,20 +1,12 @@
-// import 'dart:io';
-
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:intl/intl.dart';
+
+import 'package:schooluniform/configs/routes.dart';
+import 'package:schooluniform/constants/theme.dart';
+
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/configs/routes.dart';
-// import 'package:schooluniform/configs/collections.dart';
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/home/page.dart';
-import 'package:schooluniform/pages/policy/page.dart';
-import 'package:schooluniform/pages/user/purchase/uniform/page.dart';
 
 class ShopUniformInputData {
   ShopUniformInputData(
@@ -94,7 +86,7 @@ class ShopStep3State extends State<ShopStep3> {
       setState(() {
         loading = true;
       });
-      ShopUniformInputData d = ModalRoute.of(context).settings.arguments;
+      // ShopUniformInputData d = ModalRoute.of(context).settings.arguments;
       // User user = FirebaseAuth.instance.currentUser;
       // String uid = user.uid;
 

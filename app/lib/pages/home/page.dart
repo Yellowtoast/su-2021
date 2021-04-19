@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:schooluniform/components/footer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import "dart:async";
@@ -11,11 +10,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/configs/data.dart';
 import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 
 import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/components/footer.dart';
 import 'package:schooluniform/pages/home/widgets/bannerItem.dart';
 import 'package:schooluniform/pages/home/widgets/countUpItem.dart';
 import 'package:schooluniform/pages/home/widgets/drawerItem.dart';
@@ -144,12 +143,12 @@ class HomePageState extends State<HomePage> {
                       top: 0,
                       right: 0,
                       child: Observer(
-                          builder: (_) => infoStore.userInfo["totalAlarms"] == 0
+                          builder: (_) => infoStore.userInfo["total"] == 0
                               ? Container()
                               : Container(
                                   padding: EdgeInsets.only(left: 1),
                                   alignment: Alignment.center,
-                                  width: infoStore.userInfo["totalAlarms"] < 10
+                                  width: infoStore.userInfo["total"] < 10
                                       ? 16
                                       : 20,
                                   height: 16,
@@ -159,8 +158,7 @@ class HomePageState extends State<HomePage> {
                                     color: colorAlert,
                                   ),
                                   child: Text(
-                                    infoStore.userInfo["totalAlarms"]
-                                        .toString(),
+                                    infoStore.userInfo["total"].toString(),
                                     style: GoogleFonts.montserrat(
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
@@ -198,15 +196,15 @@ class HomePageState extends State<HomePage> {
               ),
               DrawerItemWidget(
                   label: '장바구니',
-                  userInfoKey: "totalAlarmsCart",
+                  userInfoKey: "uniformCart",
                   url: Routes.userCartUrl),
               DrawerItemWidget(
                   label: '교복 구매 내역',
-                  userInfoKey: "totalAlarmsShop",
+                  userInfoKey: "uniformShop",
                   url: Routes.userPurchaseUniformUrl),
               DrawerItemWidget(
                   label: '교복 기부 내역',
-                  userInfoKey: "totalAlarmsDonate",
+                  userInfoKey: "uniformDonate",
                   url: Routes.userDonateUniformUrl),
               GestureDetector(
                 onTap: () =>
@@ -314,9 +312,10 @@ class HomePageState extends State<HomePage> {
                     children: [
                       CountUpItemWidget(
                         url: Routes.rankingSchoolUrl,
-                        label: "교복 기부 횟수",
+                        label: "누적 교복 기부 횟수",
                         condition: '',
-                        secondaryLabel: infoStore.localInfo["totalDonate"].toDouble(),
+                        secondaryLabel:
+                            infoStore.localInfo["totalDonate"].toDouble(),
                       ),
                       Container(
                         width: 1,
@@ -327,8 +326,14 @@ class HomePageState extends State<HomePage> {
                       CountUpItemWidget(
                         url: Routes.rankingSchoolUrl,
                         label: "최다 기부 학교",
-                        condition: getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["school"],
-                        secondaryLabel: getMostDonateSchool(infoStore.localInfo["middleSchool"], infoStore.localInfo["highSchool"])["totalDonate"].toDouble(),
+                        condition: getMostDonateSchool(
+                            infoStore.localInfo["middleSchools"],
+                            infoStore.localInfo["highSchools"])["school"],
+                        secondaryLabel: getMostDonateSchool(
+                                infoStore.localInfo["middleSchools"],
+                                infoStore
+                                    .localInfo["highSchools"])["totalDonate"]
+                            .toDouble(),
                       ),
                     ],
                   ),

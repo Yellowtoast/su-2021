@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/configs/data.dart';
 import 'package:schooluniform/constants/theme.dart';
+
 import 'package:schooluniform/pages/shop/filter/widgets/listView.dart';
 
 class ShopFilterPage extends StatefulWidget {
@@ -72,8 +74,8 @@ class ShopFilterPageState extends State<ShopFilterPage>
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      ListViewWidget(data: middleSchools, ref: 'middleSchool'),
-                      ListViewWidget(data: highSchools, ref: 'highSchool'),
+                      ListViewWidget(data: middleSchools, ref: 'middleSchools'),
+                      ListViewWidget(data: highSchools, ref: 'highSchools'),
                     ],
                   ),
                 ),

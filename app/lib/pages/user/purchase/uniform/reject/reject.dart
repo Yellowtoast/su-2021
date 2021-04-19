@@ -1,12 +1,10 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:schooluniform/constants/theme.dart';
+
 import 'package:schooluniform/components/header2.dart';
 import 'package:schooluniform/components/loading.dart';
-// import 'package:schooluniform/configs/collections.dart';
-// import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/constants/theme.dart';
 
 class UserPurchaseUniformRejectPage extends StatefulWidget {
   UserPurchaseUniformRejectPage({this.code});
