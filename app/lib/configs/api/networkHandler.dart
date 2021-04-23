@@ -11,13 +11,12 @@ class NetworkHandler {
 
   Future get(String url) async {
     final prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token");
+    String token = prefs.getString("x-access-token");
     url = formater(url);
     try {
       var response = await http.get(
         url,
         headers: {
-          "Accept": "application/json",
           "Content-type": "application/json",
           "x-access-token": token,
         },
@@ -36,9 +35,9 @@ class NetworkHandler {
     }
   }
 
-  Future<http.Response> post(String url, Map<String, String> body) async {
+  Future<http.Response> post(String url, Map<dynamic, dynamic> body) async {
     final prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token");
+    String token = prefs.getString("x-access-token");
     url = formater(url);
     print(body);
     try {
@@ -58,13 +57,13 @@ class NetworkHandler {
     }
   }
 
-  Future<http.Response> put(String url, Map<String, String> body) async {
+  Future<http.Response> put(String url, Map<dynamic, dynamic> body) async {
     final prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token");
+    String token = prefs.getString("x-access-token");
     url = formater(url);
     print(body);
     try {
-      var response = await http.patch(
+      var response = await http.put(
         url,
         headers: {
           "Content-Type": "application/json",
@@ -80,40 +79,28 @@ class NetworkHandler {
     }
   }
 
-  // Future<http.StreamedResponse> putImage({String url, String filepath}) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   String token = prefs.getString("token");
-  //   url = formater(url);
-  //   var request = http.MultipartRequest('PUT', Uri.parse(url));
-  //   request.files.add(await http.MultipartFile.fromPath("imageFile", filepath));
-  //   request.headers.addAll({
-  //     "Content-type": "multipart/form-data",
-  //     "x-access-token": token,
-  //   });
-  //   var response = request.send();
-  //   return response;
-  // }
-
-  putImage({filePath}) async {
-    var uri = Uri.parse("${ApiConfig.SERVER_URI}/uploads");
+  Future putImage({String filePath}) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      var uid = prefs.getString('userId');
+      String token = prefs.getString("x-access-token");
+      String uid = prefs.getString('userId');
+      var uri = Uri.parse("${ApiConfig.SERVER_URI}/uploads");
+      var request = http.MultipartRequest('POST', uri);
       var timestemp = DateTime.now().millisecondsSinceEpoch;
+      var filename = uid + '_$timestemp';
 
-      var request = http.MultipartRequest('PUT', uri)
-        ..files.add(await http.MultipartFile.fromPath('imageFile', filePath,
-            filename: '$uid',
-            contentType:
-                MediaType('image', 'image/png', {'charset': 'utf-8'})));
-      var response = await request.send();
-      if (response.statusCode == 200) {
-        return 'uploads/${uid}_${timestemp.toString()}.png';
-      } else {
-        return false;
-      }
+      request.files.add(await http.MultipartFile.fromPath("imageFile", filePath,
+          filename: filename,
+          contentType: MediaType('image', 'image/png', {'charset': 'utf-8'})));
+      request.headers.addAll({
+        "Content-type": "multipart/form-data",
+        "x-access-token": token,
+      });
+      request.send();
+      return 'uploads/$filename.png';
     } catch (err) {
       print(err);
+      return null;
     }
   }
 
@@ -122,7 +109,7 @@ class NetworkHandler {
   }
 
   NetworkImage getImage(String imageSrc) {
-    String url = formater(imageSrc);
-    return NetworkImage('/' + url);
+    String url = formater('/' + imageSrc);
+    return NetworkImage(url);
   }
 }

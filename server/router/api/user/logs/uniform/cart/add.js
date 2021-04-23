@@ -15,25 +15,26 @@ router.post("/", isUser, async (req, res) => {
 
     const { uniformId } = req.body;
 
-    const uniform = await UniformModel.findOne({ _id: uniformId });
+    const uniform = await UniformModel.findOne({ uniformId: uniformId });
 
     if (uniform === null) throw new Error("unexist uniform");
 
-    const doc = {
+    const newLog = new UserLogModel({
       ownerId: userId,
       type: "cart",
       uniformId,
       thumbnail: uniform.images[0],
       title: uniform.title,
-    };
+    });
 
-    await doc.save();
+    await newLog.save();
 
     res.status(200).json({ success: true });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
-      error: "server error"
+      error: "server error",
     });
   }
 });

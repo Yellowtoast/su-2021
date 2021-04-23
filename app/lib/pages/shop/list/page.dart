@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/api/networkHandler.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
@@ -31,31 +33,47 @@ class ShopListPageState extends State<ShopListPage> {
 
   void request() async {
     try {
-      // ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
+      ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
+      var gender = '';
+      var season = '';
+      if (filterGender != null && filterGender != '') {
+        gender = '&gender=$filterGender';
+      }
+      if (filterSeason != null && filterSeason != '') {
+        season = '&season=$filterSeason';
+      }
 
-      // var ref =
-      // collectionUniforms
-      //     .where("filter-school", isEqualTo: arg.schoolName)
-      //     .where("status", isEqualTo: "교복보유중");
-      // var ref;
+      print(filterClothType);
+      List<Future<dynamic>> futures = [
+        NetworkHandler().get(
+            '${UniformApiRoutes.LIST}?school=${arg.schoolName}&status=교복보유중&clothType=${filterClothType.toString()}' +
+                gender +
+                season),
+      ];
 
-      // if (filterGender != null)
-      //   ref = ref.where("filter-gender", isEqualTo: filterGender);
-      // if (filterSeason != null)
-      //   ref = ref.where("filter-season", isEqualTo: filterSeason);
-      // if (filterClothType.length != 0)
-      //   ref = ref.where("filter-clothType", arrayContainsAny: filterClothType);
+      var res = await Future.wait(futures);
+      List l = [];
+      var _data;
 
-      // var querySnapshot = await ref.limit(8).get();
-      // var l = [];
-      // for (var doc in querySnapshot.docs) l.add({"id": doc.id, ...doc.data()});
-      setState(() {
-        loading = false;
-        //   list = l;
-        //   if (querySnapshot.docs.length > 0) {
-        //     lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        //   }
-      });
+      if (res[0]['data'] != null) {
+        _data = res[0]['data'];
+
+        for (var doc in _data) l.add(doc);
+
+        setState(() {
+          loading = false;
+          list = l;
+          if (_data.length > 0) {
+            lastDoc = _data[_data.length - 1];
+          }
+        });
+      } else {
+        setState(() {
+          loading = false;
+          list = l;
+        });
+      }
+      list = l;
     } catch (err) {
       print(err);
     }
@@ -116,7 +134,7 @@ class ShopListPageState extends State<ShopListPage> {
         });
 
         try {
-          // ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
+          ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
 
           // var ref;
           // var ref = collectionUniforms
@@ -202,7 +220,8 @@ class ShopListPageState extends State<ShopListPage> {
             height: (MediaQuery.of(context).size.width / 2),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(data["images"][0]), fit: BoxFit.cover)),
+                    image: NetworkHandler().getImage(data["images"][0]),
+                    fit: BoxFit.cover)),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,

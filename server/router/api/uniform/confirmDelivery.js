@@ -5,6 +5,7 @@ const UniformModel = require("models/uniform");
 const InfoModel = require("models/info");
 
 const isAdmin = require("middlewares/auth/isAdmin");
+const shopUniformPush = require("utils/shopUniformPush");
 
 router.put("/", isAdmin, async (req, res) => {
   try {
@@ -17,13 +18,23 @@ router.put("/", isAdmin, async (req, res) => {
     uniform.status = "최종완료";
     await Promise.all([
       uniform.save(),
-      InfoModel.findOneAndUpdate({}, {
-        $inc: {
-          totalBeforeDelivery: -1,
-          
-        },
-      }),
+      InfoModel.findOneAndUpdate(
+        {},
+        {
+          $inc: {
+            totalBeforeDelivery: -1,
+          },
+        }
+      ),
     ]);
+
+    await shopUniformPush({
+      targetUid: uniform.giverUid,
+      confirm: "최종완료",
+      uniformId: uniformId,
+      school: uniform["filter-school"],
+      season: uniform["filter-season"],
+    });
 
     res.status(200).json({ success: true });
   } catch (err) {

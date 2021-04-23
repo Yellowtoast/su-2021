@@ -1,10 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mobx/mobx.dart';
-import 'package:schooluniform/configs/api/user/get.dart';
-import 'package:schooluniform/configs/api/user/signin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/info/get.dart';
+import 'package:schooluniform/configs/api/networkHandler.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 
 part 'info.g.dart';
 
@@ -19,16 +18,22 @@ abstract class InfoStoreBase with Store {
 
   @action
   Future<void> initData() async {
-    List<Future<dynamic>> futures = [getInfoData()];
+    List<Future<dynamic>> futures = [
+      NetworkHandler().get(InfoApiRoutes.GET),
+    ];
 
     String fcmToken = await FirebaseMessaging.instance.getToken();
     final prefs = await SharedPreferences.getInstance();
 
     var userInitialData = {
       "total": 0,
-      "totalAlarmsDonate": 0,
-      "totalAlarmsShop": 0,
-      "totalAlarmsCart": 0,
+      "uniformDonate": 0,
+      "uniformShop": 0,
+      "uniformCart": 0,
+      "fcm": fcmToken,
+    };
+
+    var signInInfo = {
       "fcm": fcmToken,
     };
 
@@ -37,11 +42,17 @@ abstract class InfoStoreBase with Store {
 
     try {
       if (token == '' || uid == '') {
-        var newUser = await signInUser(fcm: fcmToken);
-        prefs.setString('x-access-token', newUser['token']);
-        prefs.setString('userId', newUser['userId']);
+        List<Future<dynamic>> futures2 = [
+          NetworkHandler().post(UserApiRoutes.SIGN_IN, signInInfo),
+        ];
+
+        var newUser = await Future.wait(futures2);
+        prefs.setString('x-access-token', newUser[0]['token']);
+        prefs.setString('userId', newUser[0]['userId']);
       } else {
-        futures.add(getUser(targetUid: uid, token: token));
+        futures.add(
+          NetworkHandler().get('${UserApiRoutes.GET}?targetUid=$uid'),
+        );
       }
     } catch (err) {
       print(err);

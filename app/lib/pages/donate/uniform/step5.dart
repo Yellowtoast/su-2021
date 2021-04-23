@@ -4,12 +4,10 @@ import 'dart:math';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:schooluniform/configs/api/info/update.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/uniform/request.dart';
 import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/user/logs/uniform/donate/create.dart';
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
@@ -33,27 +31,6 @@ class DonateStep5State extends State<DonateStep5> {
   String address;
   String office;
   bool checkPolicy = false;
-
-  InputDecoration deco(String hintText) {
-    return InputDecoration(
-      counterStyle: TextStyle(
-        height: double.minPositive,
-      ),
-      counterText: "",
-      enabledBorder: InputBorder.none,
-      border: InputBorder.none,
-      focusedBorder: InputBorder.none,
-      isDense: true,
-      labelStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-      ),
-      contentPadding: EdgeInsets.all(0),
-      hintText: hintText,
-      hintStyle: TextStyle(
-          fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xffb7b7b7)),
-    );
-  }
 
   togglePolicy() {
     setState(() {
@@ -129,7 +106,7 @@ class DonateStep5State extends State<DonateStep5> {
       "schoolDonate": [
         schoolLevel,
         d.school,
-        infoStore.localInfo[schoolLevel][d.school]["totalDonate"]
+        infoStore.localInfo[schoolLevel][d.school]["totalDonate"] + 1
       ],
     };
 
@@ -143,12 +120,10 @@ class DonateStep5State extends State<DonateStep5> {
       "thumbnail": images[0],
     };
 
-    String token = prefs.getString('x-access-token');
-
     List<Future<dynamic>> futures = [
-      requestUniformDonate(token: token, data: uniformValue),
-      updateInfo(token: token, data: commonUpdateInfo),
-      createLogsUniformDonate(token: token, data: log),
+      NetworkHandler().post(UniformApiRoutes.REQUEST_DONATE, uniformValue),
+      NetworkHandler().post(InfoApiRoutes.UPDATE, commonUpdateInfo),
+      NetworkHandler().post(UserLogsApiRoutes.DONATE_CREATE, log),
     ];
 
     try {

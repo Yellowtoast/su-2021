@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/api/networkHandler.dart';
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
 
@@ -27,10 +28,10 @@ Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                                color: itemCode == data["id"]
+                                color: itemCode == data["_id"]
                                     ? Colors.black
                                     : grey6)),
-                        child: itemCode == data["id"]
+                        child: itemCode == data["_id"]
                             ? Container(
                                 width: 8,
                                 height: 8,
@@ -65,7 +66,7 @@ Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {
           ),
           GestureDetector(
             onTap: () => Navigator.of(context)
-                .pushNamed(Routes.shopShowDirectUrl, arguments: data["id"]),
+                .pushNamed(Routes.shopShowDirectUrl, arguments: data["_id"]),
             child: Row(
               children: [
                 Container(
@@ -74,7 +75,7 @@ Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {
                   margin: EdgeInsets.only(right: 16),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(data["thumbnail"]),
+                        image: NetworkHandler().getImage(data["thumbnail"]),
                         fit: BoxFit.cover),
                   ),
                 ),

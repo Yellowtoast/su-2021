@@ -24,11 +24,11 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
   void toggleClothType(v) {
     if (clothType.indexOf(v) == -1)
       setState(() {
-        clothType.add(v);
+        clothType.add('"$v"');
       });
     else
       setState(() {
-        clothType.remove(v);
+        clothType.remove('"$v"');
       });
   }
 

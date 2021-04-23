@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/api/networkHandler.dart';
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
 
@@ -25,7 +26,7 @@ Widget card({context, data}) {
                 margin: EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(data["thumbnail"]),
+                      image: NetworkHandler().getImage(data["thumbnail"]),
                       fit: BoxFit.cover),
                 ),
               ),

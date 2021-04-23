@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/api/networkHandler.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
@@ -7,6 +9,7 @@ import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/components/loading.dart';
 import 'package:schooluniform/pages/user/purchase/uniform/widgets/card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPurchaseUniformPage extends StatefulWidget {
   @override
@@ -18,48 +21,52 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
   List list = [];
 
   void request() async {
+    final prefs = await SharedPreferences.getInstance();
+    String uid = prefs.getString('userId');
     try {
-      // User u = FirebaseAuth.instance.currentUser;
+      Map userUpdateInfo = {
+        "total":
+            infoStore.userInfo["total"] - infoStore.userInfo["uniformShop"],
+        "uniformShop": 0,
+      };
 
-      // List<Future<dynamic>> futures = [
-      // getLogsUniformShop(u.uid).get(),
-      // collectionUsers.doc(u.uid).get(),
-      // ];
+      List<Future<dynamic>> futures = [
+        NetworkHandler().get('${UserLogsApiRoutes.PURCHASE_LIST}'),
+        NetworkHandler()
+            .put('${UserApiRoutes.UPDATE}?targetUid=$uid', userUpdateInfo),
+      ];
 
-      // var res = await Future.wait(futures);
+      var res = await Future.wait(futures);
+      print('request res[0]');
+      print(res[0]);
 
-      // DocumentSnapshot doc = res[0];
-      // DocumentSnapshot doc1 = res[1];
+      print('request res[1]');
+      print(res[1]);
 
-      // collectionUsers.doc(u.uid).update({
-      //   "totalAlarms":
-      //       FieldValue.increment(-1 * doc1.data()["totalAlarmsShop"]),
-      //   "totalAlarmsShop": 0,
-      // });
+      infoStore.updateUserData("total",
+          infoStore.userInfo["total"] - infoStore.userInfo["uniformShop"]);
+      infoStore.updateUserData("uniformShop", 0);
 
-      infoStore.updateUserData(
-          "totalAlarms",
-          infoStore.userInfo["totalAlarms"] -
-              infoStore.userInfo["totalAlarmsShop"]);
-      infoStore.updateUserData("totalAlarmsShop", 0);
+      if (res[0]['data'] != null) {
+        var data = res[0]['data'];
 
-      // if (doc.exists) {
-      //   var data = doc.data();
+        List l = [];
+        for (int i = data.length - 1; i >= 0; i--) {
+          l.add(data[i]);
+        }
 
-      //   List l = [];
-      //   for (int i = data["index"].length - 1; i >= 0; i--) {
-      //     l.add(data["${data["index"][i]}"]);
-      //   }
+        print('res list data');
+        print(l);
 
-      //   setState(() {
-      //     list = l;
-      //     loading = false;
-      //   });
-      // } else {
-      setState(() {
-        loading = false;
-      });
-      // }
+        setState(() {
+          list = l;
+          loading = false;
+        });
+      } else {
+        setState(() {
+          loading = false;
+        });
+      }
     } catch (err) {
       print(err);
     }

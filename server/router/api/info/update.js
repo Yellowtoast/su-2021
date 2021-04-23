@@ -7,22 +7,29 @@ const router = express.Router();
 
 router.post("/", isUserOrAdmin, async (req, res) => {
   try {
-    const { totalDonate, totalBeforeStock, schoolDonate } = req.body;
+    const {
+      totalStock,
+      totalBeforeDelivery,
+      totalBeforeShop,
+      totalDonate,
+      totalBeforeStock,
+      schoolDonate,
+    } = req.body;
 
     const updated = {};
-    updated[`${schoolDonate[0]}.${schoolDonate[1]}.totalDonate`] =
-      schoolDonate[2];
+    if (totalStock) updated["totalStock"] = totalStock;
+    if (totalBeforeDelivery)
+      updated["totalBeforeDelivery"] = totalBeforeDelivery;
+    if (totalBeforeShop) updated["totalBeforeShop"] = totalBeforeShop;
+    if (totalDonate) updated["totalDonate"] = totalDonate;
+    if (totalBeforeStock) updated["totalBeforeStock"] = totalBeforeStock;
+    if (schoolDonate.length)
+      updated[`${schoolDonate[0]}.${schoolDonate[1]}.totalDonate`] =
+        schoolDonate[2];
 
-    await Promise.all([
-      InfoModel.findOneAndUpdate(
-        {},
-        {
-          totalDonate,
-          totalBeforeStock,
-        }
-      ),
-      InfoModel.findOneAndUpdate({}, updated),
-    ]);
+    console.log(updated);
+
+    await InfoModel.updateOne({}, updated);
 
     res.status(200).json({
       success: true,

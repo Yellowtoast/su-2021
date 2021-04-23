@@ -10,27 +10,27 @@ const storage = multer.diskStorage({
     cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname + "_" + new Date().getTime() + "jpg");
+    cb(null, file.originalname + ".png");
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype == "image/jpeg" || file.mimetype == "image/png") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+// const fileFilter = (req, file, cb) => {
+//   if (file.mimetype == "image/jpeg" || file.mimetype == "image/png") {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
 
 const upload = multer({
   storage: storage,
   limits: {
     fileSize: 1024 * 1024 * 1,
   },
-  fileFilter: fileFilter,
+  // fileFilter: fileFilter,
 });
 
-router.put("/", upload.single("imageFile"), async (req, res) => {
+router.post("/", upload.single("imageFile"), async (req, res) => {
   try {
     const file = req.file;
 

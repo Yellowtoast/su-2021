@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/user/cart/get.dart';
+import 'package:schooluniform/configs/api/networkHandler.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
@@ -23,37 +25,34 @@ class UserCartPageState extends State<UserCartPage> {
   String itemCode = "";
 
   void request() async {
+    final prefs = await SharedPreferences.getInstance();
+    String uid = prefs.getString('userId');
     try {
-      // User u = FirebaseAuth.instance.currentUser;
+      Map userUpdateInfo = {
+        "total":
+            infoStore.userInfo["total"] - infoStore.userInfo["uniformCart"],
+        "uniformCart": 0,
+      };
 
       List<Future<dynamic>> futures = [
-        getUserCart(id: 1),
-        //   getUniformCarts(u.uid).get(),
-        //   collectionUsers.doc(u.uid).get(),
+        NetworkHandler().get('${UserLogsApiRoutes.CART_LIST}'),
+        NetworkHandler()
+            .put('${UserApiRoutes.UPDATE}?targetUid=$uid', userUpdateInfo),
       ];
 
       var res = await Future.wait(futures);
 
-      // DocumentSnapshot doc = res[0];
-      // DocumentSnapshot doc1 = res[1];
+      print(res[1]);
 
-      // collectionUsers.doc(u.uid).update({
-      //   "totalAlarms":
-      //       FieldValue.increment(-1 * doc1.data()["totalAlarmsCart"]),
-      //   "totalAlarmsCart": 0,
-      // });
+      infoStore.updateUserData("total",
+          infoStore.userInfo["total"] - infoStore.userInfo["uniformCart"]);
+      infoStore.updateUserData("uniformCart", 0);
 
-      infoStore.updateUserData(
-          "totalAlarms",
-          infoStore.userInfo["totalAlarms"] -
-              infoStore.userInfo["totalAlarmsCart"]);
-      infoStore.updateUserData("totalAlarmsCart", 0);
+      if (res[0] != null) {
+        var _data = res[0]['data'];
 
-      if (res[0].isEmpty == false) {
-        var _data = res[0];
         List l = [];
         for (int i = _data.length - 1; i >= 0; i--) {
-          print(_data[i]);
           l.add(_data[i]);
         }
         setState(() {
@@ -82,15 +81,18 @@ class UserCartPageState extends State<UserCartPage> {
   handleDelete({
     id,
   }) async {
+    final prefs = await SharedPreferences.getInstance();
+    String uid = prefs.getString('userId');
+    print('delete list');
+    print(id);
+    print(list);
     setState(() {
-      list = list.where((element) => element["id"] != id).toList();
+      list = list.where((element) => element["_id"] != id).toList();
     });
     Navigator.of(context).pop();
     try {
-      // await getUniformCarts(u.uid).update({
-      //   "index": FieldValue.arrayRemove([id]),
-      //   id: FieldValue.delete(),
-      // });
+      await NetworkHandler()
+          .get('${UserLogsApiRoutes.CART_REMOVE}?targetUid=$uid&logId=$id');
     } catch (err) {
       print(err);
     }
@@ -103,7 +105,6 @@ class UserCartPageState extends State<UserCartPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(itemCode);
     return Scaffold(
         backgroundColor: grey2,
         appBar: Header(
@@ -126,14 +127,14 @@ class UserCartPageState extends State<UserCartPage> {
                             data: d,
                             itemCode: itemCode,
                             onClickToItem: () => setState(() {
-                                  itemCode = d["id"];
+                                  itemCode = d["_id"];
                                 }),
                             onClickToDeleteWidget: () => deleteCart(
                                   context: context,
-                                  id: d["id"],
+                                  id: d["_id"],
                                   onClickToCancel: handleCancel,
                                   onClickToDelete: () =>
-                                      handleDelete(id: d["id"]),
+                                      handleDelete(id: d["_id"]),
                                 )),
                     ],
                   ),

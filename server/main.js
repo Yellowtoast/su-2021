@@ -5,7 +5,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const mongoose = require("mongoose");
+const admin = require("firebase-admin");
 
+const serviceAccount = require("./admin.json");
 const router = require("router");
 
 const main = async () => {
@@ -19,7 +21,13 @@ const main = async () => {
     useCreateIndex: true,
   });
 
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+
   const app = express();
+  // app.use(express.json());
+  app.use(bodyParser.json());
   app.use("/uploads", express.static("uploads"));
   app.use("/", router);
 

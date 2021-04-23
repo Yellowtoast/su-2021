@@ -1,9 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/api/info/update.dart';
 import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/user/logs/uniform/donate/getList.dart';
-import 'package:schooluniform/configs/api/user/update.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
@@ -28,21 +26,23 @@ class UserDonateUniformPageState extends State<UserDonateUniformPage> {
       var uid = prefs.getString('userId');
       var token = prefs.getString('x-access-token');
 
+      Map userUpdateInfo = {
+        "total":
+            infoStore.userInfo["total"] - infoStore.userInfo["uniformDonate"],
+        "uniformDonate": 0
+      };
+
       List<Future<dynamic>> futures = [
-        getLogsUniformDonateList(token: token),
-        // updateUser(token: token, data: {
-        //   "targetUid": uid,
-        //   "total":
-        //       infoStore.userInfo["total"] - infoStore.userInfo["uniformDonate"],
-        //   "uniformDonate": 0
-        // })
+        NetworkHandler().get(UserLogsApiRoutes.DONATE_LIST),
+        NetworkHandler()
+            .put('${UserApiRoutes.UPDATE}?targetUid=$uid', userUpdateInfo),
       ];
 
       var res = await Future.wait(futures);
 
-      // infoStore.updateUserData("total",
-      //     infoStore.userInfo["total"] - infoStore.userInfo["uniformDonate"]);
-      // infoStore.updateUserData("uniformDonate", 0);
+      infoStore.updateUserData("total",
+          infoStore.userInfo["total"] - infoStore.userInfo["uniformDonate"]);
+      infoStore.updateUserData("uniformDonate", 0);
 
       if (res.length > 0) {
         var _data = res[0]['data'];

@@ -37,6 +37,7 @@ router.post("/", isUserOrAdmin, async (req, res) => {
       "filter-gender": req.body["filter-gender"],
       "filter-season": req.body["filter-season"],
       "filter-clothType": req.body["filter-clothType"],
+      title: `${req.body["filter-school"]} · ${req.body["filter-gender"]} · ${req.body["filter-season"]}`,
     });
 
     await newUniform.save();

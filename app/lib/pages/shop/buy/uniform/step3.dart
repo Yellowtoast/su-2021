@@ -1,12 +1,19 @@
+import 'dart:io';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:schooluniform/configs/api/networkHandler.dart';
+import 'package:schooluniform/configs/api/routes.dart';
 import 'package:schooluniform/configs/routes.dart';
+import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
 
 import 'package:schooluniform/components/header.dart';
 import 'package:schooluniform/components/loading.dart';
+import 'package:schooluniform/pages/shop/buy/uniform/widgets/alarmModal.dart';
 
 class ShopUniformInputData {
   ShopUniformInputData(
@@ -54,27 +61,6 @@ class ShopStep3State extends State<ShopStep3> {
     });
   }
 
-  InputDecoration deco(String hintText) {
-    return InputDecoration(
-      counterStyle: TextStyle(
-        height: double.minPositive,
-      ),
-      counterText: "",
-      enabledBorder: InputBorder.none,
-      border: InputBorder.none,
-      focusedBorder: InputBorder.none,
-      isDense: true,
-      labelStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-      ),
-      contentPadding: EdgeInsets.all(0),
-      hintText: hintText,
-      hintStyle: TextStyle(
-          fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xffb7b7b7)),
-    );
-  }
-
   togglePolicy() {
     setState(() {
       checkPolicy = !checkPolicy;
@@ -86,162 +72,114 @@ class ShopStep3State extends State<ShopStep3> {
       setState(() {
         loading = true;
       });
-      // ShopUniformInputData d = ModalRoute.of(context).settings.arguments;
-      // User user = FirebaseAuth.instance.currentUser;
-      // String uid = user.uid;
 
-      // FirebaseStorage storage = FirebaseStorage.instance;
+      final prefs = await SharedPreferences.getInstance();
+      String uid = prefs.getString('userId');
+      ShopUniformInputData d = ModalRoute.of(context).settings.arguments;
 
-      // bool hasCertImage = d.certFront != null && d.certBack != null;
+      print(uid);
+      print(d.code);
+      print(d.deliveryType);
+      print(d.certFront);
+      print(d.certBack);
+      print(d.certName);
+      print(d.certBirth);
+      print(d.certSchool);
 
-      // if (hasCertImage) {
-      //   Reference ref = storage.ref("daegu/bukgu/${d.code}");
+      bool hasCertImage = d.certFront != null && d.certBack != null;
 
-      //   await Future.wait([
-      //     ref.child('certFront.png').putFile(File(d.certFront.path)),
-      //     ref.child('certBack.png').putFile(File(d.certBack.path)),
-      //   ]);
-      // }
+      var images;
+      if (hasCertImage) {
+        List<Future<dynamic>> imageFutures = [
+          NetworkHandler().putImage(filePath: File(d.certFront.path).path),
+          NetworkHandler().putImage(filePath: File(d.certBack.path).path),
+        ];
 
-      // List<Future<dynamic>> futures = hasCertImage
-      //     ? [
-      //         collectionUniforms.doc(d.code).get(),
-      //         getLogsUniformShop(uid).get(),
-      //         storage
-      //             .ref("daegu/bukgu/${d.code}/certFront.png")
-      //             .getDownloadURL(),
-      //         storage
-      //             .ref("daegu/bukgu/${d.code}/certBack.png")
-      //             .getDownloadURL(),
-      //       ]
-      //     : [
-      //         collectionUniforms.doc(d.code).get(),
-      //         getLogsUniformShop(uid).get(),
-      //       ];
+        images = await Future.wait(imageFutures);
+      }
 
-      // var res = await Future.wait(futures);
-
-      // var data = res[0].data();
-
-      // var commonUpdateInfo = {
-      //   "totalStock": FieldValue.increment(-1),
-      //   "totalBeforeShop": FieldValue.increment(1),
-      //   "${data["filter-school"].indexOf("고등") == -1 ? "middleSchool" : "highSchool"}.${data["filter-school"]}.totalStock":
-      //       FieldValue.increment(-1),
-      // };
-
-      // var log = {
-      //   "title": data["uniforms"].length - 1 == 0
-      //       ? "${data["filter-school"]} · ${data["filter-gender"]} · ${data["uniforms"][0]["clothType"]}"
-      //       : "${data["filter-school"]} · ${data["filter-gender"]} · ${data["uniforms"][0]["clothType"]} 외 ${data["uniforms"].length - 1}",
-      //   "uniformId": d.code,
-      //   "status": "구매승인요청",
-      //   "showStatus": "구매승인요청",
-      //   "thumbnail": data["images"][0],
-      // };
-
-      // final DateTime now = DateTime.now();
-      // final DateFormat formatter = DateFormat('yyyy. MM. dd HH:mm:ss');
-      // final String formatted = formatter.format(now);
-
-      List<Future<dynamic>> futures2 = [
-        // collectionUniforms.doc(d.code).update({
-        //   "receiverUid": uid,
-        //   "receiverName": name,
-        //   "receiverPhone": phone,
-        //   "receiverAddress": address,
-        //   "receiverDeliveryType": d.deliveryType,
-        //   "receiverCert": hasCertImage ? [res[2], res[3]] : [],
-        //   "receiverBirth": d.certBirth,
-        //   "receiverSchool": d.certSchool,
-        //   "status": "구매승인요청",
-        //   "dateShop": formatted,
-        // }),
-        // common.update(commonUpdateInfo),
-        // res[1].exists
-        //     ? getLogsUniformShop(uid).update({
-        //         "index": FieldValue.arrayUnion([d.code]),
-        //         d.code: log,
-        //       })
-        //     : getLogsUniformShop(uid).set({
-        //         "index": [d.code],
-        //         d.code: log,
-        //       }),
+      List<Future<dynamic>> futures = [
+        NetworkHandler().get('${UniformApiRoutes.GET}?uniformId=${d.code}'),
+        NetworkHandler().get('${UserLogsApiRoutes.PURCHASE_LIST}'),
       ];
 
-      await Future.wait(futures2);
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.userPurchaseUniformUrl,
-          (route) => route.settings.name == Routes.homeUrl);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => Dialog(
-            insetPadding: EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            child: Container(
-              width: MediaQuery.of(context).size.width - 32,
-              padding:
-                  EdgeInsets.only(top: 36, bottom: 24, left: 16, right: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-              ),
-              child: Container(
-                height: 155,
-                child: Column(
-                  children: [
-                    Text(
-                      "알림",
-                      style: GoogleFonts.notoSans(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 12),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 24),
-                      child: Text(
-                        "센터에서 확인 후, 승인이 되면\n푸쉬 알림으로 알려드립니다",
-                        style: GoogleFonts.notoSans(
-                            fontSize: 14,
-                            color: Color(0xff444444),
-                            height: 1.57),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 64,
-                            alignment: Alignment.center,
-                            height: 52,
-                            decoration: BoxDecoration(
-                              gradient: gradSig,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Text(
-                              "확인",
-                              style: GoogleFonts.notoSans(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            )),
-      );
+      var res = await Future.wait(futures);
+      var data = res[0]['data'];
+
+      print('data');
+      print('${UniformApiRoutes.GET}?uniformId=${d.code}');
+      print(data);
+
+      if (data != null) {
+        var schoolLevel;
+        if (data["filter-school"].indexOf("고등") == -1) {
+          schoolLevel = "middleSchools";
+        } else {
+          schoolLevel = "highSchools";
+        }
+
+        var commonUpdateInfo = {
+          "totalStock": infoStore.localInfo['totalStock'] - 1,
+          "totalBeforeShop": infoStore.localInfo['totalBeforeShop'] + 1,
+          "schoolDonate": [
+            schoolLevel,
+            data["filter-school"],
+            infoStore.localInfo[schoolLevel][data["filter-school"]]
+                        ["totalStock"] ==
+                    0
+                ? 0
+                : infoStore.localInfo[schoolLevel][data["filter-school"]]
+                        ["totalStock"] -
+                    1
+          ],
+        };
+
+        var log = {
+          "title": data["uniforms"].length - 1 == 0
+              ? "${data["filter-school"]} · ${data["filter-gender"]} · ${data["uniforms"][0]["clothType"]}"
+              : "${data["filter-school"]} · ${data["filter-gender"]} · ${data["uniforms"][0]["clothType"]} 외 ${data["uniforms"].length - 1}",
+          "uniformId": d.code,
+          "status": "구매승인요청",
+          "showStatus": "구매승인요청",
+          "thumbnail": data["images"][0],
+        };
+
+        final DateTime now = DateTime.now();
+        final DateFormat formatter = DateFormat('yyyy. MM. dd HH:mm:ss');
+        final String formatted = formatter.format(now);
+
+        var uniformUpdateInfo = {
+          "receiverUid": uid,
+          "receiverName": name,
+          "receiverPhone": phone,
+          "receiverAddress": address,
+          "receiverDeliveryType": d.deliveryType,
+          "receiverCert": hasCertImage ? [images[0], images[1]] : [],
+          "receiverBirth": d.certBirth,
+          "receiverSchool": d.certSchool,
+          "status": "구매승인요청",
+          "dateShop": formatted,
+        };
+
+        print('log');
+        print(log);
+
+        await Future.wait([
+          NetworkHandler().put('${UniformApiRoutes.UPDATE}?uniformId=${d.code}',
+              uniformUpdateInfo),
+          NetworkHandler().post('${InfoApiRoutes.UPDATE}', commonUpdateInfo),
+          NetworkHandler().post('${UserLogsApiRoutes.PURCHASE_CREATE}', log),
+        ]);
+
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.userPurchaseUniformUrl,
+            (route) => route.settings.name == Routes.homeUrl);
+        alarmModal(context: context);
+      }
+
+      setState(() {
+        loading = false;
+      });
     } catch (err) {
       print(err);
     }

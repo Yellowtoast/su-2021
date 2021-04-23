@@ -3,12 +3,41 @@
 const express = require("express");
 
 const isUserOrAdmin = require("middlewares/auth/isUserOrAdmin");
+const UniformModel = require("models/uniform");
 
 const router = express.Router();
 
 router.put("/", isUserOrAdmin, async (req, res) => {
   try {
     const { uniformId } = req.query;
+    const {
+      receiverUid,
+      receiverName,
+      receiverPhone,
+      receiverAddress,
+      receiverDeliveryType,
+      receiverCert,
+      receiverBirth,
+      receiverSchool,
+      status,
+      dateShop,
+    } = req.body;
+
+    await UniformModel.updateOne(
+      { _id: uniformId },
+      {
+        receiverUid,
+        receiverName,
+        receiverPhone,
+        receiverAddress,
+        receiverDeliveryType,
+        receiverCert,
+        receiverBirth,
+        receiverSchool,
+        status,
+        dateShop,
+      }
+    );
 
     res.status(200).json({ success: true });
   } catch (err) {

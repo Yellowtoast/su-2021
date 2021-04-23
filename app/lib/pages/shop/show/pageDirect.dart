@@ -1,10 +1,16 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:schooluniform/configs/api/networkHandler.dart';
+import 'package:schooluniform/configs/api/routes.dart';
+import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/configs/routes.dart';
 
 import 'package:schooluniform/components/loading.dart';
+import 'package:schooluniform/pages/shop/show/widgets/direct/addToCartModal.dart';
+import 'package:schooluniform/pages/shop/show/widgets/direct/alarmModal.dart';
+import 'package:schooluniform/pages/shop/show/widgets/direct/buyNowModal.dart';
 
 class ShopShowDirectPage extends StatefulWidget {
   ShopShowDirectPage({this.code});
@@ -22,84 +28,19 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
   var data;
 
   void request() async {
-    // DocumentSnapshot doc = await collectionUniforms.doc(widget.code).get();
-    // if (!doc.exists) {
-    //   Navigator.of(context).pop();
-    //   showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) => Dialog(
-    //         insetPadding: EdgeInsets.symmetric(horizontal: 16),
-    //         shape: RoundedRectangleBorder(
-    //           borderRadius: BorderRadius.circular(8),
-    //         ),
-    //         elevation: 0.0,
-    //         backgroundColor: Colors.transparent,
-    //         child: Container(
-    //           width: MediaQuery.of(context).size.width - 32,
-    //           padding:
-    //               EdgeInsets.only(top: 36, bottom: 24, left: 16, right: 16),
-    //           decoration: BoxDecoration(
-    //             borderRadius: BorderRadius.circular(8),
-    //             color: Colors.white,
-    //           ),
-    //           child: Container(
-    //             height: 155,
-    //             child: Column(
-    //               children: [
-    //                 Text(
-    //                   "알림",
-    //                   style: GoogleFonts.notoSans(
-    //                       fontSize: 14, fontWeight: FontWeight.bold),
-    //                 ),
-    //                 Container(
-    //                   margin: EdgeInsets.only(bottom: 12),
-    //                 ),
-    //                 Container(
-    //                   margin: EdgeInsets.only(bottom: 24),
-    //                   child: Text(
-    //                     "본 교복은 삭제된 교복입니다\n다른 교복을 신청해주세요",
-    //                     style: GoogleFonts.notoSans(
-    //                         fontSize: 14,
-    //                         color: Color(0xff444444),
-    //                         height: 1.57),
-    //                     textAlign: TextAlign.center,
-    //                   ),
-    //                 ),
-    //                 Row(
-    //                   children: [
-    //                     GestureDetector(
-    //                       onTap: () => Navigator.of(context).pop(),
-    //                       child: Container(
-    //                         width: MediaQuery.of(context).size.width - 64,
-    //                         alignment: Alignment.center,
-    //                         height: 52,
-    //                         decoration: BoxDecoration(
-    //                           gradient: gradSig,
-    //                           borderRadius:
-    //                               BorderRadius.all(Radius.circular(8)),
-    //                         ),
-    //                         child: Text(
-    //                           "확인",
-    //                           style: GoogleFonts.notoSans(
-    //                               fontSize: 16,
-    //                               fontWeight: FontWeight.bold,
-    //                               color: Colors.white),
-    //                         ),
-    //                       ),
-    //                     )
-    //                   ],
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //         )),
-    //   );
-    // } else {
-    //   setState(() {
-    //     data = doc.data();
-    //     loading = false;
-    //   });
-    // }
+    print(widget.code);
+    var res = await NetworkHandler()
+        .get('${UniformApiRoutes.GET}?uniformId=${widget.code}');
+
+    if (res == null) {
+      Navigator.of(context).pop();
+      directAlarmModal(context: context);
+    } else {
+      setState(() {
+        data = res['data'];
+        loading = false;
+      });
+    }
   }
 
   @override
@@ -109,229 +50,45 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
   }
 
   void addToCart() async {
-    // User u = FirebaseAuth.instance.currentUser;
+    final prefs = await SharedPreferences.getInstance();
+    String uid = prefs.getString('userId');
 
     // var payload = {
-    //   "id": data["code"],
+    //   "id": data["uniformId"],
     //   "thumbnail": data["images"][0],
     //   "title": data["uniforms"].length - 1 == 0
     //       ? "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]}"
     //       : "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]} 외 ${data["uniforms"].length - 1}",
     // };
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => Dialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          child: Container(
-            width: MediaQuery.of(context).size.width - 32,
-            padding: EdgeInsets.only(top: 36, bottom: 24, left: 16, right: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-            ),
-            child: Container(
-              height: 155,
-              child: Column(
-                children: [
-                  Text(
-                    "알림",
-                    style: GoogleFonts.notoSans(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 12),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 24),
-                    child: Text(
-                      "장바구니에 추가되었습니다\n장바구니로 이동하시겠습니까?",
-                      style: GoogleFonts.notoSans(
-                          fontSize: 14, color: Color(0xff444444), height: 1.57),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushNamed(Routes.userCartUrl);
-                        },
-                        child: Container(
-                          width: (MediaQuery.of(context).size.width / 2) - 40,
-                          alignment: Alignment.center,
-                          height: 52,
-                          decoration: BoxDecoration(
-                            color: grey3,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          child: Text(
-                            "장바구니로 이동",
-                            style: GoogleFonts.notoSans(
-                                fontSize: 16, color: Colors.black),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          width: (MediaQuery.of(context).size.width / 2) - 40,
-                          alignment: Alignment.center,
-                          height: 52,
-                          decoration: BoxDecoration(
-                            gradient: gradSig,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          child: Text(
-                            "계속 둘러보기",
-                            style: GoogleFonts.notoSans(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          )),
-    );
+    directAddToCartModal(context: context);
 
-    // var doc = await getUniformCarts(u.uid).get();
+    var res = await NetworkHandler().get('${UserLogsApiRoutes.CART_LIST}');
+    print(res);
 
-    // if (doc.exists) {
-    //   var d = doc.data();
-    //   if (d["index"].indexOf(data["code"]) == -1) {
-    //     await Future.wait([
-    //       getUniformCarts(u.uid).update({
-    //         "index": FieldValue.arrayUnion([data["code"]]),
-    //         data["code"]: payload,
-    //       }),
-    //       collectionUsers.doc(u.uid).update({
-    //         "totalAlarms": FieldValue.increment(1),
-    //         "totalAlarmsCart": FieldValue.increment(1),
-    //       }),
-    //     ]);
-    //     infoStore.updateUserData(
-    //         "totalAlarms", infoStore.userInfo["totalAlarms"] + 1);
-    //     infoStore.updateUserData(
-    //         "totalAlarmsCart", infoStore.userInfo["totalAlarmsCart"] + 1);
-    //   }
-    // } else {
-    //   await Future.wait([
-    //     getUniformCarts(u.uid).set({
-    //       "index": [data["code"]],
-    //       data["code"]: payload,
-    //     }),
-    //     collectionUsers.doc(u.uid).update({
-    //       "totalAlarms": FieldValue.increment(1),
-    //       "totalAlarmsCart": FieldValue.increment(1),
-    //     }),
-    //   ]);
-    //   infoStore.updateUserData(
-    //       "totalAlarms", infoStore.userInfo["totalAlarms"] + 1);
-    //   infoStore.updateUserData(
-    //       "totalAlarmsCart", infoStore.userInfo["totalAlarmsCart"] + 1);
-    // }
+    if (res != null) {
+      Map cartAddInfo = {
+        "uniformId": data["uniformId"],
+      };
+
+      Map userUpdateInfo = {
+        "total": infoStore.userInfo["total"] + 1,
+        "uniformCart": infoStore.userInfo["uniformCart"] + 1,
+      };
+
+      await Future.wait([
+        NetworkHandler().put('${UserLogsApiRoutes.CART_ADD}', cartAddInfo),
+        NetworkHandler()
+            .put('${UserApiRoutes.UPDATE}?targetUid=$uid', userUpdateInfo),
+      ]);
+      infoStore.updateUserData("total", infoStore.userInfo["total"] + 1);
+      infoStore.updateUserData(
+          "uniformCart", infoStore.userInfo["uniformCart"] + 1);
+    }
   }
 
   void buyNow() async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => Dialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          child: Container(
-            width: MediaQuery.of(context).size.width - 32,
-            padding: EdgeInsets.only(top: 36, bottom: 24, left: 16, right: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-            ),
-            child: Container(
-              height: 155,
-              child: Column(
-                children: [
-                  Text(
-                    "주의사항",
-                    style: GoogleFonts.notoSans(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 12),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 24),
-                    child: Text(
-                      "모든 신청이 수락되지는 않으며\n너무 빈번한 구매는 거절 당할 수 있습니다",
-                      style: GoogleFonts.notoSans(
-                          fontSize: 14, color: Color(0xff444444), height: 1.57),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          width: (MediaQuery.of(context).size.width / 2) - 40,
-                          alignment: Alignment.center,
-                          height: 52,
-                          decoration: BoxDecoration(
-                            color: grey3,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          child: Text(
-                            "취소",
-                            style: GoogleFonts.notoSans(
-                                fontSize: 16, color: Colors.black),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushNamed(Routes.shopStep1Url,
-                              arguments: data["code"]);
-                        },
-                        child: Container(
-                          width: (MediaQuery.of(context).size.width / 2) - 40,
-                          alignment: Alignment.center,
-                          height: 52,
-                          decoration: BoxDecoration(
-                            gradient: gradSig,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          child: Text(
-                            "확인했습니다",
-                            style: GoogleFonts.notoSans(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          )),
-    );
+    directBuyNowModal(context: context, data: data);
   }
 
   @override
@@ -349,6 +106,9 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
       if (data["filter-clothType"].indexOf("넥타이") != -1) clothes.add("necktie");
       if (data["filter-clothType"].indexOf("조끼") != -1) clothes.add("vest");
     }
+
+    print('data: ');
+    print(data);
 
     return Scaffold(
         body: loading
@@ -377,7 +137,8 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: NetworkImage(img))),
+                                            image: NetworkHandler()
+                                                .getImage(img))),
                                   )
                               ],
                             ),
@@ -431,7 +192,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                               ),
                             ),
                             Text(
-                              data["code"],
+                              data["uniformId"],
                               style: GoogleFonts.poppins(
                                   fontSize: 16, color: Color(0xff888888)),
                             ),

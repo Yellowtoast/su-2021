@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/constants/theme.dart';
 
 Future<void> deleteCart({context, id, onClickToCancel, onClickToDelete}) async {
-  // User u = FirebaseAuth.instance.currentUser;
   showDialog(
     context: context,
     builder: (BuildContext context) => Dialog(

@@ -21,29 +21,31 @@ router.get("/", isUserOrAdmin, async (req, res) => {
     const andQuery = [];
 
     if (gender !== null) andQuery.push({ "filter-gender": gender });
-    if (clothType !== null) andQuery.push({
-      clothType: {
-        $in: clothType,
-      },
-    });
+    if (JSON.parse(clothType).length)
+      andQuery.push({
+        "filter-clothType": {
+          $in: JSON.parse(clothType),
+        },
+      });
     if (school !== null) andQuery.push({ "filter-school": school });
     if (season !== null) andQuery.push({ "filter-season": season });
-    if (keyword !== null) andQuery.push({
-      $or: [
-        { "title": { $regex: keyword, $option: "$i" } },
-        { "filter-school": { $regex: keyword, $option: "$i" } },
-        { "filter-gender": { $regex: keyword, $option: "$i" } },
-        { "filter-season": { $regex: keyword, $option: "$i" } },
-        { "giverAddress": { $regex: keyword, $option: "$i" } },
-        { "giverPhone": { $regex: keyword, $option: "$i" } },
-        { "giverDeliveryType": { $regex: keyword, $option: "$i" } },
-        { "giverName": { $regex: keyword, $option: "$i" } },
-        { "receiverAddress": { $regex: keyword, $option: "$i" } },
-        { "receiverPhone": { $regex: keyword, $option: "$i" } },
-        { "receiverDeliveryType": { $regex: keyword, $option: "$i" } },
-        { "receiverName": { $regex: keyword, $option: "$i" } },
-      ],
-    });
+    if (keyword !== null)
+      andQuery.push({
+        $or: [
+          { title: { $regex: keyword, $option: "$i" } },
+          { "filter-school": { $regex: keyword, $option: "$i" } },
+          { "filter-gender": { $regex: keyword, $option: "$i" } },
+          { "filter-season": { $regex: keyword, $option: "$i" } },
+          { giverAddress: { $regex: keyword, $option: "$i" } },
+          { giverPhone: { $regex: keyword, $option: "$i" } },
+          { giverDeliveryType: { $regex: keyword, $option: "$i" } },
+          { giverName: { $regex: keyword, $option: "$i" } },
+          { receiverAddress: { $regex: keyword, $option: "$i" } },
+          { receiverPhone: { $regex: keyword, $option: "$i" } },
+          { receiverDeliveryType: { $regex: keyword, $option: "$i" } },
+          { receiverName: { $regex: keyword, $option: "$i" } },
+        ],
+      });
     if (status !== null) andQuery.push({ status });
     if (giverDeliveryType !== null) andQuery.push({ giverDeliveryType });
     if (receiverDeliveryType !== null) andQuery.push({ receiverDeliveryType });
@@ -57,9 +59,10 @@ router.get("/", isUserOrAdmin, async (req, res) => {
       data: lists,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
-      error: "server error"
+      error: "server error",
     });
   }
 });

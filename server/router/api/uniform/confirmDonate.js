@@ -11,6 +11,7 @@ const UniformModel = require("models/uniform");
 const InfoModel = require("models/info");
 
 const isAdmin = require("middlewares/auth/isAdmin");
+const shopUniformPush = require("utils/shopUniformPush");
 
 router.put("/", isAdmin, async (req, res) => {
   try {
@@ -31,6 +32,14 @@ router.put("/", isAdmin, async (req, res) => {
         }
       ),
     ]);
+
+    await shopUniformPush({
+      targetUid: uniform.giverUid,
+      confirm: "교복보유중",
+      uniformId: uniformId,
+      school: uniform["filter-school"],
+      season: uniform["filter-season"],
+    });
 
     res.status(200).json({ success: true });
   } catch (err) {
