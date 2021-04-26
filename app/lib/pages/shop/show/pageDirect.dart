@@ -53,14 +53,6 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
     final prefs = await SharedPreferences.getInstance();
     String uid = prefs.getString('userId');
 
-    // var payload = {
-    //   "id": data["uniformId"],
-    //   "thumbnail": data["images"][0],
-    //   "title": data["uniforms"].length - 1 == 0
-    //       ? "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]}"
-    //       : "${data["filter-school"]} · ${data["filter-gender"]} · ${data["filter-clothType"][0]} 외 ${data["uniforms"].length - 1}",
-    // };
-
     directAddToCartModal(context: context);
 
     var res = await NetworkHandler().get('${UserLogsApiRoutes.CART_LIST}');
@@ -68,7 +60,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
 
     if (res != null) {
       Map cartAddInfo = {
-        "uniformId": data["uniformId"],
+        "uniformId": data["code"],
       };
 
       Map userUpdateInfo = {
@@ -192,7 +184,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                               ),
                             ),
                             Text(
-                              data["uniformId"],
+                              data["code"],
                               style: GoogleFonts.poppins(
                                   fontSize: 16, color: Color(0xff888888)),
                             ),

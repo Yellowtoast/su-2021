@@ -24,8 +24,8 @@ router.post("/", isUserOrAdmin, async (req, res) => {
     if (totalDonate) updated["totalDonate"] = totalDonate;
     if (totalBeforeStock) updated["totalBeforeStock"] = totalBeforeStock;
     if (schoolDonate.length)
-      updated[`${schoolDonate[0]}.${schoolDonate[1]}.totalDonate`] =
-        schoolDonate[2];
+      updated[`${schoolDonate[0]}.${schoolDonate[1]}.${schoolDonate[2]}`] =
+        schoolDonate[3];
 
     console.log(updated);
 

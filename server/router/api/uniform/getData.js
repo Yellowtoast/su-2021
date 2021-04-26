@@ -6,9 +6,7 @@ const router = express.Router();
 
 router.get("/", isUserOrAdmin, async (req, res) => {
   try {
-    const {
-      uniformId,
-    } = req.query;
+    const { uniformId } = req.query;
     const uniform = await UniformModel.findOne({ uniformId });
 
     res.status(200).json({
@@ -18,7 +16,7 @@ router.get("/", isUserOrAdmin, async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      error: "server error"
+      error: "server error",
     });
   }
 });

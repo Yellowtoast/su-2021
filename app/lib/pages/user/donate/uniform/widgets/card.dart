@@ -5,6 +5,8 @@ import 'package:schooluniform/configs/api/networkHandler.dart';
 import 'package:schooluniform/constants/theme.dart';
 
 Widget card({context, data}) {
+  print(data['thumbnail']);
+  print(data);
   return Container(
     color: Colors.white,
     padding: EdgeInsets.all(16),
@@ -17,7 +19,9 @@ Widget card({context, data}) {
           decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkHandler().getImage(data['thumbnail']))),
+                  image: data['thumbnail'] == null
+                      ? AssetImage('assets/img/bookie-main.png')
+                      : NetworkHandler().getImage(data['thumbnail']))),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

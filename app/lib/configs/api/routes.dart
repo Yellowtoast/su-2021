@@ -1,5 +1,5 @@
 class ApiConfig {
-  static const BASE_URI = 'http://192.168.226.44:3000';
+  static const BASE_URI = 'http://192.168.254.44:3001';
   static const SERVER_URI = '$BASE_URI/api';
 }
 

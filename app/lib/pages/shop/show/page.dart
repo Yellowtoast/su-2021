@@ -35,7 +35,7 @@ class ShopShowPageState extends State<ShopShowPage> {
 
     addToCartModal(context: context);
 
-    Map cartAddInfo = {"uniformId": data.data["uniformId"]};
+    Map cartAddInfo = {"uniformId": data.data["code"]};
 
     Map userUpdateInfo = {
       "total": infoStore.userInfo["total"] + 1,
@@ -155,7 +155,7 @@ class ShopShowPageState extends State<ShopShowPage> {
                     ),
                   ),
                   Text(
-                    data.data["uniformId"],
+                    data.data["code"],
                     style: GoogleFonts.poppins(
                         fontSize: 16, color: Color(0xff888888)),
                   ),

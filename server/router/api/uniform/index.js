@@ -7,6 +7,7 @@ const update = require("router/api/uniform/update");
 const list = require("router/api/uniform/list");
 const getData = require("router/api/uniform/getData");
 const requestDonate = require("router/api/uniform/requestDonate");
+const confirmDonate = require("router/api/uniform/confirmDonate");
 
 // router.use("/create", create);
 router.use("/delete", _delete);
@@ -14,5 +15,6 @@ router.use("/update", update);
 router.use("/list", list);
 router.use("/getData", getData);
 router.use("/donate/request", requestDonate);
+router.use("/confirm/donate", confirmDonate);
 
 module.exports = router;

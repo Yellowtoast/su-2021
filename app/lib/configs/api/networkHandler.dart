@@ -79,15 +79,14 @@ class NetworkHandler {
     }
   }
 
-  Future putImage({String filePath}) async {
+  Future putImage({String filePath, String uniformId}) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       String token = prefs.getString("x-access-token");
-      String uid = prefs.getString('userId');
       var uri = Uri.parse("${ApiConfig.SERVER_URI}/uploads");
       var request = http.MultipartRequest('POST', uri);
       var timestemp = DateTime.now().millisecondsSinceEpoch;
-      var filename = uid + '_$timestemp';
+      var filename = uniformId + '_$timestemp';
 
       request.files.add(await http.MultipartFile.fromPath("imageFile", filePath,
           filename: filename,

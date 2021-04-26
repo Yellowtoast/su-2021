@@ -127,7 +127,7 @@ class UserCartPageState extends State<UserCartPage> {
                             data: d,
                             itemCode: itemCode,
                             onClickToItem: () => setState(() {
-                                  itemCode = d["_id"];
+                                  itemCode = d["uniformId"];
                                 }),
                             onClickToDeleteWidget: () => deleteCart(
                                   context: context,

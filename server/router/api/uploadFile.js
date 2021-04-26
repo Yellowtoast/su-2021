@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname + ".png");
+    cb(null, file.originalname);
   },
 });
 
@@ -33,6 +33,7 @@ const upload = multer({
 router.post("/", upload.single("imageFile"), async (req, res) => {
   try {
     const file = req.file;
+    console.log(req.file);
 
     if (!file) {
       res.json({
@@ -46,6 +47,7 @@ router.post("/", upload.single("imageFile"), async (req, res) => {
       data: req.file.path,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
       error: "permission denied",

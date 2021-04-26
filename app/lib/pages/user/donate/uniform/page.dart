@@ -24,7 +24,6 @@ class UserDonateUniformPageState extends State<UserDonateUniformPage> {
     try {
       final prefs = await SharedPreferences.getInstance();
       var uid = prefs.getString('userId');
-      var token = prefs.getString('x-access-token');
 
       Map userUpdateInfo = {
         "total":
@@ -44,11 +43,11 @@ class UserDonateUniformPageState extends State<UserDonateUniformPage> {
           infoStore.userInfo["total"] - infoStore.userInfo["uniformDonate"]);
       infoStore.updateUserData("uniformDonate", 0);
 
-      if (res.length > 0) {
-        var _data = res[0]['data'];
+      if (res[0]['data'] != null) {
+        var data = res[0]['data'];
         List l = [];
-        for (int i = _data.length - 1; i >= 0; i--) {
-          l.add(_data[i]);
+        for (int i = data.length - 1; i >= 0; i--) {
+          l.add(data[i]);
         }
         setState(() {
           list = l;

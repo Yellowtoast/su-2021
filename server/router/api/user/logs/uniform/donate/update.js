@@ -3,27 +3,27 @@ const jwt = require("jsonwebtoken");
 
 const UserLogModel = require("models/userLog");
 
-const isUser = require("middlewares/auth/isUser");
+const isUserOrAdmin = require("middlewares/auth/isUserOrAdmin");
 
 const router = express.Router();
 
-router.put("/", isUser, async (req, res) => {
+router.put("/", isUserOrAdmin, async (req, res) => {
   try {
     const token = req.headers["x-access-token"];
     const { userId } = jwt.decode(token);
     const { uniformId, title, thumbnail, status, showStatus } = req.body;
 
-    const newLog = {
-      uniformId,
-      title,
-      thumbnail,
-      status,
-      showStatus,
-    };
+    const updated = {};
+    if (title) updated["title"] = title;
+    if (thumbnail) updated["thumbnail"] = thumbnail;
+    if (status) updated["status"] = status;
+    if (showStatus) updated["showStatus"] = showStatus;
+
+    console.log(updated);
 
     await UserLogModel.findOneAndUpdate(
-      { ownerId: userId, type: "donate" },
-      newLog
+      { ownerId: userId, type: "donate", uniformId },
+      updated
     );
 
     res.status(200).json({

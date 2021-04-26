@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", isUserOrAdmin, async (req, res) => {
   try {
+    console.log(req.query);
     const {
       gender = null,
       clothType = null,
@@ -21,7 +22,7 @@ router.get("/", isUserOrAdmin, async (req, res) => {
     const andQuery = [];
 
     if (gender !== null) andQuery.push({ "filter-gender": gender });
-    if (JSON.parse(clothType).length)
+    if (clothType && JSON.parse(clothType).length)
       andQuery.push({
         "filter-clothType": {
           $in: JSON.parse(clothType),
@@ -32,18 +33,18 @@ router.get("/", isUserOrAdmin, async (req, res) => {
     if (keyword !== null)
       andQuery.push({
         $or: [
-          { title: { $regex: keyword, $option: "$i" } },
-          { "filter-school": { $regex: keyword, $option: "$i" } },
-          { "filter-gender": { $regex: keyword, $option: "$i" } },
-          { "filter-season": { $regex: keyword, $option: "$i" } },
-          { giverAddress: { $regex: keyword, $option: "$i" } },
-          { giverPhone: { $regex: keyword, $option: "$i" } },
-          { giverDeliveryType: { $regex: keyword, $option: "$i" } },
-          { giverName: { $regex: keyword, $option: "$i" } },
-          { receiverAddress: { $regex: keyword, $option: "$i" } },
-          { receiverPhone: { $regex: keyword, $option: "$i" } },
-          { receiverDeliveryType: { $regex: keyword, $option: "$i" } },
-          { receiverName: { $regex: keyword, $option: "$i" } },
+          { title: new RegExp(keyword, "i") },
+          { "filter-school": new RegExp(keyword, "i") },
+          { "filter-gender": new RegExp(keyword, "i") },
+          { "filter-season": new RegExp(keyword, "i") },
+          { giverAddress: new RegExp(keyword, "i") },
+          { giverPhone: new RegExp(keyword, "i") },
+          { giverDeliveryType: new RegExp(keyword, "i") },
+          { giverName: new RegExp(keyword, "i") },
+          { receiverAddress: new RegExp(keyword, "i") },
+          { receiverPhone: new RegExp(keyword, "i") },
+          { receiverDeliveryType: new RegExp(keyword, "i") },
+          { receiverName: new RegExp(keyword, "i") },
         ],
       });
     if (status !== null) andQuery.push({ status });

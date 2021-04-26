@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-import firebase from "firebase/app";
-import "firebase/firestore";
-
 import styles from "styles/components/table.module.scss";
+import networkHandler from "configs/networkHandler";
 
 const Table = ({ list }) => {
+  console.log(list);
   return (
     <div>
       <div className={styles["table-border"]}>
@@ -22,25 +21,50 @@ const Table = ({ list }) => {
           <div className={styles["table-beforeShop-header9"]}>신청날짜</div>
         </div>
         <div>
-          {
-            list.map((data, i) => (
-              <Link href={`/uniform?id=${data.id}`} key={String(i)}>
-                <a className={styles["table-section-row"]}>
-                  <div className={styles["table-beforeShop-section1"]}>{data.id}</div>
-                  <div className={styles["table-beforeShop-section2"]}>
-                    <div style={{ backgroundImage: `url(${data.images[0]})` }}/>
-                  </div>
-                  <div className={styles["table-beforeShop-section3"]}>{data["filter-school"]}</div>
-                  <div className={styles["table-beforeShop-section4"]}>{data["filter-clothType"].join(" / ")}</div>
-                  <div className={styles["table-beforeShop-section5"]}>{data["receiverName"]}</div>
-                  <div className={styles["table-beforeShop-section6"]}>{`${data["receiverPhone"].substring(0, 3)}-${data["receiverPhone"].substring(3, 7)}-${data["receiverPhone"].substring(7, 11)}`}</div>
-                  <div className={styles["table-beforeShop-section7"]}>{data["receiverAddress"] || "-"}</div>
-                  <div className={styles["table-beforeShop-section8"]}>{data["receiverDeliveryType"] === "배송 요청" ? "배송 요청" : "직접 방문"}</div>
-                  <div className={styles["table-beforeShop-section9"]}>{data["dateShop"].substring(0, 12)}</div>
-                </a>
-              </Link>
-            ))
-          }
+          {list.map((data, i) => (
+            <Link href={`/uniform?id=${data.code}`} key={String(i)}>
+              <a className={styles["table-section-row"]}>
+                <div className={styles["table-beforeShop-section1"]}>
+                  {data.code}
+                </div>
+                <div className={styles["table-beforeShop-section2"]}>
+                  <div
+                    style={{
+                      backgroundImage: `url(${networkHandler.getImageFromServer(
+                        data.images[0]
+                      )})`,
+                    }}
+                  />
+                </div>
+                <div className={styles["table-beforeShop-section3"]}>
+                  {data["filter-school"]}
+                </div>
+                <div className={styles["table-beforeShop-section4"]}>
+                  {data["filter-clothType"].join(" / ")}
+                </div>
+                <div className={styles["table-beforeShop-section5"]}>
+                  {data["receiverName"]}
+                </div>
+                <div className={styles["table-beforeShop-section6"]}>{`${data[
+                  "receiverPhone"
+                ].substring(0, 3)}-${data["receiverPhone"].substring(
+                  3,
+                  7
+                )}-${data["receiverPhone"].substring(7, 11)}`}</div>
+                <div className={styles["table-beforeShop-section7"]}>
+                  {data["receiverAddress"] || "-"}
+                </div>
+                <div className={styles["table-beforeShop-section8"]}>
+                  {data["receiverDeliveryType"] === "배송 요청"
+                    ? "배송 요청"
+                    : "직접 방문"}
+                </div>
+                <div className={styles["table-beforeShop-section9"]}>
+                  {data["dateShop"].substring(0, 12)}
+                </div>
+              </a>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

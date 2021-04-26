@@ -60,8 +60,8 @@ class DonateStep5State extends State<DonateStep5> {
     List<Future<dynamic>> imagesUpload = [];
 
     d.images.forEach((image) async {
-      var uploadPath =
-          NetworkHandler().putImage(filePath: File(image.path).path);
+      var uploadPath = NetworkHandler()
+          .putImage(filePath: File(image.path).path, uniformId: id);
       imagesUpload.add(uploadPath);
     });
 
@@ -92,6 +92,9 @@ class DonateStep5State extends State<DonateStep5> {
     });
 
     uniformValue["filter-clothType"] = filterClothType;
+    uniformValue["title"] = d.uniforms.length - 1 == 0
+        ? "${d.school} · ${d.gender} · ${d.uniforms[0].clothType}"
+        : "${d.school} · ${d.gender} · ${d.uniforms[0].clothType} 외 ${d.uniforms.length - 1}";
 
     var schoolLevel;
     if (d.school.indexOf("고등") == -1) {
@@ -106,6 +109,7 @@ class DonateStep5State extends State<DonateStep5> {
       "schoolDonate": [
         schoolLevel,
         d.school,
+        'totalDonate',
         infoStore.localInfo[schoolLevel][d.school]["totalDonate"] + 1
       ],
     };

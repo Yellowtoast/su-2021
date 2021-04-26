@@ -5,6 +5,8 @@ import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/constants/theme.dart';
 
 Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {
+  print(itemCode);
+  print(data);
   return Container(
       color: Colors.white,
       padding: EdgeInsets.all(16),
@@ -28,10 +30,10 @@ Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                                color: itemCode == data["_id"]
+                                color: itemCode == data["uniformId"]
                                     ? Colors.black
                                     : grey6)),
-                        child: itemCode == data["_id"]
+                        child: itemCode == data["uniformId"]
                             ? Container(
                                 width: 8,
                                 height: 8,
@@ -65,8 +67,9 @@ Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {
             ],
           ),
           GestureDetector(
-            onTap: () => Navigator.of(context)
-                .pushNamed(Routes.shopShowDirectUrl, arguments: data["_id"]),
+            onTap: () => Navigator.of(context).pushNamed(
+                Routes.shopShowDirectUrl,
+                arguments: data["uniformId"]),
             child: Row(
               children: [
                 Container(

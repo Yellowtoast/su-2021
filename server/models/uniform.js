@@ -7,6 +7,7 @@ const modelSchema = mongoose.Schema({
   dateDelivery: { type: Number },
   dateShop: { type: Number },
   dateStock: { type: Number },
+  code: { type: String },
   "filter-clothType": [{ type: String }],
   "filter-gender": { type: String },
   "filter-school": { type: String },

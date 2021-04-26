@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const UserModel = require("models/user");
-const isMine = require("middlewares/auth/isMine");
+const isMineOrAdmin = require("middlewares/auth/isMineOrAdmin");
 
 const router = express.Router();
 
-router.get("/", isMine, async (req, res) => {
+router.get("/", isMineOrAdmin, async (req, res) => {
   try {
     const { targetUid } = req.query;
 

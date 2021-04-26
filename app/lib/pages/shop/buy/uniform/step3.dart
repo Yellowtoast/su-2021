@@ -77,22 +77,15 @@ class ShopStep3State extends State<ShopStep3> {
       String uid = prefs.getString('userId');
       ShopUniformInputData d = ModalRoute.of(context).settings.arguments;
 
-      print(uid);
-      print(d.code);
-      print(d.deliveryType);
-      print(d.certFront);
-      print(d.certBack);
-      print(d.certName);
-      print(d.certBirth);
-      print(d.certSchool);
-
       bool hasCertImage = d.certFront != null && d.certBack != null;
 
       var images;
       if (hasCertImage) {
         List<Future<dynamic>> imageFutures = [
-          NetworkHandler().putImage(filePath: File(d.certFront.path).path),
-          NetworkHandler().putImage(filePath: File(d.certBack.path).path),
+          NetworkHandler().putImage(
+              filePath: File(d.certFront.path).path, uniformId: d.code),
+          NetworkHandler().putImage(
+              filePath: File(d.certBack.path).path, uniformId: d.code),
         ];
 
         images = await Future.wait(imageFutures);
@@ -105,10 +98,6 @@ class ShopStep3State extends State<ShopStep3> {
 
       var res = await Future.wait(futures);
       var data = res[0]['data'];
-
-      print('data');
-      print('${UniformApiRoutes.GET}?uniformId=${d.code}');
-      print(data);
 
       if (data != null) {
         var schoolLevel;
@@ -124,13 +113,10 @@ class ShopStep3State extends State<ShopStep3> {
           "schoolDonate": [
             schoolLevel,
             data["filter-school"],
+            "totalStock",
             infoStore.localInfo[schoolLevel][data["filter-school"]]
-                        ["totalStock"] ==
-                    0
-                ? 0
-                : infoStore.localInfo[schoolLevel][data["filter-school"]]
-                        ["totalStock"] -
-                    1
+                    ["totalStock"] -
+                1
           ],
         };
 
@@ -160,9 +146,6 @@ class ShopStep3State extends State<ShopStep3> {
           "status": "구매승인요청",
           "dateShop": formatted,
         };
-
-        print('log');
-        print(log);
 
         await Future.wait([
           NetworkHandler().put('${UniformApiRoutes.UPDATE}?uniformId=${d.code}',

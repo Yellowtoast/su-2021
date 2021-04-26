@@ -5,6 +5,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const admin = require("firebase-admin");
 
 const serviceAccount = require("./admin.json");
@@ -26,12 +27,15 @@ const main = async () => {
   });
 
   const app = express();
-  // app.use(express.json());
-  app.use(bodyParser.json());
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  // app.use(bodyParser.json());
+  // app.use(bodyParser.urlencoded({extended:true}));
   app.use("/uploads", express.static("uploads"));
   app.use("/", router);
 
-  app.listen(3000, () => {
+  app.listen(3001, () => {
     console.log("server on");
   });
 };

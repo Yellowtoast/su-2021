@@ -1,11 +1,11 @@
 const express = require("express");
 const UserModel = require("models/user");
 
-const isMine = require("middlewares/auth/isMine");
+const isMineOrAdmin = require("middlewares/auth/isMineOrAdmin");
 
 const router = express.Router();
 
-router.put("/", isMine, async (req, res) => {
+router.put("/", isMineOrAdmin, async (req, res) => {
   const { targetUid } = req.query;
   const { total, uniformCart, uniformShop, uniformDonate } = req.body;
 
