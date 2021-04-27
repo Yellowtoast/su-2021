@@ -2,7 +2,6 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 
 const UserLogModel = require("models/userLog");
-
 const isUserOrAdmin = require("middlewares/auth/isUserOrAdmin");
 
 const router = express.Router();
@@ -11,13 +10,14 @@ router.put("/", isUserOrAdmin, async (req, res) => {
   try {
     const token = req.headers["x-access-token"];
     const { userId } = jwt.decode(token);
-    const { uniformId, title, thumbnail, status, showStatus } = req.body;
+    const { uniformId, title, thumbnail, status, showStatus, why } = req.body;
 
     const updated = {};
     if (title) updated["title"] = title;
     if (thumbnail) updated["thumbnail"] = thumbnail;
     if (status) updated["status"] = status;
     if (showStatus) updated["showStatus"] = showStatus;
+    if (why) updated["why"] = why;
 
     console.log(updated);
 
@@ -30,6 +30,7 @@ router.put("/", isUserOrAdmin, async (req, res) => {
       success: true,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
       error: "server error",

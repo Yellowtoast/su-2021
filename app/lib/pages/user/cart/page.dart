@@ -83,9 +83,6 @@ class UserCartPageState extends State<UserCartPage> {
   }) async {
     final prefs = await SharedPreferences.getInstance();
     String uid = prefs.getString('userId');
-    print('delete list');
-    print(id);
-    print(list);
     setState(() {
       list = list.where((element) => element["_id"] != id).toList();
     });

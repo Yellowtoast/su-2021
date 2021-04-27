@@ -13,6 +13,7 @@ const modelSchema = mongoose.Schema({
   totalBeforeShop: { type: Number },
   totalBeforeStock: { type: Number },
   totalDonate: { type: Number },
+  totalShopped: { type: Number },
   totalStock: { type: Number },
   updateMent: { type: String },
 });

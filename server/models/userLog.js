@@ -9,6 +9,7 @@ const modelSchema = mongoose.Schema({
   thumbnail: { type: String },
   status: { type: String },
   showStatus: { type: String },
+  why: { type: String },
 });
 
 const model = mongoose.model(modelName, modelSchema);

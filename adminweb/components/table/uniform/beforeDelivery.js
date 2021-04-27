@@ -21,50 +21,56 @@ const Table = ({ list }) => {
           <div className={styles["table-beforeShop-header9"]}>신청날짜</div>
         </div>
         <div>
-          {list.map((data, i) => (
-            <Link href={`/uniform?id=${data.code}`} key={String(i)}>
-              <a className={styles["table-section-row"]}>
-                <div className={styles["table-beforeShop-section1"]}>
-                  {data.code}
-                </div>
-                <div className={styles["table-beforeShop-section2"]}>
-                  <div
-                    style={{
-                      backgroundImage: `url(${networkHandler.getImageFromServer(
-                        data.images[0]
-                      )})`,
-                    }}
-                  />
-                </div>
-                <div className={styles["table-beforeShop-section3"]}>
-                  {data["filter-school"]}
-                </div>
-                <div className={styles["table-beforeShop-section4"]}>
-                  {data["filter-clothType"].join(" / ")}
-                </div>
-                <div className={styles["table-beforeShop-section5"]}>
-                  {data["receiverName"]}
-                </div>
-                <div className={styles["table-beforeShop-section6"]}>{`${data[
-                  "receiverPhone"
-                ].substring(0, 3)}-${data["receiverPhone"].substring(
-                  3,
-                  7
-                )}-${data["receiverPhone"].substring(7, 11)}`}</div>
-                <div className={styles["table-beforeShop-section7"]}>
-                  {data["receiverAddress"] || "-"}
-                </div>
-                <div className={styles["table-beforeShop-section8"]}>
-                  {data["receiverDeliveryType"] === "배송 요청"
-                    ? "배송 요청"
-                    : "직접 방문"}
-                </div>
-                <div className={styles["table-beforeShop-section9"]}>
-                  {data["dateShop"].substring(0, 12)}
-                </div>
-              </a>
-            </Link>
-          ))}
+          {list.map((data, i) => {
+            const d = new Date(data["dateShop"]);
+            const ds = `${d.getFullYear()}. ${
+              d.getMonth() + 1 >= 10 ? d.getMonth() + 1 : `0${d.getMonth() + 1}`
+            }. ${d.getDate() >= 10 ? d.getDate() : `0${d.getDate()}`}`;
+            return (
+              <Link href={`/uniform?id=${data.code}`} key={String(i)}>
+                <a className={styles["table-section-row"]}>
+                  <div className={styles["table-beforeShop-section1"]}>
+                    {data.code}
+                  </div>
+                  <div className={styles["table-beforeShop-section2"]}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${networkHandler.getImageFromServer(
+                          data.images[0]
+                        )})`,
+                      }}
+                    />
+                  </div>
+                  <div className={styles["table-beforeShop-section3"]}>
+                    {data["filter-school"]}
+                  </div>
+                  <div className={styles["table-beforeShop-section4"]}>
+                    {data["filter-clothType"].join(" / ")}
+                  </div>
+                  <div className={styles["table-beforeShop-section5"]}>
+                    {data["receiverName"]}
+                  </div>
+                  <div className={styles["table-beforeShop-section6"]}>{`${data[
+                    "receiverPhone"
+                  ].substring(0, 3)}-${data["receiverPhone"].substring(
+                    3,
+                    7
+                  )}-${data["receiverPhone"].substring(7, 11)}`}</div>
+                  <div className={styles["table-beforeShop-section7"]}>
+                    {data["receiverAddress"] || "-"}
+                  </div>
+                  <div className={styles["table-beforeShop-section8"]}>
+                    {data["receiverDeliveryType"] === "배송 요청"
+                      ? "배송 요청"
+                      : "직접 방문"}
+                  </div>
+                  <div className={styles["table-beforeShop-section9"]}>
+                    {ds}
+                  </div>
+                </a>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

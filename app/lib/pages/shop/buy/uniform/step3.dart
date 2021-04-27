@@ -130,9 +130,9 @@ class ShopStep3State extends State<ShopStep3> {
           "thumbnail": data["images"][0],
         };
 
-        final DateTime now = DateTime.now();
-        final DateFormat formatter = DateFormat('yyyy. MM. dd HH:mm:ss');
-        final String formatted = formatter.format(now);
+        final int now = DateTime.now().millisecondsSinceEpoch;
+        // final DateFormat formatter = DateFormat('yyyy. MM. dd HH:mm:ss');
+        // final String formatted = formatter.format(now);
 
         var uniformUpdateInfo = {
           "receiverUid": uid,
@@ -144,7 +144,7 @@ class ShopStep3State extends State<ShopStep3> {
           "receiverBirth": d.certBirth,
           "receiverSchool": d.certSchool,
           "status": "구매승인요청",
-          "dateShop": formatted,
+          "dateShop": now,
         };
 
         await Future.wait([

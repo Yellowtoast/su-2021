@@ -16,6 +16,7 @@ router.put("/", isAdmin, async (req, res) => {
     if (uniform.status !== "출고대기중") throw new Error("duplicated request");
 
     uniform.status = "최종완료";
+    uniform.dateDelivery = new Date().getTime();
     await Promise.all([
       uniform.save(),
       InfoModel.findOneAndUpdate(

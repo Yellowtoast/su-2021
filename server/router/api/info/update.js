@@ -13,6 +13,7 @@ router.post("/", isUserOrAdmin, async (req, res) => {
       totalBeforeShop,
       totalDonate,
       totalBeforeStock,
+      totalShopped,
       schoolDonate,
     } = req.body;
 
@@ -23,6 +24,7 @@ router.post("/", isUserOrAdmin, async (req, res) => {
     if (totalBeforeShop) updated["totalBeforeShop"] = totalBeforeShop;
     if (totalDonate) updated["totalDonate"] = totalDonate;
     if (totalBeforeStock) updated["totalBeforeStock"] = totalBeforeStock;
+    if (totalShopped) updated["totalShopped"] = totalShopped;
     if (schoolDonate.length)
       updated[`${schoolDonate[0]}.${schoolDonate[1]}.${schoolDonate[2]}`] =
         schoolDonate[3];

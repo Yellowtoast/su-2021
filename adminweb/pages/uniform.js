@@ -4,22 +4,18 @@ import { useRouter } from "next/router";
 import { Map, List, update } from "immutable";
 import fetch from "node-fetch";
 
-import Nav from "components/nav";
-import LoadingPage from "components/loading/page";
-
-import BeforeStockTable from "components/table/uniform/beforeStock";
-import StockTable from "components/table/uniform/stock";
-import BeforeShopTable from "components/table/uniform/beforeShop";
-import BeforeDelivery from "components/table/uniform/beforeDelivery";
-import Shopped from "components/table/uniform/shopped";
-import Dropdown, { getClothesTypes } from "components/dropdown";
-
-import styles from "styles/pages/uniform.module.scss";
 import onlyNum from "utils/onlyNum";
-import RejectModal from "components/modal/reject";
 import networkHandler from "configs/networkHandler";
 import apiRoutes from "configs/apiRoutes";
 import updateLocalInfo from "utils/updatelocalInfo";
+
+import Nav from "components/nav";
+import LoadingPage from "components/loading/page";
+import RejectModal from "components/modal/reject";
+
+import Dropdown, { getClothesTypes } from "components/dropdown";
+
+import styles from "styles/pages/uniform.module.scss";
 
 const Uniform = () => {
   const router = useRouter();
@@ -70,7 +66,7 @@ const Uniform = () => {
         setLoading(false);
         if (
           data["data"].status === "구매승인요청" &&
-          data["data"].receiverCert.length === 0
+          (!data["data"].receiverCert || data["data"].receiverCert.length === 0)
         ) {
           setCheckerGiverName(data["data"].receiverName);
           setCheckerGiverBirth(data["data"].receiverBirth);
@@ -181,11 +177,6 @@ const Uniform = () => {
             -1
           ),
         ];
-        // updateData[
-        //   uniformInfo["filter-school"].indexOf("고등") === -1
-        //     ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-        //     : `highSchool.${uniformInfo["filter-school"]}.totalStock`
-        // ] = firebase.firestore.FieldValue.increment(-1);
       }
 
       await Promise.all([
@@ -195,20 +186,6 @@ const Uniform = () => {
           updateData
         ),
       ]);
-      // await Promise.all([
-      //   firebase
-      //     .firestore()
-      //     .collection("daegu")
-      //     .doc("bukgu")
-      //     .collection("uniforms")
-      //     .doc(id)
-      //     .delete(),
-      //   firebase
-      //     .firestore()
-      //     .collection("daegu")
-      //     .doc("bukgu")
-      //     .update(updateData),
-      // ]);
       router.back();
     }
   };
@@ -404,16 +381,13 @@ const Uniform = () => {
   };
 
   const searchLogs = async () => {
-    // const db = firebase
-    //   .firestore()
-    //   .collection("daegu")
-    //   .doc("bukgu")
-    //   .collection("logs");
-    // const querySnapshot = await db
-    //   .where("name", "==", checkerGiverName)
-    //   .where("birth", "==", checkerGiverBirth)
-    //   .get();
-    // setLogs(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    console.log(
+      `${apiRoutes.UNIFORM_SEARCH_RECORD}?nameKeyword=${checkerGiverName}&birthKeyword=${checkerGiverBirth}`
+    );
+    const logData = await networkHandler.getApi(
+      `${apiRoutes.UNIFORM_SEARCH_RECORD}?nameKeyword=${checkerGiverName}&birthKeyword=${checkerGiverBirth}`
+    );
+    setLogs(logData["data"]);
   };
 
   const rejectShop = async (r) => {
@@ -425,48 +399,68 @@ const Uniform = () => {
           "정말로 거절하시겠습니까?\n거절된 교복은 다시 유저들에게 공개됩니다"
         )
       ) {
-        // const db = firebase.firestore().collection("daegu").doc("bukgu");
-        // const uniformRef = db.collection("uniforms").doc(id);
-        // const userRef = db.collection("users").doc(uniformInfo.receiverUid);
-        // const userLogRef = userRef.collection("logsUniformShop").doc("list");
-        // const logsRef = db
-        //   .collection("logs")
-        //   .doc(new Date().getTime().toString());
+        const userLogData = {
+          uniformId: id,
+          showStatus: "거절",
+          why: r,
+        };
 
-        // await Promise.all([
-        //   uniformRef.update({
-        //     status: "교복보유중",
-        //   }),
-        //   db.update({
-        //     totalBeforeShop: firebase.firestore.FieldValue.increment(-1),
-        //     totalStock: firebase.firestore.FieldValue.increment(1),
-        //     [school.indexOf("고등") === -1
-        //       ? `middleSchool.${school}.totalStock`
-        //       : `highSchool.${school}.totalStock`]: firebase.firestore.FieldValue.increment(
-        //       1
-        //     ),
-        //   }),
-        //   userLogRef.update({
-        //     [`${id}.showStatus`]: "거절",
-        //     [`${id}.why`]: r,
-        //   }),
-        //   userRef.update({
-        //     totalAlarms: firebase.firestore.FieldValue.increment(1),
-        //     totalAlarmsShop: firebase.firestore.FieldValue.increment(1),
-        //   }),
-        //   logsRef.set({
-        //     uniformId: id,
-        //     uid: uniformInfo.receiverUid,
-        //     name: checkerGiverName,
-        //     birth: checkerGiverBirth,
-        //     school: school,
-        //     cert: uniformInfo.receiverCert,
-        //     season: season,
-        //     gender: gender,
-        //     uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
-        //     confirm: "거절",
-        //   }),
-        // ]);
+        const commonData = {
+          totalBeforeShop: updateLocalInfo("totalBeforeShop", -1),
+          totalStock: updateLocalInfo("totalStock", 1),
+          schoolDonate: [
+            school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+            school,
+            "totalStock",
+            updateLocalInfo(
+              uniformInfo["filter-school"].indexOf("고등") === -1
+                ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
+                : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
+              1
+            ),
+          ],
+        };
+
+        const user = await networkHandler.getApi(
+          `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
+        );
+
+        const userData = {
+          total: user.alarms.total + 1,
+          uniformShop: user.alarms.uniformShop + 1,
+        };
+
+        const uniformTransferRecordData = {
+          uid: uniformInfo.receiverUid,
+          name: checkerGiverName,
+          birth: checkerGiverBirth,
+          school: school,
+          cert: uniformInfo.receiverCert,
+          season: season,
+          gender: gender,
+          uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
+          confirm: "거절",
+        };
+
+        try {
+          await Promise.all([
+            networkHandler.putApi(
+              `${apiRoutes.UNIFORM_REJECT_PURCHASE}?uniformId=${id}`,
+              uniformTransferRecordData
+            ),
+            networkHandler.putApi(
+              `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
+              userLogData
+            ),
+            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
+            networkHandler.putApi(
+              `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
+              userData
+            ),
+          ]);
+        } catch (err) {
+          console.log(err);
+        }
         router.back();
       }
     }
@@ -476,79 +470,126 @@ const Uniform = () => {
       return alert("구매자 이름과 생년월일을 입력해주세요");
     } else {
       if (window.confirm("구매승인을 하시겠습니까?")) {
-        const db = firebase.firestore().collection("daegu").doc("bukgu");
-        const uniformRef = db.collection("uniforms").doc(id);
-        const userRef = db.collection("users").doc(uniformInfo.receiverUid);
-        const userLogRef = userRef.collection("logsUniformShop").doc("list");
-        const logsRef = db
-          .collection("logs")
-          .doc(new Date().getTime().toString());
+        const userLogData = {
+          uniformId: id,
+          showStatus: `승인 - ${
+            uniformInfo.receiverDeliveryType === "배송 요청"
+              ? "배송예정"
+              : "방문수령필요"
+          }`,
+        };
 
-        await Promise.all([
-          uniformRef.update({
-            status: "출고대기중",
-          }),
-          db.update({
-            totalBeforeShop: firebase.firestore.FieldValue.increment(-1),
-            totalBeforeDelivery: firebase.firestore.FieldValue.increment(1),
-            [school.indexOf("고등") === -1
-              ? `middleSchool.${school}.totalStock`
-              : `highSchool.${school}.totalStock`]: firebase.firestore.FieldValue.increment(
+        const commonData = {
+          totalBeforeShop: updateLocalInfo("totalBeforeShop", -1),
+          totalBeforeDelivery: updateLocalInfo("totalBeforeDelivery", 1),
+          schoolDonate: [
+            school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+            school,
+            "totalStock",
+            updateLocalInfo(
+              uniformInfo["filter-school"].indexOf("고등") === -1
+                ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
+                : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
               -1
             ),
-          }),
-          userLogRef.update({
-            [`${id}.showStatus`]: `승인 - ${
-              uniformInfo.receiverDeliveryType === "배송 요청"
-                ? "배송예정"
-                : "방문수령필요"
-            }`,
-          }),
-          userRef.update({
-            totalAlarms: firebase.firestore.FieldValue.increment(1),
-            totalAlarmsShop: firebase.firestore.FieldValue.increment(1),
-          }),
-          logsRef.set({
-            uniformId: id,
-            uid: uniformInfo.receiverUid,
-            name: checkerGiverName,
-            birth: checkerGiverBirth,
-            school: school,
-            cert: uniformInfo.receiverCert,
-            season: season,
-            gender: gender,
-            uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
-            confirm: "승인",
-          }),
-        ]);
+          ],
+        };
+
+        const user = await networkHandler.getApi(
+          `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
+        );
+
+        const userData = {
+          total: user.alarms.total + 1,
+          uniformShop: user.alarms.uniformShop + 1,
+        };
+
+        const uniformTransferRecordData = {
+          uid: uniformInfo.receiverUid,
+          name: checkerGiverName,
+          birth: checkerGiverBirth,
+          school: school,
+          cert: uniformInfo.receiverCert,
+          season: season,
+          gender: gender,
+          uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
+          confirm: "승인",
+        };
+
+        try {
+          await Promise.all([
+            networkHandler.putApi(
+              `${apiRoutes.UNIFORM_CONFIRM_PURCHASE}?uniformId=${id}`,
+              uniformTransferRecordData
+            ),
+            networkHandler.putApi(
+              `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
+              userLogData
+            ),
+            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
+            networkHandler.putApi(
+              `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
+              userData
+            ),
+          ]);
+        } catch (err) {
+          console.log(err);
+        }
         router.back();
       }
     }
   };
   const confirmDelivery = async () => {
     if (window.confirm("교복전달을 완료하셨나요?")) {
-      // const db = firebase.firestore().collection("daegu").doc("bukgu");
-      // const uniformRef = db.collection("uniforms").doc(id);
-      // const userRef = db.collection("users").doc(uniformInfo.receiverUid);
-      // const userLogRef = userRef.collection("logsUniformShop").doc("list");
+      const userLogData = {
+        uniformId: id,
+        showStatus: "구매완료",
+      };
 
-      // await Promise.all([
-      //   uniformRef.update({
-      //     status: "최종완료",
-      //     dateDelivery: new Date().getTime(),
-      //   }),
-      //   db.update({
-      //     totalBeforeDelivery: firebase.firestore.FieldValue.increment(-1),
-      //     totalShopped: firebase.firestore.FieldValue.increment(1),
-      //   }),
-      //   userLogRef.update({
-      //     [`${id}.showStatus`]: "구매완료",
-      //   }),
-      //   userRef.update({
-      //     totalAlarms: firebase.firestore.FieldValue.increment(1),
-      //     totalAlarmsShop: firebase.firestore.FieldValue.increment(1),
-      //   }),
-      // ]);
+      const commonData = {
+        totalShopped: updateLocalInfo("totalShopped", 1),
+        totalBeforeDelivery: updateLocalInfo("totalBeforeDelivery", -1),
+        schoolDonate: [
+          school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+          school,
+          "totalStock",
+          updateLocalInfo(
+            uniformInfo["filter-school"].indexOf("고등") === -1
+              ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
+              : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
+            -1
+          ),
+        ],
+      };
+
+      const user = await networkHandler.getApi(
+        `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
+      );
+
+      const userData = {
+        total: user.alarms.total + 1,
+        uniformShop: user.alarms.uniformShop + 1,
+      };
+
+      try {
+        await Promise.all([
+          networkHandler.putApi(
+            `${apiRoutes.UNIFORM_CONFIRM_DELIVERY}?uniformId=${id}`,
+            {}
+          ),
+          networkHandler.putApi(
+            `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
+            userLogData
+          ),
+          networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
+          networkHandler.putApi(
+            `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
+            userData
+          ),
+        ]);
+      } catch (err) {
+        console.log(err);
+      }
       router.back();
     }
   };
@@ -792,7 +833,8 @@ const Uniform = () => {
           uniformInfo.status !== "교복보유중" ? (
             <>
               <div className={styles["uniform-label"]}>학생증</div>
-              {uniformInfo.receiverCert.length === 0 ? (
+              {!uniformInfo.receiverCert ||
+              uniformInfo.receiverCert.length === 0 ? (
                 <div className={styles["uniform-cert-none"]}>
                   올해 입학하는 학생입니다
                 </div>
@@ -847,22 +889,24 @@ const Uniform = () => {
                   </div>
                   {logs.map((log, i) => {
                     console.log(log);
-                    const d = new Date(Number(log.id));
+                    const d = new Date(Number(log.dateShop));
                     const ds = `${d.getFullYear()}. ${
                       d.getMonth() + 1 >= 10
                         ? d.getMonth() + 1
                         : `0${d.getMonth() + 1}`
                     }. ${d.getDate() >= 10 ? d.getDate() : `0${d.getDate()}`}`;
-                    let item = `${log.gender} / ${log.season} / `;
+                    let item = `${log["filter-gender"]} / ${log["filter-season"]} / `;
                     log.uniforms.forEach(({ clothType }) => {
                       item += `${clothType},`;
                     });
                     return (
                       <div className={styles.row} key={String(i)}>
                         <div className={styles.col1}>{ds}</div>
-                        <div className={styles.col2}>{log.school}</div>
+                        <div className={styles.col2}>
+                          {log["filter-school"]}
+                        </div>
                         <div className={styles.col3}>{item}</div>
-                        <div className={styles.col4}>{log.confirm}</div>
+                        <div className={styles.col4}>승인</div>
                       </div>
                     );
                   })}
