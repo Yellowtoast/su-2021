@@ -1,9 +1,9 @@
-//total count: totalBeforeDelivery: +1 맞는지
-
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
+
 const isAdmin = require("middlewares/auth/isAdmin");
 const UniformModel = require("models/uniform");
-const InfoModel = require("models/info");
 
 const router = express.Router();
 
@@ -11,22 +11,22 @@ router.get("/", isAdmin, async (req, res) => {
   try {
     const { uniformId } = req.query;
 
-    // 사진도 삭제,
-    // info model의 토탈카운드 조정
-    await Promise.all([
-      UniformModel.deleteOne({ uniformId }),
-      InfoModel.findOneAndUpdate(
-        {},
-        {
-          $inc: {
-            totalBeforeDelivery: +1,
-          },
-        }
-      ),
-    ]);
+    const uniform = await UniformModel.findOne({ uniformId });
+    if (uniform === null) new Error("no exist uniform");
+    else {
+      if (uniform.images.length) {
+        uniform.images.forEach((filename) => {
+          const filePath = path.join(__dirname, "../../../", filename);
+          fs.unlinkSync(filePath);
+        });
+      }
+    }
+
+    await UniformModel.deleteOne({ uniformId });
 
     res.status(200).json({ success: true });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
       error: "server error",

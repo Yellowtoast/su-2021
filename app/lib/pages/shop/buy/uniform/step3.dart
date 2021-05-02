@@ -108,16 +108,9 @@ class ShopStep3State extends State<ShopStep3> {
         }
 
         var commonUpdateInfo = {
-          "totalStock": infoStore.localInfo['totalStock'] - 1,
-          "totalBeforeShop": infoStore.localInfo['totalBeforeShop'] + 1,
-          "schoolDonate": [
-            schoolLevel,
-            data["filter-school"],
-            "totalStock",
-            infoStore.localInfo[schoolLevel][data["filter-school"]]
-                    ["totalStock"] -
-                1
-          ],
+          "totalStock": -1,
+          "totalBeforeShop": 1,
+          "totalSchool": [schoolLevel, data["filter-school"], "totalStock", -1],
         };
 
         var log = {
@@ -131,8 +124,6 @@ class ShopStep3State extends State<ShopStep3> {
         };
 
         final int now = DateTime.now().millisecondsSinceEpoch;
-        // final DateFormat formatter = DateFormat('yyyy. MM. dd HH:mm:ss');
-        // final String formatted = formatter.format(now);
 
         var uniformUpdateInfo = {
           "receiverUid": uid,

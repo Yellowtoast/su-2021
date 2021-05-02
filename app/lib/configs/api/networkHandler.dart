@@ -35,7 +35,7 @@ class NetworkHandler {
     }
   }
 
-  Future<http.Response> post(String url, Map<dynamic, dynamic> body) async {
+  Future post(String url, Map<dynamic, dynamic> body) async {
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("x-access-token");
     url = formater(url);
@@ -49,7 +49,7 @@ class NetworkHandler {
         },
         body: json.encode(body),
       );
-      return response;
+      return jsonDecode(response.body);
     } catch (err) {
       print('err message');
       print(err);
@@ -57,7 +57,7 @@ class NetworkHandler {
     }
   }
 
-  Future<http.Response> put(String url, Map<dynamic, dynamic> body) async {
+  Future put(String url, Map<dynamic, dynamic> body) async {
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("x-access-token");
     url = formater(url);
@@ -71,7 +71,7 @@ class NetworkHandler {
         },
         body: json.encode(body),
       );
-      return response;
+      return jsonDecode(response.body);
     } catch (err) {
       print('err message');
       print(err);
@@ -86,7 +86,7 @@ class NetworkHandler {
       var uri = Uri.parse("${ApiConfig.SERVER_URI}/uploads");
       var request = http.MultipartRequest('POST', uri);
       var timestemp = DateTime.now().millisecondsSinceEpoch;
-      var filename = uniformId + '_$timestemp';
+      var filename = uniformId + '_$timestemp.png';
 
       request.files.add(await http.MultipartFile.fromPath("imageFile", filePath,
           filename: filename,
@@ -96,7 +96,7 @@ class NetworkHandler {
         "x-access-token": token,
       });
       request.send();
-      return 'uploads/$filename.png';
+      return 'uploads/$filename';
     } catch (err) {
       print(err);
       return null;

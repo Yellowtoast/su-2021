@@ -41,30 +41,31 @@ abstract class InfoStoreBase with Store {
     var uid = prefs.getString('userId');
 
     try {
-      if (token == '' || uid == '') {
-        List<Future<dynamic>> futures2 = [
-          NetworkHandler().post(UserApiRoutes.SIGN_IN, signInInfo),
-        ];
+      if (token != '' || uid != '') {
+        var user =
+            await NetworkHandler().get('${UserApiRoutes.GET}?targetUid=$uid');
 
-        var newUser = await Future.wait(futures2);
-        prefs.setString('x-access-token', newUser[0]['token']);
-        prefs.setString('userId', newUser[0]['userId']);
+        if (user == null) {
+          var newUser =
+              await NetworkHandler().post(UserApiRoutes.SIGN_IN, signInInfo);
+
+          prefs.setString('x-access-token', newUser["token"]);
+          prefs.setString('userId', newUser["userId"]);
+          userInfo = userInitialData;
+        } else {
+          userInfo = user['alarms'];
+        }
       } else {
-        futures.add(
-          NetworkHandler().get('${UserApiRoutes.GET}?targetUid=$uid'),
-        );
+        var newUser =
+            await NetworkHandler().post(UserApiRoutes.SIGN_IN, signInInfo);
+        prefs.setString('x-access-token', newUser["token"]);
+        prefs.setString('userId', newUser["userId"]);
+        userInfo = userInitialData;
       }
+      List res = await Future.wait(futures);
+      localInfo = res[0];
     } catch (err) {
       print(err);
-    }
-
-    List res = await Future.wait(futures);
-
-    localInfo = res[0];
-    if (token == '' || uid == '') {
-      userInfo = userInitialData;
-    } else {
-      userInfo = res[1]['alarms'];
     }
   }
 

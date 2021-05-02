@@ -17,14 +17,17 @@ router.put("/", isAdmin, async (req, res) => {
 
     uniform.status = "최종완료";
     uniform.dateDelivery = new Date().getTime();
+
+    const updated = {
+      totalBeforeDelivery: -1,
+    };
+
     await Promise.all([
       uniform.save(),
       InfoModel.findOneAndUpdate(
         {},
         {
-          $inc: {
-            totalBeforeDelivery: -1,
-          },
+          $inc: updated,
         }
       ),
     ]);

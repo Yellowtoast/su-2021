@@ -15,14 +15,17 @@ router.put("/", isAdmin, async (req, res) => {
     if (uniform === null) throw new Error("non exist uniform");
 
     uniform.status = "교복보유중";
+
+    const updated = {
+      totalDonate: 1,
+    };
+
     await Promise.all([
       uniform.save(),
       InfoModel.findOneAndUpdate(
         {},
         {
-          $inc: {
-            totalDonate: +1,
-          },
+          $inc: updated,
         }
       ),
     ]);

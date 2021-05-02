@@ -14,7 +14,7 @@ router.post("/", isUserOrAdmin, async (req, res) => {
       totalDonate,
       totalBeforeStock,
       totalShopped,
-      schoolDonate,
+      totalSchool,
     } = req.body;
 
     const updated = {};
@@ -25,13 +25,18 @@ router.post("/", isUserOrAdmin, async (req, res) => {
     if (totalDonate) updated["totalDonate"] = totalDonate;
     if (totalBeforeStock) updated["totalBeforeStock"] = totalBeforeStock;
     if (totalShopped) updated["totalShopped"] = totalShopped;
-    if (schoolDonate.length)
-      updated[`${schoolDonate[0]}.${schoolDonate[1]}.${schoolDonate[2]}`] =
-        schoolDonate[3];
+    if (totalSchool.length)
+      updated[`${totalSchool[0]}.${totalSchool[1]}.${totalSchool[2]}`] =
+        totalSchool[3];
 
     console.log(updated);
 
-    await InfoModel.updateOne({}, updated);
+    await InfoModel.updateOne(
+      {},
+      {
+        $inc: updated,
+      }
+    );
 
     res.status(200).json({
       success: true,

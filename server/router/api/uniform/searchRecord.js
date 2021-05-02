@@ -4,7 +4,7 @@ const uniformTransferRecordModel = require("models/uniformTransferRecord");
 
 const router = express.Router();
 
-router.get("/", isUserOrAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const { nameKeyword, birthKeyword, sort = { dateStock: 1 } } = req.query;
 

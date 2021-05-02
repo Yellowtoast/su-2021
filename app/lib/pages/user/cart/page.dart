@@ -23,6 +23,7 @@ class UserCartPageState extends State<UserCartPage> {
   bool loading = true;
   List list = [];
   String itemCode = "";
+  String logId = "";
 
   void request() async {
     final prefs = await SharedPreferences.getInstance();
@@ -95,7 +96,8 @@ class UserCartPageState extends State<UserCartPage> {
     }
   }
 
-  handleBuy({id}) {
+  handleBuy({id}) async {
+    handleDelete(id: logId);
     Navigator.of(context).pop();
     Navigator.of(context).pushNamed(Routes.shopStep1Url, arguments: id);
   }
@@ -125,6 +127,7 @@ class UserCartPageState extends State<UserCartPage> {
                             itemCode: itemCode,
                             onClickToItem: () => setState(() {
                                   itemCode = d["uniformId"];
+                                  logId = d["_id"];
                                 }),
                             onClickToDeleteWidget: () => deleteCart(
                                   context: context,

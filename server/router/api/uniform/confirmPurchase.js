@@ -32,6 +32,10 @@ router.put("/", isAdmin, async (req, res) => {
 
     uniform.status = "출고대기중";
 
+    const updated = {
+      totalBeforeDelivery: 1,
+    };
+
     const newRecord = new UniformTransferRecordModel({
       uniformId,
       uid,
@@ -50,9 +54,7 @@ router.put("/", isAdmin, async (req, res) => {
       InfoModel.findOneAndUpdate(
         {},
         {
-          $inc: {
-            totalBeforeDelivery: +1,
-          },
+          $inc: updated,
         }
       ),
       newRecord.save(),

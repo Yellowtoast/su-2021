@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:schooluniform/configs/api/networkHandler.dart';
 import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/constants/theme.dart';
 import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
 
@@ -104,13 +103,12 @@ class DonateStep5State extends State<DonateStep5> {
     }
 
     var commonUpdateInfo = {
-      "totalDonate": infoStore.localInfo["totalDonate"] + 1,
-      "totalBeforeStock": infoStore.localInfo["totalBeforeStock"] + 1,
-      "schoolDonate": [
+      "totalBeforeStock": 1,
+      "totalSchool": [
         schoolLevel,
         d.school,
         'totalDonate',
-        infoStore.localInfo[schoolLevel][d.school]["totalDonate"] + 1
+        1,
       ],
     };
 

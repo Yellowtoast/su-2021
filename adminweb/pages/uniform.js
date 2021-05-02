@@ -7,7 +7,7 @@ import fetch from "node-fetch";
 import onlyNum from "utils/onlyNum";
 import networkHandler from "configs/networkHandler";
 import apiRoutes from "configs/apiRoutes";
-import updateLocalInfo from "utils/updatelocalInfo";
+// import updateLocalInfo from "utils/updatelocalInfo";
 
 import Nav from "components/nav";
 import LoadingPage from "components/loading/page";
@@ -160,22 +160,17 @@ const Uniform = () => {
       if (uniformInfo.status === "최종완료") updateKey = "totalShopped";
 
       const updateData = {
-        [updateKey]: updateLocalInfo(updateKey, -1),
+        [updateKey]: -1,
       };
 
       if (uniformInfo.status === "교복보유중") {
-        updateData["schoolDonate"] = [
+        updateData["totalSchool"] = [
           uniformInfo["filter-school"].indexOf("고등") === -1
             ? "middleSchool"
             : "highSchool",
           uniformInfo["filter-school"],
           "totalStock",
-          updateLocalInfo(
-            uniformInfo["filter-school"].indexOf("고등") === -1
-              ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-              : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
-            -1
-          ),
+          -1,
         ];
       }
 
@@ -244,18 +239,13 @@ const Uniform = () => {
       };
 
       const commonData = {
-        totalBeforeStock: updateLocalInfo("totalBeforeStock", -1),
-        totalStock: updateLocalInfo("totalStock", 1),
-        schoolDonate: [
+        totalBeforeStock: -1,
+        totalStock: 1,
+        totalSchool: [
           school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
           school,
           "totalStock",
-          updateLocalInfo(
-            uniformInfo["filter-school"].indexOf("고등") === -1
-              ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-              : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
-            -1
-          ),
+          1,
         ],
       };
 
@@ -340,32 +330,22 @@ const Uniform = () => {
     ];
 
     const commonData = {
-      schoolDonate: [
+      totalSchool: [
         school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
         school,
         "totalStock",
-        updateLocalInfo(
-          school.indexOf("고등") === -1
-            ? `middleSchool.${school}.totalStock`
-            : `highSchool.${school}.totalStock`,
-          1
-        ),
+        1,
       ],
     };
 
     const commonData2 = {
-      schoolDonate: [
+      totalSchool: [
         uniformInfo["filter-school"].indexOf("고등") === -1
           ? "middleSchool"
           : "highSchool",
         uniformInfo["filter-school"],
         "totalStock",
-        updateLocalInfo(
-          uniformInfo["filter-school"].indexOf("고등") === -1
-            ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-            : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
-          -1
-        ),
+        -1,
       ],
     };
 
@@ -406,18 +386,21 @@ const Uniform = () => {
         };
 
         const commonData = {
-          totalBeforeShop: updateLocalInfo("totalBeforeShop", -1),
-          totalStock: updateLocalInfo("totalStock", 1),
-          schoolDonate: [
+          // totalBeforeShop: updateLocalInfo("totalBeforeShop", -1),
+          // totalStock: updateLocalInfo("totalStock", 1),
+          totalBeforeShop: -1,
+          totalStock: 1,
+          totalSchool: [
             school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
             school,
             "totalStock",
-            updateLocalInfo(
-              uniformInfo["filter-school"].indexOf("고등") === -1
-                ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-                : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
-              1
-            ),
+            1,
+            // updateLocalInfo(
+            //   uniformInfo["filter-school"].indexOf("고등") === -1
+            //     ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
+            //     : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
+            //   1
+            // ),
           ],
         };
 
@@ -480,18 +463,22 @@ const Uniform = () => {
         };
 
         const commonData = {
-          totalBeforeShop: updateLocalInfo("totalBeforeShop", -1),
-          totalBeforeDelivery: updateLocalInfo("totalBeforeDelivery", 1),
-          schoolDonate: [
+          totalBeforeShop: -1,
+          totalBeforeDelivery: 1,
+          totalSchool: [
             school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
             school,
             "totalStock",
-            updateLocalInfo(
-              uniformInfo["filter-school"].indexOf("고등") === -1
-                ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-                : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
-              -1
-            ),
+            -1,
+          ],
+        };
+
+        const commonData2 = {
+          totalSchool: [
+            school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+            school,
+            "totalShop",
+            1,
           ],
         };
 
@@ -527,6 +514,7 @@ const Uniform = () => {
               userLogData
             ),
             networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
+            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData2),
             networkHandler.putApi(
               `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
               userData
@@ -547,18 +535,13 @@ const Uniform = () => {
       };
 
       const commonData = {
-        totalShopped: updateLocalInfo("totalShopped", 1),
-        totalBeforeDelivery: updateLocalInfo("totalBeforeDelivery", -1),
-        schoolDonate: [
+        totalShopped: 1,
+        totalBeforeDelivery: -1,
+        totalSchool: [
           school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
           school,
-          "totalStock",
-          updateLocalInfo(
-            uniformInfo["filter-school"].indexOf("고등") === -1
-              ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-              : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
-            -1
-          ),
+          "totalShop",
+          -1,
         ],
       };
 
