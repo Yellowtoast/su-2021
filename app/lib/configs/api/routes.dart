@@ -1,5 +1,5 @@
 class ApiConfig {
-  static const BASE_URI = 'http://192.168.151.44:3001';
+  static const BASE_URI = 'http://192.168.9.44:3001';
   static const SERVER_URI = '$BASE_URI/api';
 }
 
@@ -16,7 +16,8 @@ class UniformApiRoutes {
   static const GET = '$BASE_PATH/getData';
   static const UPDATE = '$BASE_PATH/update';
 
-  static const REQUEST_DONATE = '$BASE_PATH/donate/request';
+  static const REQUEST_DONATE = '$BASE_PATH/request/donate';
+  static const REQUEST_PURCHASE = '$BASE_PATH/request/purchase';
 }
 
 class InfoApiRoutes {

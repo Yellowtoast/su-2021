@@ -33,21 +33,9 @@ router.put("/", isAdmin, async (req, res) => {
     uniform.status = "출고대기중";
 
     const updated = {
+      totalBeforeShop: -1,
       totalBeforeDelivery: 1,
     };
-
-    const newRecord = new UniformTransferRecordModel({
-      uniformId,
-      uid,
-      name,
-      birth,
-      school,
-      cert,
-      season,
-      gender,
-      uniforms,
-      confirm,
-    });
 
     await Promise.all([
       uniform.save(),
@@ -57,7 +45,22 @@ router.put("/", isAdmin, async (req, res) => {
           $inc: updated,
         }
       ),
-      newRecord.save(),
+      UniformTransferRecordModel.findOneAndUpdate(
+        {
+          uniformId,
+          userId: uid,
+        },
+        {
+          name,
+          birth,
+          school,
+          cert,
+          season,
+          gender,
+          uniforms,
+          confirm,
+        }
+      ),
     ]);
 
     await shopUniformPush({

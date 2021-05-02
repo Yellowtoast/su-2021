@@ -54,6 +54,7 @@ router.get("/", isUserOrAdmin, async (req, res) => {
     if (andQuery.length > 0) conditions["$and"] = andQuery;
 
     const lists = await UniformModel.find(conditions);
+    console.log(lists);
 
     res.status(200).json({
       success: true,

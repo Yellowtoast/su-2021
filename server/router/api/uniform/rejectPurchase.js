@@ -32,7 +32,7 @@ router.put("/", isAdmin, async (req, res) => {
 
     const newRecord = new UniformTransferRecordModel({
       uniformId,
-      uid,
+      userId: uid,
       name,
       birth,
       school,

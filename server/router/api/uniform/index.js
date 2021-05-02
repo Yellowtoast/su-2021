@@ -11,16 +11,18 @@ const searchRecord = require("router/api/uniform/searchRecord");
 const confirmPurchase = require("router/api/uniform/confirmPurchase");
 const confirmDelivery = require("router/api/uniform/confirmDelivery");
 const rejectPurchase = require("router/api/uniform/rejectPurchase");
+const requestPurchase = require("router/api/uniform/requestPurchase");
 
 router.use("/delete", _delete);
 router.use("/update", update);
 router.use("/list", list);
 router.use("/getData", getData);
-router.use("/donate/request", requestDonate);
+router.use("/request/donate", requestDonate);
 router.use("/confirm/donate", confirmDonate);
 router.use("/confirm/purchase", confirmPurchase);
 router.use("/searchRecord", searchRecord);
 router.use("/confirm/delivery", confirmDelivery);
 router.use("/reject/purchase", rejectPurchase);
+router.use("/request/purchase", requestPurchase);
 
 module.exports = router;

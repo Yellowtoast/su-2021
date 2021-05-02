@@ -20,6 +20,7 @@ router.put("/", isAdmin, async (req, res) => {
 
     const updated = {
       totalBeforeDelivery: -1,
+      totalShopped: 1,
     };
 
     await Promise.all([

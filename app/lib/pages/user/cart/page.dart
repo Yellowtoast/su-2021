@@ -97,9 +97,12 @@ class UserCartPageState extends State<UserCartPage> {
   }
 
   handleBuy({id}) async {
-    handleDelete(id: logId);
     Navigator.of(context).pop();
-    Navigator.of(context).pushNamed(Routes.shopStep1Url, arguments: id);
+    Navigator.of(context)
+        .pushNamed(Routes.shopStep1Url, arguments: id)
+        .then((_) {
+      handleDelete(id: logId);
+    });
   }
 
   @override

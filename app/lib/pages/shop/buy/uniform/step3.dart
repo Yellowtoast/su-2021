@@ -125,6 +125,9 @@ class ShopStep3State extends State<ShopStep3> {
 
         final int now = DateTime.now().millisecondsSinceEpoch;
 
+        var uniform = await NetworkHandler()
+            .get('${UniformApiRoutes.GET}?uniformId=${d.code}');
+
         var uniformUpdateInfo = {
           "receiverUid": uid,
           "receiverName": name,
@@ -136,10 +139,17 @@ class ShopStep3State extends State<ShopStep3> {
           "receiverSchool": d.certSchool,
           "status": "구매승인요청",
           "dateShop": now,
+          "uniforms":
+              uniform['data'] != null ? uniform['data']['uniforms'] : [],
+          "season":
+              uniform['data'] != null ? uniform['data']['"filter-season"'] : "",
+          "gender":
+              uniform['data'] != null ? uniform['data']['filter-gender'] : "",
         };
 
         await Future.wait([
-          NetworkHandler().put('${UniformApiRoutes.UPDATE}?uniformId=${d.code}',
+          NetworkHandler().put(
+              '${UniformApiRoutes.REQUEST_PURCHASE}?uniformId=${d.code}',
               uniformUpdateInfo),
           NetworkHandler().post('${InfoApiRoutes.UPDATE}', commonUpdateInfo),
           NetworkHandler().post('${UserLogsApiRoutes.PURCHASE_CREATE}', log),

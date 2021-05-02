@@ -65,8 +65,8 @@ router.put("/", isUserOrAdmin, async (req, res) => {
     console.log(uniformId);
     console.log(updated);
 
-    const unfirom = await UniformModel.findOne({ uniformId });
-    console.log(unfirom);
+    const uniform = await UniformModel.findOne({ uniformId });
+    if (uniform === null) new Error("non exist uniform");
 
     await UniformModel.findOneAndUpdate({ uniformId }, updated);
 

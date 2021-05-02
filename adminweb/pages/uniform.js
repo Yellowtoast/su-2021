@@ -242,7 +242,7 @@ const Uniform = () => {
         totalBeforeStock: -1,
         totalStock: 1,
         totalSchool: [
-          school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+          school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
           school,
           "totalStock",
           1,
@@ -463,8 +463,6 @@ const Uniform = () => {
         };
 
         const commonData = {
-          totalBeforeShop: -1,
-          totalBeforeDelivery: 1,
           totalSchool: [
             school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
             school,
@@ -535,8 +533,6 @@ const Uniform = () => {
       };
 
       const commonData = {
-        totalShopped: 1,
-        totalBeforeDelivery: -1,
         totalSchool: [
           school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
           school,
@@ -872,24 +868,21 @@ const Uniform = () => {
                   </div>
                   {logs.map((log, i) => {
                     console.log(log);
-                    const d = new Date(Number(log.dateShop));
-                    const ds = `${d.getFullYear()}. ${
-                      d.getMonth() + 1 >= 10
-                        ? d.getMonth() + 1
-                        : `0${d.getMonth() + 1}`
-                    }. ${d.getDate() >= 10 ? d.getDate() : `0${d.getDate()}`}`;
-                    let item = `${log["filter-gender"]} / ${log["filter-season"]} / `;
+                    const d = log.uniformId.split("-")[0];
+                    const ds = `20${d.substring(0, 2)}. ${d.substring(
+                      2,
+                      4
+                    )}. ${d.substring(4, 6)}`;
+                    let item = `${log.gender} / ${log.season} / `;
                     log.uniforms.forEach(({ clothType }) => {
                       item += `${clothType},`;
                     });
                     return (
                       <div className={styles.row} key={String(i)}>
                         <div className={styles.col1}>{ds}</div>
-                        <div className={styles.col2}>
-                          {log["filter-school"]}
-                        </div>
+                        <div className={styles.col2}>{log.school}</div>
                         <div className={styles.col3}>{item}</div>
-                        <div className={styles.col4}>승인</div>
+                        <div className={styles.col4}>{log.confirm}</div>
                       </div>
                     );
                   })}
