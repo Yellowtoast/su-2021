@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/constants/theme.dart';
@@ -17,7 +18,7 @@ class DonateStep1_4State extends State<DonateStep1_4> {
   String size;
 
   handleClothType(String g) {
-    // Navigator.of(context).pop(g);
+    Get.back(result: g);
     setState(() {
       clothType = g;
     });

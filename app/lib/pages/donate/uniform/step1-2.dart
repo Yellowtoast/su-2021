@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/components/header2.dart';
@@ -13,7 +14,7 @@ class DonateStep1_2State extends State<DonateStep1_2> {
   String gender;
 
   handleGender(String g) {
-    Navigator.of(context).pop(g);
+    Get.back(result: g);
   }
 
   @override
