@@ -5,14 +5,14 @@ import { useRouter } from "next/router";
 
 import { throttle } from "throttle-debounce";
 
-import Nav from "components/nav";
-import LoadingPage from "components/loading/page";
+import Nav from "widgets/nav";
+import LoadingPage from "widgets/loading/page";
 
-import BeforeStockTable from "components/table/uniform/beforeStock";
-import StockTable from "components/table/uniform/stock";
-import BeforeShopTable from "components/table/uniform/beforeShop";
-import BeforeDeliveryTable from "components/table/uniform/beforeDelivery";
-import ShoppedTable from "components/table/uniform/shopped";
+import BeforeStockTable from "widgets/table/uniform/beforeStock";
+import StockTable from "widgets/table/uniform/stock";
+import BeforeShopTable from "widgets/table/uniform/beforeShop";
+import BeforeDeliveryTable from "widgets/table/uniform/beforeDelivery";
+import ShoppedTable from "widgets/table/uniform/shopped";
 
 import styles from "styles/pages/home.module.scss";
 import networkHandler from "configs/networkHandler";

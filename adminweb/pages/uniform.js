@@ -9,11 +9,11 @@ import networkHandler from "configs/networkHandler";
 import apiRoutes from "configs/apiRoutes";
 // import updateLocalInfo from "utils/updatelocalInfo";
 
-import Nav from "components/nav";
-import LoadingPage from "components/loading/page";
-import RejectModal from "components/modal/reject";
+import Nav from "widgets/nav";
+import LoadingPage from "widgets/loading/page";
+import RejectModal from "widgets/modal/reject";
 
-import Dropdown, { getClothesTypes } from "components/dropdown";
+import Dropdown, { getClothesTypes } from "widgets/dropdown";
 
 import styles from "styles/pages/uniform.module.scss";
 

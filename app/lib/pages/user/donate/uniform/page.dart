@@ -1,14 +1,15 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/routes.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/routes/api/user.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/pages/user/donate/uniform/widgets/card.dart';
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/widgets/loading.dart';
+import 'package:schooluniform/widgets/user/cart/card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDonateUniformPage extends StatefulWidget {

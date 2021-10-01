@@ -1,19 +1,24 @@
 import 'dart:io';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+
+import 'package:schooluniform/routes/api/info.dart';
+import 'package:schooluniform/routes/api/uniform.dart';
+import 'package:schooluniform/routes/api/user.dart';
+import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/widgets/shop/buy/uniform/alarmModal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/routes.dart';
-import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/pages/shop/buy/uniform/widgets/alarmModal.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+
+import 'package:schooluniform/widgets/header.dart';
+
+import 'package:schooluniform/widgets/loading.dart';
 
 class ShopUniformInputData {
   ShopUniformInputData(
@@ -154,9 +159,7 @@ class ShopStep3State extends State<ShopStep3> {
           NetworkHandler().post('${InfoApiRoutes.UPDATE}', commonUpdateInfo),
           NetworkHandler().post('${UserLogsApiRoutes.PURCHASE_CREATE}', log),
         ]);
-
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.userPurchaseUniformUrl,
+        Get.offNamedUntil(Routes.userPurchaseUniformUrl,
             (route) => route.settings.name == Routes.homeUrl);
         alarmModal(context: context);
       }
@@ -307,8 +310,7 @@ class ShopStep3State extends State<ShopStep3> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () =>
-                          Navigator.of(context).pushNamed(Routes.policyUrl),
+                      onTap: () => Get.toNamed(Routes.policyUrl),
                       child: Text(
                         "전문보기",
                         style: GoogleFonts.notoSans(

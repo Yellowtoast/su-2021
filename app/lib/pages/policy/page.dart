@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/components/header2.dart';
+import 'package:schooluniform/widgets/header2.dart';
 
 class PolicyPage extends StatefulWidget {
   @override

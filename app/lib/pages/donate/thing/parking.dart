@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/widgets/header.dart';
 
 class DonateThingParking extends StatefulWidget {
   @override

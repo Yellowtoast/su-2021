@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import networkHandler from "configs/networkHandler";
 
-import styles from "styles/components/table.module.scss";
+import styles from "styles/widgets/table.module.scss";
 
 const Table = ({ list }) => {
   console.log(list);

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import styles from "components/entrance/page.module.scss";
+import styles from "widgets/entrance/page.module.scss";
 import networkHandler from "configs/networkHandler";
 import apiRoutes from "configs/apiRoutes";
 
-import LoadingPage from "components/loading/page";
+import LoadingPage from "widgets/loading/page";
 
 const EntrancePage = () => {
   const router = useRouter();

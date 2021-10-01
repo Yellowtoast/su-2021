@@ -3,10 +3,11 @@ import "package:flutter/material.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/support/widgets/supportModal.dart';
-import 'package:schooluniform/pages/support/widgets/recModal.dart';
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/widgets/support/recModal.dart';
+import 'package:schooluniform/widgets/support/supportModal.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
 class SupportPage extends StatefulWidget {
   static String url = "/support";

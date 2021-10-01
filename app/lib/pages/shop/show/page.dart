@@ -1,14 +1,17 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/routes/api/user.dart';
+
+import 'package:schooluniform/widgets/shop/show/addToCartModal.dart';
+import 'package:schooluniform/widgets/shop/show/buyNowModal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/routes.dart';
-import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 
-import 'package:schooluniform/pages/shop/show/widgets/addToCartModal.dart';
-import 'package:schooluniform/pages/shop/show/widgets/buyNowModal.dart';
+import 'package:schooluniform/configs/stores.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
 class ShopUniformShowArg {
   ShopUniformShowArg({
@@ -130,7 +133,7 @@ class ShopShowPageState extends State<ShopShowPage> {
                   brightness: Brightness.dark,
                   elevation: 0,
                   leading: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: () => Get.back(),
                     child: Container(
                       padding: EdgeInsets.all(12),
                       child: Image(

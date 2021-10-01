@@ -1,4 +1,4 @@
-import AuthHoC from "components/hocs/auth";
+import AuthHoC from "widgets/hocs/auth";
 
 import "styles/globals.scss";
 

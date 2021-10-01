@@ -2,11 +2,12 @@ import "package:flutter/material.dart";
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/configs/data.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/widgets/header.dart';
 
-import 'package:schooluniform/pages/shop/filter/widgets/listView.dart';
+import 'package:schooluniform/constants/data.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/widgets/shop/filter/listView.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
 class ShopFilterPage extends StatefulWidget {
   @override

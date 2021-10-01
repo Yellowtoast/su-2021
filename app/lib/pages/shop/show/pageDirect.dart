@@ -1,16 +1,19 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/routes/api/uniform.dart';
+import 'package:schooluniform/routes/api/user.dart';
+import 'package:schooluniform/widgets/shop/show/direct/addToCartModal.dart';
+import 'package:schooluniform/widgets/shop/show/direct/alarmModal.dart';
+import 'package:schooluniform/widgets/shop/show/direct/buyNowModal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/routes.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
-import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/pages/shop/show/widgets/direct/addToCartModal.dart';
-import 'package:schooluniform/pages/shop/show/widgets/direct/alarmModal.dart';
-import 'package:schooluniform/pages/shop/show/widgets/direct/buyNowModal.dart';
+import 'package:schooluniform/widgets/loading.dart';
 
 class ShopShowDirectPage extends StatefulWidget {
   ShopShowDirectPage({this.code});
@@ -33,7 +36,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
         .get('${UniformApiRoutes.GET}?uniformId=${widget.code}');
 
     if (res == null) {
-      Navigator.of(context).pop();
+      Get.back();
       directAlarmModal(context: context);
     } else {
       setState(() {
@@ -158,7 +161,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                             brightness: Brightness.dark,
                             elevation: 0,
                             leading: GestureDetector(
-                              onTap: () => Navigator.of(context).pop(),
+                              onTap: () => Get.back(),
                               child: Container(
                                 padding: EdgeInsets.all(12),
                                 child: Image(

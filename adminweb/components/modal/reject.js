@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "styles/components/modal.module.scss";
+import styles from "styles/widgets/modal.module.scss";
 
 const RejectModal = ({ closeModal, handleReject }) => {
   const [reject, setReject] = useState("");

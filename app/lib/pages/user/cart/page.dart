@@ -1,18 +1,21 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/components/user%20copy/cart/widgets/buyCart.dart';
+import 'package:schooluniform/components/user%20copy/cart/widgets/card.dart';
+import 'package:schooluniform/components/user%20copy/cart/widgets/deleteCart.dart';
+import 'package:schooluniform/routes/api/user.dart';
+import 'package:schooluniform/routes/client/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/routes.dart';
-import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/pages/user/cart/widgets/buyCart.dart';
-import 'package:schooluniform/pages/user/cart/widgets/card.dart';
-import 'package:schooluniform/pages/user/cart/widgets/deleteCart.dart';
+import 'package:schooluniform/configs/stores.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/widgets/loading.dart';
 
 class UserCartPage extends StatefulWidget {
   @override
@@ -76,7 +79,7 @@ class UserCartPageState extends State<UserCartPage> {
   }
 
   handleCancel() {
-    Navigator.of(context).pop();
+    Get.back();
   }
 
   handleDelete({
@@ -87,7 +90,7 @@ class UserCartPageState extends State<UserCartPage> {
     setState(() {
       list = list.where((element) => element["_id"] != id).toList();
     });
-    Navigator.of(context).pop();
+    Get.back();
     try {
       await NetworkHandler()
           .get('${UserLogsApiRoutes.CART_REMOVE}?targetUid=$uid&logId=$id');
@@ -97,10 +100,8 @@ class UserCartPageState extends State<UserCartPage> {
   }
 
   handleBuy({id}) async {
-    Navigator.of(context).pop();
-    Navigator.of(context)
-        .pushNamed(Routes.shopStep1Url, arguments: id)
-        .then((_) {
+    Get.back();
+    Get.toNamed(Routes.shopStep1Url, arguments: id).then((_) {
       handleDelete(id: logId);
     });
   }

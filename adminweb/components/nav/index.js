@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import styles from "components/nav/index.module.scss";
+import styles from "widgets/nav/index.module.scss";
 
 const Nav = () => {
   const router = useRouter();

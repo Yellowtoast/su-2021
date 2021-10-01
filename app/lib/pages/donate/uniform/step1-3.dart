@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/widgets/donate/uniform/selectSeason.dart';
 
-import 'package:schooluniform/pages/donate/uniform/types/uniform.dart';
-import 'package:schooluniform/components/header2.dart';
-import 'package:schooluniform/pages/donate/uniform/widgets/selectSeason.dart';
+import 'package:schooluniform/widgets/header2.dart';
+import 'package:schooluniform/types/uniform.dart';
 
 class DonateStep1_3 extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class DonateStep1_3State extends State<DonateStep1_3> {
   String season;
 
   handleSeason(String g) {
-    Navigator.of(context).pop(g);
+    Get.back(result: g);
   }
 
   @override

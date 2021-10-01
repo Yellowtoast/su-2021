@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import styles from "styles/components/dropdown.module.scss";
+import styles from "styles/widgets/dropdown.module.scss";
 
 var schools = [
   "강북중학교",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-import styles from "styles/components/table.module.scss";
+import styles from "styles/widgets/table.module.scss";
 import networkHandler from "configs/networkHandler";
 
 const Table = ({ list }) => {

@@ -1,16 +1,18 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/routes.dart';
+import 'package:schooluniform/routes/api/uniform.dart';
+import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/widgets/shop/list/types/clothFilterData.dart';
+import 'package:schooluniform/widgets/shop/list/types/pageArg.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 
-import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/shop/list/types/pageArg.dart';
-import 'package:schooluniform/pages/shop/list/types/clothFilterData.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/loading.dart';
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/widgets/loading.dart';
 import 'package:schooluniform/pages/shop/show/page.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
 class ShopListPage extends StatefulWidget {
   @override
@@ -87,8 +89,7 @@ class ShopListPageState extends State<ShopListPage> {
       });
       request();
     } else {
-      var res =
-          await Navigator.of(context).pushNamed(Routes.shopListGenderFilterUrl);
+      var res = await Get.toNamed(Routes.shopListGenderFilterUrl);
       if (res != null) {
         setState(() {
           filterGender = res;
@@ -110,8 +111,7 @@ class ShopListPageState extends State<ShopListPage> {
       });
       request();
     } else {
-      var res =
-          await Navigator.of(context).pushNamed(Routes.shopListClothFilterUrl);
+      var res = await Get.toNamed(Routes.shopListClothFilterUrl);
       ShopListClothFilterData d = res;
       if (d.clothType != null && d.clothType.length != 0) {
         setState(() {
@@ -211,7 +211,7 @@ class ShopListPageState extends State<ShopListPage> {
     }
 
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(Routes.shopShowUrl,
+      onTap: () => Get.toNamed(Routes.shopShowUrl,
           arguments: ShopUniformShowArg(data: data)),
       child: Column(
         children: [

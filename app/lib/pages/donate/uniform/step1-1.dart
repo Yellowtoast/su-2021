@@ -1,10 +1,12 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
-import 'package:schooluniform/configs/data.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/constants/data.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
-import 'package:schooluniform/components/header2.dart';
+import 'package:schooluniform/widgets/header2.dart';
 
 class DonateStep1_1 extends StatefulWidget {
   @override
@@ -75,7 +77,7 @@ class DonateStep1_1State extends State<DonateStep1_1>
                   children: [
                     for (var i in middleSchools)
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(i),
+                        onTap: () => Get.back(result: i),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           height: 48,
@@ -93,7 +95,7 @@ class DonateStep1_1State extends State<DonateStep1_1>
                   children: [
                     for (var i in highSchools)
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(i),
+                        onTap: () => Get.back(result: i),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           height: 48,

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Head from "next/head";
 
-import styles from "components/loading/page.module.scss";
+import styles from "widgets/loading/page.module.scss";
 
 const LoadingPage = () => {
   const imgRef = useRef();

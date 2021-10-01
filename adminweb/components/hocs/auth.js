@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 // import firebase from "firebase/app";
 // import "firebase/auth";
 
-import LoadingPage from "components/loading/page";
-import EntrancePage from "components/entrance/page";
+import LoadingPage from "widgets/loading/page";
+import EntrancePage from "widgets/entrance/page";
 import networkHandler from "configs/networkHandler";
 import apiRoutes, { USER_PATH } from "configs/apiRoutes";
 

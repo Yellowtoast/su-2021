@@ -1,13 +1,14 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
-import 'package:schooluniform/pages/donate/uniform/types/donateState1_4Data.dart';
-import 'package:schooluniform/pages/donate/uniform/types/uniform.dart';
-
-import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/types/donateInfo.dart';
+import 'package:schooluniform/types/donateState1_4Data.dart';
+import 'package:schooluniform/types/uniform.dart';
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 
 class DonateStep1 extends StatefulWidget {
   @override
@@ -41,7 +42,7 @@ class DonateStep1State extends State<DonateStep1> {
   }
 
   handleAdd() async {
-    var u = await Navigator.of(context).pushNamed(Routes.donateStep1_1Url);
+    var u = await Get.toNamed(Routes.donateStep1_1Url);
     if (u != null) {
       Uniform uu = u;
       if (uu.school != null &&
@@ -52,7 +53,7 @@ class DonateStep1State extends State<DonateStep1> {
   }
 
   handleSchool() async {
-    var res = await Navigator.of(context).pushNamed(Routes.donateStep1_1Url);
+    var res = await Get.toNamed(Routes.donateStep1_1Url);
     if (res != null) {
       setState(() {
         school = res;
@@ -62,7 +63,7 @@ class DonateStep1State extends State<DonateStep1> {
   }
 
   handleGender() async {
-    var res = await Navigator.of(context).pushNamed(Routes.donateStep1_2Url);
+    var res = await Get.toNamed(Routes.donateStep1_2Url);
     if (res != null) {
       setState(() {
         gender = res;
@@ -72,7 +73,7 @@ class DonateStep1State extends State<DonateStep1> {
   }
 
   handleSeason() async {
-    var res = await Navigator.of(context).pushNamed(Routes.donateStep1_3Url);
+    var res = await Get.toNamed(Routes.donateStep1_3Url);
     if (res != null) {
       setState(() {
         season = res;
@@ -82,7 +83,7 @@ class DonateStep1State extends State<DonateStep1> {
   }
 
   handleClothType() async {
-    var res = await Navigator.of(context).pushNamed(Routes.donateStep1_4Url,
+    var res = await Get.toNamed(Routes.donateStep1_4Url,
         arguments: DonateState1_4InputData(season: season, gender: gender));
     if (res != null) {
       addUniform(res);
@@ -262,8 +263,7 @@ class DonateStep1State extends State<DonateStep1> {
             uniforms.length > 0
                 ? Positioned(
                     child: GestureDetector(
-                      onTap: () => Navigator.of(context).pushNamed(
-                          Routes.donateStep3Url,
+                      onTap: () => Get.toNamed(Routes.donateStep3Url,
                           arguments: DonateInfo(
                               uniforms: uniforms,
                               school: school,
