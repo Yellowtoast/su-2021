@@ -8,7 +8,7 @@ import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/routes/api/user.dart';
 
 import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets/loading.dart';
+import 'package:schooluniform/widgets2/loading/loading.dart';
 import 'package:schooluniform/widgets/user/cart/card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

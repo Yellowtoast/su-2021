@@ -18,7 +18,7 @@ import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 
 import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets/footer.dart';
+import 'package:schooluniform/widgets2/footer/footer.dart';
 import 'package:schooluniform/widgets/home/drawerItem.dart';
 import 'package:schooluniform/widgets/home/swipeBannerItem.dart';
 

@@ -5,7 +5,7 @@ import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 
 import 'package:schooluniform/widgets/header2.dart';
-import 'package:schooluniform/widgets/loading.dart';
+import 'package:schooluniform/widgets2/loading/loading.dart';
 
 class UserPurchaseUniformRejectPage extends StatefulWidget {
   UserPurchaseUniformRejectPage({this.code});

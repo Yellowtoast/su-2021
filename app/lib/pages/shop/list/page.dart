@@ -10,7 +10,7 @@ import 'package:schooluniform/routes/api/networkHandler.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 
 import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets/loading.dart';
+import 'package:schooluniform/widgets2/loading/loading.dart';
 import 'package:schooluniform/pages/shop/show/page.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 

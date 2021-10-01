@@ -2,10 +2,10 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/components/user%20copy/cart/widgets/buyCart.dart';
-import 'package:schooluniform/components/user%20copy/cart/widgets/card.dart';
 import 'package:schooluniform/components/user%20copy/cart/widgets/deleteCart.dart';
 import 'package:schooluniform/routes/api/user.dart';
 import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/widgets/user/cart/card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:schooluniform/routes/api/networkHandler.dart';
@@ -14,8 +14,7 @@ import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 
 import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
-import 'package:schooluniform/widgets/loading.dart';
+import 'package:schooluniform/widgets2/loading/loading.dart';
 
 class UserCartPage extends StatefulWidget {
   @override

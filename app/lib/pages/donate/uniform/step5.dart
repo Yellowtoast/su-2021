@@ -21,7 +21,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
 
 import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets/loading.dart';
+import 'package:schooluniform/widgets2/loading/loading.dart';
 
 class DonateStep5 extends StatefulWidget {
   @override

@@ -18,7 +18,7 @@ import 'package:schooluniform/configs/theme/color/color.dart';
 
 import 'package:schooluniform/widgets/header.dart';
 
-import 'package:schooluniform/widgets/loading.dart';
+import 'package:schooluniform/widgets2/loading/loading.dart';
 
 class ShopUniformInputData {
   ShopUniformInputData(
