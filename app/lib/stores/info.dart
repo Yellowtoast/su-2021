@@ -1,9 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mobx/mobx.dart';
+import 'package:schooluniform/routes/api/info.dart';
+import 'package:schooluniform/routes/api/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/api/routes.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 
 part 'info.g.dart';
 

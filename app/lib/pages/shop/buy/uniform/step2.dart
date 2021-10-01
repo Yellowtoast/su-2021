@@ -1,12 +1,15 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/routes/client/client.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/configs/routes.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+
 import 'package:schooluniform/configs/stores.dart';
 
-import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/widgets/header.dart';
 import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
 
 class ShopStep2 extends StatefulWidget {
@@ -182,8 +185,7 @@ class ShopStep2State extends State<ShopStep2> {
                           alignment: Alignment.centerRight,
                           margin: EdgeInsets.only(top: 24),
                           child: GestureDetector(
-                            onTap: () => Navigator.of(context).pushNamed(
-                                Routes.shopStep3Url,
+                            onTap: () => Get.toNamed(Routes.shopStep3Url,
                                 arguments: ShopUniformInputData(
                                     code: d.code,
                                     certFront: d.certFront,

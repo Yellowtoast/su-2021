@@ -1,14 +1,16 @@
 import 'dart:io';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/widgets/donate/uniform/imageHandler.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/pages/donate/uniform/widgets/imageHandler.dart';
+import 'package:schooluniform/widgets/header.dart';
+
+import 'package:schooluniform/types/donateInfo.dart';
 
 class DonateStep3 extends StatefulWidget {
   @override
@@ -20,6 +22,8 @@ class DonateStep3State extends State<DonateStep3> {
 
   final picker = ImagePicker();
   ScrollController _controller = ScrollController();
+
+  get shadowSig => null;
 
   handleImageAddFrom(type) async {
     final pickedFile = await picker.getImage(
@@ -38,13 +42,13 @@ class DonateStep3State extends State<DonateStep3> {
         });
       });
     }
-    Navigator.of(context).pop();
+    Get.back();
   }
 
   handleImageRemove(index) {
     setState(() {
       images.removeAt(index);
-      Navigator.of(context).pop();
+      Get.back();
     });
   }
 
@@ -54,7 +58,7 @@ class DonateStep3State extends State<DonateStep3> {
     if (pickedFile != null) {
       setState(() {
         images[index] = pickedFile;
-        Navigator.of(context).pop();
+        Get.back();
       });
     }
   }
@@ -168,15 +172,14 @@ class DonateStep3State extends State<DonateStep3> {
                   alignment: Alignment.centerRight,
                   margin: EdgeInsets.only(top: 24),
                   child: GestureDetector(
-                    onTap: () =>
-                        Navigator.of(context).pushNamed(Routes.donateStep4Url,
-                            arguments: DonateInfo(
-                              school: d.school,
-                              gender: d.gender,
-                              season: d.season,
-                              images: images,
-                              uniforms: d.uniforms,
-                            )),
+                    onTap: () => Get.toNamed(Routes.donateStep4Url,
+                        arguments: DonateInfo(
+                          school: d.school,
+                          gender: d.gender,
+                          season: d.season,
+                          images: images,
+                          uniforms: d.uniforms,
+                        )),
                     child: Container(
                       width: 52,
                       height: 52,

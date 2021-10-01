@@ -2,20 +2,26 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:math';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:schooluniform/configs/api/routes.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+
+import 'package:schooluniform/routes/api/info.dart';
+import 'package:schooluniform/routes/api/uniform.dart';
+import 'package:schooluniform/routes/api/user.dart';
+import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/types/donateInfo.dart';
+import 'package:schooluniform/widgets/donate/uniform/input.dart';
+import 'package:schooluniform/widgets/donate/uniform/requestModal.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:schooluniform/configs/api/networkHandler.dart';
-import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/types/donateInfo.dart';
+import 'package:schooluniform/routes/api/networkHandler.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/loading.dart';
-import 'package:schooluniform/pages/donate/uniform/widgets/input.dart';
-import 'package:schooluniform/pages/donate/uniform/widgets/requestModal.dart';
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/widgets/loading.dart';
 
 class DonateStep5 extends StatefulWidget {
   @override
@@ -130,7 +136,7 @@ class DonateStep5State extends State<DonateStep5> {
 
     try {
       await Future.wait(futures);
-      Navigator.of(context).pushNamedAndRemoveUntil(Routes.userDonateUniformUrl,
+      Get.offNamedUntil(Routes.userDonateUniformUrl,
           (route) => route.settings.name == Routes.homeUrl);
       requestModal(context: context);
     } catch (err) {
@@ -242,8 +248,7 @@ class DonateStep5State extends State<DonateStep5> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () =>
-                          Navigator.of(context).pushNamed(Routes.policyUrl),
+                      onTap: () => Get.toNamed(Routes.policyUrl),
                       child: Text(
                         "전문보기",
                         style: GoogleFonts.notoSans(

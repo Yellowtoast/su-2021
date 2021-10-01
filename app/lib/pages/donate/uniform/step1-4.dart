@@ -2,11 +2,11 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/constants/theme.dart';
-import 'package:schooluniform/pages/donate/uniform/types/donateState1_4Data.dart';
-
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/pages/donate/uniform/widgets/selectClothType.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/widgets/donate/uniform/selectClothType.dart';
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/types/donateState1_4Data.dart';
 
 class DonateStep1_4 extends StatefulWidget {
   @override
@@ -143,8 +143,8 @@ class DonateStep1_4State extends State<DonateStep1_4> {
                     alignment: Alignment.centerRight,
                     margin: EdgeInsets.only(top: 24),
                     child: GestureDetector(
-                      onTap: () => Navigator.of(context).pop(
-                          DonateState1_4OutputData(
+                      onTap: () => Get.back(
+                          result: DonateState1_4OutputData(
                               clothType: clothType, size: size)),
                       child: Container(
                         width: 52,

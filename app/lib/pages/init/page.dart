@@ -1,11 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/widgets/init/updateMessageModal.dart';
 
-import 'package:schooluniform/configs/routes.dart';
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/pages/init/widgets/updateMessageModal.dart';
 
 class InitPage extends StatefulWidget {
   @override
@@ -45,7 +46,7 @@ class InitPageState extends State<InitPage> {
       if (infoStore.localInfo["shouldBeUpdated"]) {
         updateMessageModal(context: context);
       } else {
-        Navigator.of(context).pushReplacementNamed(Routes.homeUrl);
+        Get.offNamed(Routes.homeUrl);
       }
     } catch (err) {
       print(err);
@@ -61,37 +62,39 @@ class InitPageState extends State<InitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            brightness: Brightness.light,
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          brightness: Brightness.light,
+        ),
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Container(
+          margin: EdgeInsets.only(bottom: 80),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                  image: AssetImage("assets/img/bookie-main.png"),
+                  width: 164,
+                  height: 164),
+              Container(
+                margin: EdgeInsets.only(top: 12, bottom: 64),
+                child: Text(
+                  "대구 북구 교복 나눔",
+                  style: GoogleFonts.notoSans(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
           ),
         ),
-        body: Container(
-            alignment: Alignment.center,
-            child: Container(
-              margin: EdgeInsets.only(bottom: 80),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                      image: AssetImage("assets/img/bookie-main.png"),
-                      width: 164,
-                      height: 164),
-                  Container(
-                    margin: EdgeInsets.only(top: 12, bottom: 64),
-                    child: Text(
-                      "대구 북구 교복 나눔",
-                      style: GoogleFonts.notoSans(fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-                ],
-              ),
-            )));
+      ),
+    );
   }
 }

@@ -1,12 +1,14 @@
 import "dart:io";
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:schooluniform/configs/routes.dart';
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/routes/client/client.dart';
 
-import 'package:schooluniform/components/header.dart';
+import 'package:schooluniform/widgets/header.dart';
 import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
 
 class ShopStep1 extends StatefulWidget {
@@ -21,6 +23,8 @@ class ShopStep1State extends State<ShopStep1> {
   String certSchool;
   String certBirth;
   dynamic step = 1;
+
+  get shadowSig => null;
 
   void handleStep2(v) {
     setState(() {
@@ -283,12 +287,12 @@ class ShopStep1State extends State<ShopStep1> {
                                   alignment: Alignment.centerRight,
                                   margin: EdgeInsets.only(top: 24),
                                   child: GestureDetector(
-                                    onTap: () => Navigator.of(context)
-                                        .pushNamed(Routes.shopStep2Url,
-                                            arguments: ShopUniformInputData(
-                                                code: code,
-                                                certFront: imageFront,
-                                                certBack: imageBack)),
+                                    onTap: () => Get.toNamed(
+                                        Routes.shopStep2Url,
+                                        arguments: ShopUniformInputData(
+                                            code: code,
+                                            certFront: imageFront,
+                                            certBack: imageBack)),
                                     child: Container(
                                       width: 52,
                                       height: 52,
@@ -443,15 +447,15 @@ class ShopStep1State extends State<ShopStep1> {
                                   alignment: Alignment.centerRight,
                                   margin: EdgeInsets.only(top: 24),
                                   child: GestureDetector(
-                                    onTap: () => Navigator.of(context)
-                                        .pushNamed(Routes.shopStep2Url,
-                                            arguments: ShopUniformInputData(
-                                                code: code,
-                                                certName: certName,
-                                                certBirth: certBirth,
-                                                certSchool: certSchool,
-                                                certFront: imageFront,
-                                                certBack: imageBack)),
+                                    onTap: () => Get.toNamed(
+                                        Routes.shopStep2Url,
+                                        arguments: ShopUniformInputData(
+                                            code: code,
+                                            certName: certName,
+                                            certBirth: certBirth,
+                                            certSchool: certSchool,
+                                            certFront: imageFront,
+                                            certBack: imageBack)),
                                     child: Container(
                                       width: 52,
                                       height: 52,

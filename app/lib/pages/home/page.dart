@@ -1,24 +1,26 @@
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import "dart:async";
 import "dart:core";
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:schooluniform/routes/client/client.dart';
+import 'package:schooluniform/widgets/home/bannerItem.dart';
+import 'package:schooluniform/widgets/home/countUpItem.dart';
 
-import 'package:schooluniform/constants/theme.dart';
+import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/configs/routes.dart';
+
 import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 
-import 'package:schooluniform/components/header.dart';
-import 'package:schooluniform/components/footer.dart';
-import 'package:schooluniform/pages/home/widgets/bannerItem.dart';
-import 'package:schooluniform/pages/home/widgets/countUpItem.dart';
-import 'package:schooluniform/pages/home/widgets/drawerItem.dart';
-import 'package:schooluniform/pages/home/widgets/swipeBannerItem.dart';
+import 'package:schooluniform/widgets/header.dart';
+import 'package:schooluniform/widgets/footer.dart';
+import 'package:schooluniform/widgets/home/drawerItem.dart';
+import 'package:schooluniform/widgets/home/swipeBannerItem.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,11 +40,11 @@ class HomePageState extends State<HomePage> {
 
     if (initialMessage != null) {
       if (initialMessage.data['confirm'] == "true") {
-        Navigator.of(context).pushNamed(Routes.userPurchaseUniformUrl);
+        Get.toNamed(Routes.userPurchaseUniformUrl);
       }
       if (initialMessage.data["confirm"] == "false") {
-        Navigator.of(context).pushNamed(Routes.userPurchaseUniformUrl);
-        Navigator.of(context).pushNamed(Routes.userPurchaseUniformRejectUrl,
+        Get.toNamed(Routes.userPurchaseUniformUrl);
+        Get.toNamed(Routes.userPurchaseUniformRejectUrl,
             arguments: initialMessage.data["uniformId"]);
       }
     }
@@ -80,17 +82,17 @@ class HomePageState extends State<HomePage> {
                 icon: "ic_launcher",
               ),
             ));
-        Navigator.of(context).pushNamed(Routes.userPurchaseUniformUrl);
+        Get.toNamed(Routes.userPurchaseUniformUrl);
       }
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (message.data["confirm"] == "true") {
-        Navigator.of(context).pushNamed(Routes.userPurchaseUniformUrl);
+        Get.toNamed(Routes.userPurchaseUniformUrl);
       }
       if (message.data["confirm"] == "false") {
-        Navigator.of(context).pushNamed(Routes.userPurchaseUniformUrl);
-        Navigator.of(context).pushNamed(Routes.userPurchaseUniformRejectUrl,
+        Get.toNamed(Routes.userPurchaseUniformUrl);
+        Get.toNamed(Routes.userPurchaseUniformRejectUrl,
             arguments: message.data["uniformId"]);
       }
     });
@@ -183,7 +185,7 @@ class HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(right: 16),
                 margin: EdgeInsets.only(bottom: 24),
                 child: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: () => Get.back(),
                     child: Container(
                       width: 32,
                       height: 32,
@@ -207,8 +209,7 @@ class HomePageState extends State<HomePage> {
                   userInfoKey: "uniformDonate",
                   url: Routes.userDonateUniformUrl),
               GestureDetector(
-                onTap: () =>
-                    Navigator.of(context).pushNamed(Routes.userSupportUrl),
+                onTap: () => Get.toNamed(Routes.userSupportUrl),
                 child: Container(
                   height: 48,
                   color: Colors.transparent,
