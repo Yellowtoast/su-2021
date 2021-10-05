@@ -8,19 +8,18 @@ import "dart:async";
 import "dart:core";
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/widgets/home/bannerItem.dart';
-import 'package:schooluniform/widgets/home/countUpItem.dart';
 
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/configs/stores.dart';
 
 import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
-
-import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets2/footer/footer.dart';
-import 'package:schooluniform/widgets/home/drawerItem.dart';
-import 'package:schooluniform/widgets/home/swipeBannerItem.dart';
+import 'package:schooluniform/widgets/footer/footer.dart';
+import 'package:schooluniform/widgets/header/header.dart';
+import 'package:schooluniform/widgets/pages/home/bannerItem.dart';
+import 'package:schooluniform/widgets/pages/home/countUpItem.dart';
+import 'package:schooluniform/widgets/pages/home/drawerItem.dart';
+import 'package:schooluniform/widgets/pages/home/swipeBannerItem.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/components/donate/uniform/widgets/selectGender.dart';
 
-import 'package:schooluniform/widgets/header2.dart';
+import 'package:schooluniform/widgets/header/header2.dart';
+
+import 'package:schooluniform/widgets/pages/donate/uniform/selectGender.dart';
 
 class DonateStep1_2 extends StatefulWidget {
   @override

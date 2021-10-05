@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:schooluniform/widgets/shop/list/filterCloth.dart';
-import 'package:schooluniform/widgets/shop/list/filterGender.dart';
+
 import 'package:schooluniform/pages/donate/thing/parking.dart';
 import 'package:schooluniform/pages/donate/uniform/step1-1.dart';
 import 'package:schooluniform/pages/donate/uniform/step1-2.dart';
@@ -27,6 +26,8 @@ import 'package:schooluniform/pages/user/donate/uniform/page.dart';
 import 'package:schooluniform/pages/user/purchase/uniform/page.dart';
 import 'package:schooluniform/pages/user/purchase/uniform/reject/reject.dart';
 import 'package:schooluniform/pages/user/support/page.dart';
+import 'package:schooluniform/widgets/pages/shop/list/filterCloth.dart';
+import 'package:schooluniform/widgets/pages/shop/list/filterGender.dart';
 
 class Routes {
   static const String initUrl = "/init";

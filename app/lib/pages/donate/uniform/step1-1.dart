@@ -5,8 +5,7 @@ import 'package:schooluniform/configs/theme/color/color.dart';
 
 import 'package:schooluniform/constants/data.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
-
-import 'package:schooluniform/widgets/header2.dart';
+import 'package:schooluniform/widgets/header/header2.dart';
 
 class DonateStep1_1 extends StatefulWidget {
   @override

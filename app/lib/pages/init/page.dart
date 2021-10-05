@@ -4,9 +4,9 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/widgets/init/updateMessageModal.dart';
 
 import 'package:schooluniform/configs/stores.dart';
+import 'package:schooluniform/widgets/pages/init/updateMessageModal.dart';
 
 class InitPage extends StatefulWidget {
   @override

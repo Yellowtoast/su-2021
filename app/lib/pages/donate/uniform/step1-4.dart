@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
-import 'package:schooluniform/widgets/donate/uniform/selectClothType.dart';
-import 'package:schooluniform/widgets/header.dart';
+
 import 'package:schooluniform/types/donateState1_4Data.dart';
+import 'package:schooluniform/widgets/header/header.dart';
+import 'package:schooluniform/widgets/pages/donate/uniform/selectClothType.dart';
 
 class DonateStep1_4 extends StatefulWidget {
   @override

@@ -6,11 +6,10 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/widgets/donate/uniform/imageHandler.dart';
-
-import 'package:schooluniform/widgets/header.dart';
 
 import 'package:schooluniform/types/donateInfo.dart';
+import 'package:schooluniform/widgets/header/header.dart';
+import 'package:schooluniform/widgets/pages/donate/uniform/imageHandler.dart';
 
 class DonateStep3 extends StatefulWidget {
   @override

@@ -13,15 +13,14 @@ import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/api/user.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/types/donateInfo.dart';
-import 'package:schooluniform/widgets/donate/uniform/input.dart';
-import 'package:schooluniform/widgets/donate/uniform/requestModal.dart';
+import 'package:schooluniform/widgets/header/header.dart';
+import 'package:schooluniform/widgets/loading/loading.dart';
+import 'package:schooluniform/widgets/pages/donate/uniform/input.dart';
+import 'package:schooluniform/widgets/modal/requestModal.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:schooluniform/routes/api/networkHandler.dart';
-
-import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets2/loading/loading.dart';
 
 class DonateStep5 extends StatefulWidget {
   @override

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
-void directAddToCartModal({context}) {
+void buyNowModal({context, data}) {
   showDialog(
     context: context,
     builder: (BuildContext context) => Dialog(
@@ -27,7 +25,7 @@ void directAddToCartModal({context}) {
             child: Column(
               children: [
                 Text(
-                  "알림",
+                  "주의사항",
                   style: GoogleFonts.notoSans(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
@@ -37,7 +35,7 @@ void directAddToCartModal({context}) {
                 Container(
                   margin: EdgeInsets.only(bottom: 24),
                   child: Text(
-                    "장바구니에 추가되었습니다\n장바구니로 이동하시겠습니까?",
+                    "모든 신청이 수락되지는 않으며\n너무 빈번한 구매는 거절 당할 수 있습니다",
                     style: GoogleFonts.notoSans(
                         fontSize: 14, color: Color(0xff444444), height: 1.57),
                     textAlign: TextAlign.center,
@@ -47,10 +45,7 @@ void directAddToCartModal({context}) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Get.back();
-                        Get.toNamed(Routes.userCartUrl);
-                      },
+                      onTap: () => Navigator.of(context).pop(),
                       child: Container(
                         width: (MediaQuery.of(context).size.width / 2) - 40,
                         alignment: Alignment.center,
@@ -60,14 +55,18 @@ void directAddToCartModal({context}) {
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Text(
-                          "장바구니로 이동",
+                          "취소",
                           style: GoogleFonts.notoSans(
                               fontSize: 16, color: Colors.black),
                         ),
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pushNamed(Routes.shopStep1Url,
+                            arguments: data.data["code"]);
+                      },
                       child: Container(
                         width: (MediaQuery.of(context).size.width / 2) - 40,
                         alignment: Alignment.center,
@@ -77,7 +76,7 @@ void directAddToCartModal({context}) {
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Text(
-                          "계속 둘러보기",
+                          "확인했습니다",
                           style: GoogleFonts.notoSans(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

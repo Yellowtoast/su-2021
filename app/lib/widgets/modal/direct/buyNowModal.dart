@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
@@ -47,7 +45,7 @@ void directBuyNowModal({context, data}) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap: () => Navigator.of(context).pop(),
                       child: Container(
                         width: (MediaQuery.of(context).size.width / 2) - 40,
                         alignment: Alignment.center,
@@ -65,8 +63,8 @@ void directBuyNowModal({context, data}) {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.back();
-                        Get.toNamed(Routes.shopStep1Url,
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pushNamed(Routes.shopStep1Url,
                             arguments: data["uniformId"]);
                       },
                       child: Container(

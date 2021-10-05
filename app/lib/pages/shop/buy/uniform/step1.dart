@@ -8,8 +8,8 @@ import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
-import 'package:schooluniform/widgets/header.dart';
 import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
+import 'package:schooluniform/widgets/header/header.dart';
 
 class ShopStep1 extends StatefulWidget {
   @override

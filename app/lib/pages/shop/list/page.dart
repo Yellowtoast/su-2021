@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/widgets/shop/list/types/clothFilterData.dart';
-import 'package:schooluniform/widgets/shop/list/types/pageArg.dart';
+import 'package:schooluniform/types/clothFilterData.dart';
+import 'package:schooluniform/types/pageArg.dart';
+import 'package:schooluniform/widgets/header/header.dart';
+import 'package:schooluniform/widgets/loading/loading.dart';
+
 import 'package:schooluniform/routes/api/networkHandler.dart';
 
 import 'package:schooluniform/configs/theme/color/color.dart';
 
-import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets2/loading/loading.dart';
 import 'package:schooluniform/pages/shop/show/page.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 

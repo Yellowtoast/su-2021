@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/widgets/header.dart';
-import 'package:schooluniform/widgets/ranking/school/listView.dart';
+
+import 'package:schooluniform/widgets/header/header.dart';
+
 import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/widgets/pages/ranking/school/listView.dart';
 
 class RankingSchoolPage extends StatefulWidget {
   @override
