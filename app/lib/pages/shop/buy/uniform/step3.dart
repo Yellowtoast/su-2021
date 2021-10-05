@@ -9,16 +9,15 @@ import 'package:schooluniform/routes/api/info.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/api/user.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/widgets/shop/buy/uniform/alarmModal.dart';
+import 'package:schooluniform/widgets/header/header.dart';
+import 'package:schooluniform/widgets/loading/loading.dart';
+import 'package:schooluniform/widgets/modal/alarmModal.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:schooluniform/routes/api/networkHandler.dart';
 
 import 'package:schooluniform/configs/theme/color/color.dart';
-
-import 'package:schooluniform/widgets/header.dart';
-
-import 'package:schooluniform/widgets2/loading/loading.dart';
 
 class ShopUniformInputData {
   ShopUniformInputData(
