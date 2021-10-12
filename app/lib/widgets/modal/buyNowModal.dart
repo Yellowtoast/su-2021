@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
+import 'package:get/get.dart';
 
 void buyNowModal({context, data}) {
   showDialog(
@@ -45,7 +46,7 @@ void buyNowModal({context, data}) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: () => Get.back(),
                       child: Container(
                         width: (MediaQuery.of(context).size.width / 2) - 40,
                         alignment: Alignment.center,
@@ -63,8 +64,8 @@ void buyNowModal({context, data}) {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pushNamed(Routes.shopStep1Url,
+                        Get.back();
+                        Get.offNamed(Routes.shopStep1Url,
                             arguments: data.data["code"]);
                       },
                       child: Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:get/get.dart';
 
 void directAlarmModal({context}) {
   showDialog(
@@ -43,7 +44,7 @@ void directAlarmModal({context}) {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: () => Get.back(),
                       child: Container(
                         width: MediaQuery.of(context).size.width - 64,
                         alignment: Alignment.center,
