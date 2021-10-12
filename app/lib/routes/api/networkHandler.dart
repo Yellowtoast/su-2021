@@ -13,6 +13,7 @@ class NetworkHandler {
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("x-access-token");
     url = formater(url);
+    print(url);
     try {
       var response = await http.get(
         url,
@@ -30,7 +31,7 @@ class NetworkHandler {
         print(response.body);
       }
     } catch (err) {
-      print('err message');
+      print('err message get');
       print(err);
     }
   }
@@ -51,7 +52,7 @@ class NetworkHandler {
       );
       return jsonDecode(response.body);
     } catch (err) {
-      print('err message');
+      print('err message post');
       print(err);
       return null;
     }
@@ -73,7 +74,7 @@ class NetworkHandler {
       );
       return jsonDecode(response.body);
     } catch (err) {
-      print('err message');
+      print('err message put');
       print(err);
       return null;
     }

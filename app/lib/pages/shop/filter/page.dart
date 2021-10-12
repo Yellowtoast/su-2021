@@ -6,7 +6,6 @@ import 'package:schooluniform/constants/data.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/widgets/pages/shop/filter/listView.dart';
 
 class ShopFilterPage extends StatefulWidget {

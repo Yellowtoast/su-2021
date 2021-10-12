@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>733477305411-aak9vksbnlqn6qr2n250pull4ce7h9rk.apps.googleusercontent.com</string>
+	<string>109102425737-qimi9ad63qc8qnkq8ujvnbofdr0l1ppo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.733477305411-aak9vksbnlqn6qr2n250pull4ce7h9rk</string>
+	<string>com.googleusercontent.apps.109102425737-qimi9ad63qc8qnkq8ujvnbofdr0l1ppo</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDn3rFYj-MH0KMGFQagxUy6o5ff7Hijx-g</string>
+	<string>AIzaSyD-logNXNXvKEM7QBBpmmdUWmI2Or45iT4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>733477305411</string>
+	<string>109102425737</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.daegubukgu.donations</string>
 	<key>PROJECT_ID</key>
-	<string>su-2021</string>
+	<string>su2021</string>
 	<key>STORAGE_BUCKET</key>
-	<string>su-2021.appspot.com</string>
+	<string>su2021.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:733477305411:ios:441c0ae9e597137df128f6</string>
+	<string>1:109102425737:ios:dcc00d7c21a2f90c910858</string>
 </dict>
 </plist>

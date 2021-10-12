@@ -20,11 +20,13 @@ class InitPageState extends State<InitPage> {
     try {
       await Firebase.initializeApp();
       await infoStore.initData();
+      print('pass1');
       setState(() {
         authCheck = true;
       });
 
       FirebaseMessaging messaging = FirebaseMessaging.instance;
+      print('pass2');
 
       await messaging.requestPermission(
         alert: true,
@@ -35,6 +37,7 @@ class InitPageState extends State<InitPage> {
         provisional: false,
         sound: true,
       );
+      print('pass3');
 
       await FirebaseMessaging.instance
           .setForegroundNotificationPresentationOptions(
@@ -43,13 +46,16 @@ class InitPageState extends State<InitPage> {
         sound: true,
       );
 
+      print('pass4');
+
       if (infoStore.localInfo["shouldBeUpdated"]) {
         updateMessageModal(context: context);
+        print('pass5');
       } else {
         Get.offNamed(Routes.homeUrl);
       }
     } catch (err) {
-      print(err);
+      // print(err);
     }
   }
 

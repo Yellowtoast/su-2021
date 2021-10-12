@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "733477305411",
-    "project_id": "su-2021",
-    "storage_bucket": "su-2021.appspot.com"
+    "project_number": "109102425737",
+    "project_id": "su2021",
+    "storage_bucket": "su2021.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:733477305411:android:4726e92751b142b6f128f6",
+        "mobilesdk_app_id": "1:109102425737:android:45f21641788ca20e910858",
         "android_client_info": {
           "package_name": "com.daegubukgu.donations"
         }
       },
       "oauth_client": [
         {
-          "client_id": "733477305411-tnaporaii7tvi3rp9u5157j309hm62ah.apps.googleusercontent.com",
+          "client_id": "109102425737-k419hpqt4m7l25m7rv1p1s6tag6nbe88.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB3nmjUbHzcKpjZvOzCAyNu0klrwfRDyBM"
+          "current_key": "AIzaSyATi5zTVj0nflFvQ3jowmgz1pbLZiTNuYM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "733477305411-tnaporaii7tvi3rp9u5157j309hm62ah.apps.googleusercontent.com",
+              "client_id": "109102425737-k419hpqt4m7l25m7rv1p1s6tag6nbe88.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "733477305411-aak9vksbnlqn6qr2n250pull4ce7h9rk.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.daegubukgu.donations"
-              }
             }
           ]
         }

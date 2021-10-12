@@ -21,6 +21,8 @@ abstract class InfoStoreBase with Store {
   Future<void> initData() async {
     List<Future<dynamic>> futures = [
       NetworkHandler().get(InfoApiRoutes.GET),
+
+      ///api/info/getData
     ];
 
     String fcmToken = await FirebaseMessaging.instance.getToken();

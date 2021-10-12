@@ -20,8 +20,6 @@ import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/pages/home/appbarActionItem.dart';
 import 'package:schooluniform/widgets/pages/home/bannerItem.dart';
 import 'package:schooluniform/widgets/pages/home/countUpItem.dart';
-import 'package:schooluniform/widgets/pages/home/drawerItem.dart';
-import 'package:schooluniform/widgets/pages/home/infoBadge.dart';
 import 'package:schooluniform/widgets/pages/home/sideDrawer.dart';
 import 'package:schooluniform/widgets/pages/home/swipeBannerItem.dart';
 
