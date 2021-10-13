@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,14 +11,12 @@ import 'package:schooluniform/configs/theme/color/color.dart';
 
 import 'package:schooluniform/configs/stores.dart';
 
-import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
-
-class ShopStep2 extends StatefulWidget {
+class OrderStep2 extends StatefulWidget {
   @override
-  ShopStep2State createState() => ShopStep2State();
+  OrderStep2State createState() => OrderStep2State();
 }
 
-class ShopStep2State extends State<ShopStep2> {
+class OrderStep2State extends State<OrderStep2> {
   String deliveryType;
 
   handleDeliveryType(String g) {

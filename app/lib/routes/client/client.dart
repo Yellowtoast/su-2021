@@ -13,11 +13,11 @@ import 'package:schooluniform/pages/home/homePage.dart';
 import 'package:schooluniform/pages/init/initPage.dart';
 import 'package:schooluniform/pages/policy/page.dart';
 import 'package:schooluniform/pages/ranking/school/page.dart';
-import 'package:schooluniform/pages/shop/buy/uniform/step1.dart';
-import 'package:schooluniform/pages/shop/buy/uniform/step2.dart';
-import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
 import 'package:schooluniform/pages/shop/filter/page.dart';
 import 'package:schooluniform/pages/shop/list/page.dart';
+import 'package:schooluniform/pages/shop/order/uniform/step1.dart';
+import 'package:schooluniform/pages/shop/order/uniform/step2.dart';
+import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/pages/shop/show/page.dart';
 import 'package:schooluniform/pages/shop/show/pageDirect.dart';
 import 'package:schooluniform/pages/support/page.dart';
@@ -133,15 +133,15 @@ class Routes {
     ),
     GetPage(
       name: Routes.shopStep1Url,
-      page: () => ShopStep1(),
+      page: () => OrderStep1(),
     ),
     GetPage(
       name: Routes.shopStep2Url,
-      page: () => ShopStep2(),
+      page: () => OrderStep2(),
     ),
     GetPage(
       name: Routes.shopStep3Url,
-      page: () => ShopStep3(),
+      page: () => OrderStep3(),
     ),
     GetPage(
       name: Routes.supportUrl,

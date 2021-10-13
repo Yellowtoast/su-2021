@@ -1,12 +1,10 @@
 import "package:flutter/material.dart";
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/constants/data.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
-import 'package:schooluniform/widgets/header/header.dart';
 
 import 'package:schooluniform/widgets/pages/shop/filter/listView.dart';
+import 'package:schooluniform/widgets/pages/shop/filter/selectionTabview.dart';
 
 class ShopFilterPage extends StatefulWidget {
   @override
@@ -25,61 +23,21 @@ class ShopFilterPageState extends State<ShopFilterPage>
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-        builder: (_) => Scaffold(
-            backgroundColor: Colors.white,
-            appBar: Header(
-              border: false,
-              popButton: true,
-              title: Text(
-                "학교 선택",
-                style: GoogleFonts.notoSans(fontSize: 14, color: Colors.black),
-              ),
-            ),
-            body: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    bottom: BorderSide(
-                      width: 1,
-                      color: grey2,
-                    ),
-                  )),
-                  child: TabBar(
-                    indicatorColor: colorSig1,
-                    labelColor: colorSig1,
-                    labelStyle: GoogleFonts.notoSans(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                    unselectedLabelColor: Color(0x80000000),
-                    unselectedLabelStyle: TextStyle(fontSize: 14),
-                    controller: _tabController,
-                    tabs: <Widget>[
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        child: Text(
-                          "중학교",
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        child: Text(
-                          "고등학교",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      ListViewWidget(data: middleSchools, ref: 'middleSchools'),
-                      ListViewWidget(data: highSchools, ref: 'highSchools'),
-                    ],
-                  ),
-                ),
-              ],
-            )));
+    return SelecttionTabView(
+      tabController: _tabController,
+      appbarText: Text(
+        "학교 선택",
+        style: GoogleFonts.notoSans(fontSize: 14, color: Colors.black),
+      ),
+      tabbarText1: Text(
+        "중학교",
+      ),
+      tabbarText2: Text(
+        "고등학교",
+      ),
+      tabbarViewList1:
+          ListViewWidget(data: middleSchools, ref: 'middleSchools'),
+      tabbarViewList2: ListViewWidget(data: highSchools, ref: 'highSchools'),
+    );
   }
 }

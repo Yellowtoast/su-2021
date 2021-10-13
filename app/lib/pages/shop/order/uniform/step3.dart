@@ -38,12 +38,12 @@ class ShopUniformInputData {
   final String certSchool;
 }
 
-class ShopStep3 extends StatefulWidget {
+class OrderStep3 extends StatefulWidget {
   @override
-  ShopStep3State createState() => ShopStep3State();
+  OrderStep3State createState() => OrderStep3State();
 }
 
-class ShopStep3State extends State<ShopStep3> {
+class OrderStep3State extends State<OrderStep3> {
   bool loading = false;
 
   String name;

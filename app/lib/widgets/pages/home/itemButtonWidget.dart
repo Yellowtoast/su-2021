@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 
-class BannerItemWidget extends StatelessWidget {
+class itemButtonWidget extends StatelessWidget {
   final Color bg;
   final String url;
   final String imageSrc;
   final String label;
   final String secondaryLabel;
-  BannerItemWidget(
+  itemButtonWidget(
       {this.bg, this.url, this.imageSrc, this.label, this.secondaryLabel});
 
   @override

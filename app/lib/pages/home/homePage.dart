@@ -17,11 +17,12 @@ import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 import 'package:schooluniform/widgets/footer/footer.dart';
 import 'package:schooluniform/widgets/header/header.dart';
-import 'package:schooluniform/widgets/pages/home/appbarActionItem.dart';
-import 'package:schooluniform/widgets/pages/home/bannerItem.dart';
-import 'package:schooluniform/widgets/pages/home/countUpItem.dart';
-import 'package:schooluniform/widgets/pages/home/sideDrawer.dart';
-import 'package:schooluniform/widgets/pages/home/swipeBannerItem.dart';
+import 'package:schooluniform/widgets/pages/home/appbarActionsWidget.dart';
+import 'package:schooluniform/widgets/pages/home/itemButtonWidget.dart';
+import 'package:schooluniform/widgets/pages/home/countUpItemWidget.dart';
+import 'package:schooluniform/widgets/pages/home/drawerWidget.dart';
+import 'package:schooluniform/widgets/pages/home/slideBannerWidget.dart';
+import 'package:schooluniform/widgets/pages/home/swipeBannerItemWidget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -146,47 +147,29 @@ class HomePageState extends State<HomePage> {
           children: [
             Container(
               height: 180,
-              child: Stack(
-                children: [
-                  PageView(
-                    controller: bannerController,
-                    onPageChanged: (value) {
-                      setState(() {
-                        bannerPage = value;
-                      });
-                    },
-                    children: [
-                      SwipeBannerItemWidget(
-                          url: Routes.donateStep1Url,
-                          imageSrc: "assets/img/banner1.png"),
-                      SwipeBannerItemWidget(
-                          url: Routes.shopFilterUrl,
-                          imageSrc: "assets/img/banner2.png"),
-                      SwipeBannerItemWidget(
-                          url: Routes.supportUrl,
-                          imageSrc: "assets/img/banner3.png"),
-                      SwipeBannerItemWidget(
-                          url: Routes.donateThingParkingUrl,
-                          imageSrc: "assets/img/banner4.png"),
-                    ],
-                  ),
-                  Positioned(
-                    right: 16,
-                    bottom: 16,
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                          color: Color(0x80000000),
-                          borderRadius: BorderRadius.all(Radius.circular(14))),
-                      child: Text("${bannerPage + 1} / $totalBannerPage",
-                          style: GoogleFonts.montserrat(
-                            fontSize: 12,
-                            color: Colors.white,
-                          )),
-                    ),
-                  )
+              child: SlideBannerWidget(
+                bannerController: bannerController,
+                bannerPage: bannerPage,
+                totalBannerPage: totalBannerPage,
+                bannerItems: [
+                  SwipeBannerItemWidget(
+                      url: Routes.donateStep1Url,
+                      imageSrc: "assets/img/banner1.png"),
+                  SwipeBannerItemWidget(
+                      url: Routes.shopFilterUrl,
+                      imageSrc: "assets/img/banner2.png"),
+                  SwipeBannerItemWidget(
+                      url: Routes.supportUrl,
+                      imageSrc: "assets/img/banner3.png"),
+                  SwipeBannerItemWidget(
+                      url: Routes.donateThingParkingUrl,
+                      imageSrc: "assets/img/banner4.png"),
                 ],
+                onPageChanged: (value) {
+                  setState(() {
+                    bannerPage = value;
+                  });
+                },
               ),
             ),
             Container(
@@ -256,7 +239,7 @@ class HomePageState extends State<HomePage> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
-                          child: BannerItemWidget(
+                          child: itemButtonWidget(
                               bg: grey2,
                               url: Routes.donateStep1Url,
                               imageSrc: "assets/img/bookie-banner-1.png",
@@ -265,7 +248,7 @@ class HomePageState extends State<HomePage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
-                          child: BannerItemWidget(
+                          child: itemButtonWidget(
                               bg: Color(0xffeae1f2),
                               url: Routes.shopFilterUrl,
                               imageSrc: "assets/img/bookie-banner-0.png",
@@ -273,7 +256,7 @@ class HomePageState extends State<HomePage> {
                               secondaryLabel: "기부된 교복을 무료로 나눠드려요"),
                         ),
                         Container(
-                          child: BannerItemWidget(
+                          child: itemButtonWidget(
                               bg: Color(0xffE5DDCB),
                               url: Routes.supportUrl,
                               imageSrc: "assets/img/bookie-banner-2.png",

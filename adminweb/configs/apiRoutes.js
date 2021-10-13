@@ -1,8 +1,8 @@
-const SERVER_PATH = "http://172.30.1.34:3001";
+const SERVER_PATH = "http://172.30.1.5:3001";
 const UPLOAD_PATH = `${SERVER_PATH}/api/uploads`;
 
 const ADMIN_PATH = `${SERVER_PATH}/api/admin`;
-const ADMIN_SIGN_IN = `${ADMIN_PATH}/signin`;
+const ADMIN_SIGN_IN = `${ADMIN_PATH}/signin`;ㄴ
 const ADMIN_VERIFY = `${ADMIN_PATH}/verifyToken`;
 
 const INFO_PATH = `${SERVER_PATH}/api/info`;

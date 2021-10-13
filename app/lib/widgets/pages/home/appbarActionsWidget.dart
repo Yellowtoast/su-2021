@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'infoBadge.dart';
+import 'infoBadgeWidget.dart';
 
 class AppbarIcon extends StatelessWidget {
   const AppbarIcon(

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:schooluniform/constants/size.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/widgets/pages/home/drawerItem.dart';
+import 'package:schooluniform/widgets/pages/home/drawerItemWidget.dart';
 
-import 'infoBadge.dart';
+import 'infoBadgeWidget.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({

@@ -6,17 +6,17 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:schooluniform/configs/theme/color/color.dart';
 import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
-import 'package:schooluniform/pages/shop/buy/uniform/step3.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
-class ShopStep1 extends StatefulWidget {
+class OrderStep1 extends StatefulWidget {
   @override
-  ShopStep1State createState() => ShopStep1State();
+  OrderStep1State createState() => OrderStep1State();
 }
 
-class ShopStep1State extends State<ShopStep1> {
+class OrderStep1State extends State<OrderStep1> {
   var imageFront;
   var imageBack;
   String certName;

@@ -13,7 +13,7 @@ import 'package:schooluniform/routes/api/networkHandler.dart';
 import 'package:schooluniform/configs/theme/color/color.dart';
 
 import 'package:schooluniform/pages/shop/show/page.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/widgets/pages/shop/filter/filteringBox.dart';
 
 class ShopListPage extends StatefulWidget {
   @override
@@ -28,7 +28,7 @@ class ShopListPageState extends State<ShopListPage> {
   List filterClothType = [];
 
   bool loading = true;
-  var list = [];
+  var uniformList = [];
 
   var lastDoc;
 
@@ -65,7 +65,7 @@ class ShopListPageState extends State<ShopListPage> {
 
         setState(() {
           loading = false;
-          list = l;
+          uniformList = l;
           if (_data.length > 0) {
             lastDoc = _data[_data.length - 1];
           }
@@ -73,10 +73,10 @@ class ShopListPageState extends State<ShopListPage> {
       } else {
         setState(() {
           loading = false;
-          list = l;
+          uniformList = l;
         });
       }
-      list = l;
+      uniformList = l;
     } catch (err) {
       print(err);
     }
@@ -307,92 +307,50 @@ class ShopListPageState extends State<ShopListPage> {
                       GestureDetector(
                           onTap: handleGenderFilter,
                           child: filterGender == null
-                              ? Container(
-                                  color: grey2,
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  height: 28,
-                                  alignment: Alignment.center,
-                                  child: Text(
+                              ? UnselectedFilteringBox(
+                                  backgroundColor: grey2,
+                                  text: Text(
                                     "성별 선택",
                                     style: GoogleFonts.notoSans(
                                         fontSize: 12, color: Color(0xff444444)),
                                   ),
                                 )
-                              : Container(
-                                  decoration: BoxDecoration(
-                                    gradient: gradSig,
+                              : SelectedFilteringBox(
+                                  text: Text(
+                                    filterGender,
+                                    style: GoogleFonts.notoSans(
+                                        fontSize: 12, color: Colors.white),
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  height: 28,
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        filterGender,
-                                        style: GoogleFonts.notoSans(
-                                            fontSize: 12, color: Colors.white),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(right: 4),
-                                      ),
-                                      Image(
-                                        width: 12,
-                                        height: 12,
-                                        image: AssetImage(
-                                            "assets/icon/close-white.png"),
-                                      )
-                                    ],
-                                  ))),
+                                )),
                       Container(
                         margin: EdgeInsets.only(right: 16),
                       ),
                       GestureDetector(
                         onTap: handleClothFilter,
                         child: filterSeason == null
-                            ? Container(
-                                color: grey2,
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                height: 28,
-                                alignment: Alignment.center,
-                                child: Text(
+                            ? UnselectedFilteringBox(
+                                backgroundColor: grey2,
+                                text: Text(
                                   "카테고리 선택",
                                   style: GoogleFonts.notoSans(
                                       fontSize: 12, color: Color(0xff444444)),
                                 ),
                               )
-                            : Container(
-                                decoration: BoxDecoration(
-                                  gradient: gradSig,
+                            : SelectedFilteringBox(
+                                text: Text(
+                                  filterClothType.length == 0
+                                      ? "카테고리 선택"
+                                      : "$filterSeason - ${filterClothType.join(",")}",
+                                  style: GoogleFonts.notoSans(
+                                      fontSize: 12, color: Colors.white),
                                 ),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                height: 28,
-                                alignment: Alignment.center,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      filterClothType.length == 0
-                                          ? "카테고리 선택"
-                                          : "$filterSeason - ${filterClothType.join(",")}",
-                                      style: GoogleFonts.notoSans(
-                                          fontSize: 12, color: Colors.white),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(right: 4),
-                                    ),
-                                    Image(
-                                      width: 12,
-                                      height: 12,
-                                      image: AssetImage(
-                                          "assets/icon/close-white.png"),
-                                    )
-                                  ],
-                                )),
+                              ),
                       ),
                     ],
                   ),
                 ),
                 Flexible(
-                  child: list.length == 0
+                  child: uniformList.length == 0
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -420,7 +378,8 @@ class ShopListPageState extends State<ShopListPage> {
                                   2) /
                               ((MediaQuery.of(context).size.width / 2) + 116),
                           children: [
-                              for (var d in list) card(d),
+                              for (var uniformData in uniformList)
+                                card(uniformData),
                             ]),
                 )
 
