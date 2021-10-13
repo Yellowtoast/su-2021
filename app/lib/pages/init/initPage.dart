@@ -55,7 +55,7 @@ class InitPageState extends State<InitPage> {
         Get.offNamed(Routes.homeUrl);
       }
     } catch (err) {
-      // print(err);
+      print(err);
     }
   }
 
