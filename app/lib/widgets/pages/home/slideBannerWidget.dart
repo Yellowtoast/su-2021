@@ -33,7 +33,7 @@ class SlideBannerWidget extends StatelessWidget {
             padding: slideBannerIndexBoxPadding,
             decoration: slideBannerIndexBoxStyle,
             child: Text("${bannerPage + 1} / $totalBannerPage",
-                style: slideBannerIndexTextStyle),
+                style: HomeTextStyle.slideBannerIndexStyle),
           ),
         )
       ],

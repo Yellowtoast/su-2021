@@ -7,12 +7,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import "dart:async";
 import "dart:core";
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'package:schooluniform/routes/client/client.dart';
-
 import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/configs/stores.dart';
-
 import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 import 'package:schooluniform/widgets/footer/footer.dart';
@@ -241,7 +238,7 @@ class HomePageState extends State<HomePage> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
-                          child: bannerButtonWidget(
+                          child: BannerButtonWidget(
                               bg: grey2,
                               url: Routes.donateStep1Url,
                               imageSrc: "assets/img/bookie-banner-1.png",
@@ -250,7 +247,7 @@ class HomePageState extends State<HomePage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
-                          child: bannerButtonWidget(
+                          child: BannerButtonWidget(
                               bg: Color(0xffeae1f2),
                               url: Routes.shopFilterUrl,
                               imageSrc: "assets/img/bookie-banner-0.png",
@@ -258,7 +255,7 @@ class HomePageState extends State<HomePage> {
                               secondaryLabel: "기부된 교복을 무료로 나눠드려요"),
                         ),
                         Container(
-                          child: bannerButtonWidget(
+                          child: BannerButtonWidget(
                               bg: Color(0xffE5DDCB),
                               url: Routes.supportUrl,
                               imageSrc: "assets/img/bookie-banner-2.png",

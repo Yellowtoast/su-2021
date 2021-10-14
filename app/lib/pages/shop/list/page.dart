@@ -113,11 +113,12 @@ class ShopListPageState extends State<ShopListPage> {
       request();
     } else {
       var res = await Get.toNamed(Routes.shopListClothFilterUrl);
-      ShopListClothFilterData d = res;
-      if (d.clothType != null && d.clothType.length != 0) {
+      ShopListClothFilterData filteredClothesData = res;
+      if (filteredClothesData.clothType != null &&
+          filteredClothesData.clothType.length != 0) {
         setState(() {
-          filterSeason = d.season;
-          filterClothType = d.clothType;
+          filterSeason = filteredClothesData.season;
+          filterClothType = filteredClothesData.clothType;
           loading = true;
         });
         request();

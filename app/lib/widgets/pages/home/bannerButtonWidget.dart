@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/configs/home_style.dart';
 
-class bannerButtonWidget extends StatelessWidget {
+class BannerButtonWidget extends StatelessWidget {
   final Color bg;
   final String url;
   final String imageSrc;
   final String label;
   final String secondaryLabel;
-  bannerButtonWidget(
+  BannerButtonWidget(
       {this.bg, this.url, this.imageSrc, this.label, this.secondaryLabel});
 
   @override
