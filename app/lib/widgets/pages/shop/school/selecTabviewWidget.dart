@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/shop_school_style.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
 class SelectionTabView extends StatelessWidget {
@@ -42,18 +43,13 @@ class SelectionTabView extends StatelessWidget {
                   child: TabBar(
                     indicatorColor: colorSig1,
                     labelColor: colorSig1,
-                    labelStyle: GoogleFonts.notoSans(
-                        fontSize: 14, fontWeight: FontWeight.bold),
+                    labelStyle: tabBarLabelStyle,
                     unselectedLabelColor: Color(0x80000000),
-                    unselectedLabelStyle: TextStyle(fontSize: 14),
+                    unselectedLabelStyle: unselectedTabBarLabelStyle,
                     controller: _tabController,
                     tabs: <Widget>[
-                      Container(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: tabbarText1),
-                      Container(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: tabbarText2),
+                      Container(padding: tabBarPadding, child: tabbarText1),
+                      Container(padding: tabBarPadding, child: tabbarText2),
                     ],
                   ),
                 ),

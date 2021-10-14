@@ -33,3 +33,11 @@ const EdgeInsetsGeometry numberBadgePadding =
     EdgeInsets.symmetric(vertical: 4, horizontal: 8);
 
 const EdgeInsetsGeometry numberBadgeMargin = EdgeInsets.only(top: 2);
+
+//SelectTabView
+
+EdgeInsetsGeometry tabBarPadding = EdgeInsets.symmetric(vertical: 16);
+TextStyle tabBarLabelStyle =
+    GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold);
+
+TextStyle unselectedTabBarLabelStyle = TextStyle(fontSize: 14);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/configs/theme/decoration/textDeco.dart';
+import 'package:schooluniform/configs/textDeco.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
