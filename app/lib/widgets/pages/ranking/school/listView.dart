@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/utils/getRankingSchool.dart';
 
 class RankingSchoolListViewWidget extends StatelessWidget {

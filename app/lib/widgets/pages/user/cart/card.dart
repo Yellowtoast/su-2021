@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
 Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {

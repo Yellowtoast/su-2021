@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schooluniform/constants/size.dart';
+import 'package:schooluniform/configs/home_style.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/widgets/pages/home/drawerItemWidget.dart';
 
@@ -17,40 +17,40 @@ class SideDrawer extends StatelessWidget {
       width: sideDrawerWidth,
       child: Drawer(
         child: ListView(
-          padding: EdgeInsets.only(top: 48),
+          padding: sideDrawerListPadding,
           children: [
             Container(
               alignment: Alignment.centerRight,
-              padding: EdgeInsets.only(right: 16),
-              margin: EdgeInsets.only(bottom: 24),
+              padding: sideDrawerPadding,
+              margin: sideDrawerMargin,
               child: GestureDetector(
                   onTap: () => Get.back(),
                   child: Container(
                     width: 32,
                     height: 32,
-                    padding: EdgeInsets.all(6),
+                    padding: sideDrawerIconBoxPadding,
                     child: Image(
                         image: AssetImage("assets/icon/close.png"),
-                        width: 20,
-                        height: 20),
+                        width: sideDrawerIconImgWidth,
+                        height: sideDrawerIconImgHeight),
                   )),
             ),
             DrawerItemWidget(
                 label: '장바구니',
                 url: Routes.userCartUrl,
-                infoBadge: InfoBadge(
+                infoBadgeItem: InfoBadge(
                   userInfoKey: "uniformCart",
                 )),
             DrawerItemWidget(
                 label: '교복 구매 내역',
                 url: Routes.userPurchaseUniformUrl,
-                infoBadge: InfoBadge(
+                infoBadgeItem: InfoBadge(
                   userInfoKey: "uniformShop",
                 )),
             DrawerItemWidget(
               label: '교복 기부 내역',
               url: Routes.userDonateUniformUrl,
-              infoBadge: InfoBadge(
+              infoBadgeItem: InfoBadge(
                 userInfoKey: "uniformDonate",
               ),
             ),

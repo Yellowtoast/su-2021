@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 
 showModal({context, label1, onClickForLabel1, label2, onClickForLabel2}) {
   showModalBottomSheet(

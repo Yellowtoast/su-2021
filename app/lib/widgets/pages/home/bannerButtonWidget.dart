@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/home_style.dart';
 
-class itemButtonWidget extends StatelessWidget {
+class bannerButtonWidget extends StatelessWidget {
   final Color bg;
   final String url;
   final String imageSrc;
   final String label;
   final String secondaryLabel;
-  itemButtonWidget(
+  bannerButtonWidget(
       {this.bg, this.url, this.imageSrc, this.label, this.secondaryLabel});
 
   @override
@@ -17,48 +18,41 @@ class itemButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.toNamed(url),
       child: Container(
-        height: 80,
+        height: bannerButtonHeight,
         decoration: BoxDecoration(
           color: bg,
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderRadius: bannerButtonRadius,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.only(left: 24),
+              padding: bannerButtonPadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 8),
+                    margin: bannerButtonTextPadding,
                     child: Text(
                       label,
-                      style: GoogleFonts.notoSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: textHeading1,
-                          height: 1),
+                      style: bannerButtonLabelStyle,
                     ),
                   ),
                   Text(
                     secondaryLabel,
-                    style: GoogleFonts.notoSans(
-                        fontSize: 10, color: textContent1, height: 1),
+                    style: bannerButtonSecondaryLabelStyle,
                   ),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.only(right: 8),
-              width: 64,
-              height: 64,
+              margin: bannerButtonIconMagin,
+              width: bannerButtonIconWidth,
+              height: bannerButtonIconHight,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(8),
-                    topRight: Radius.circular((8))),
+                borderRadius: bannerButtonIconRadius,
                 image: DecorationImage(
                   image: AssetImage(imageSrc),
                 ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
-class SelecttionTabView extends StatelessWidget {
-  const SelecttionTabView(
+class SelectionTabView extends StatelessWidget {
+  const SelectionTabView(
       {Key key,
       @required TabController tabController,
       this.appbarText,

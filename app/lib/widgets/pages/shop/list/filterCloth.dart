@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/types/clothFilterData.dart';
 import 'package:schooluniform/widgets/header/header2.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 
 class ShopListClothFilter extends StatefulWidget {
   @override

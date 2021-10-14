@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 
 class Header2 extends StatelessWidget implements PreferredSizeWidget {
   Header2({

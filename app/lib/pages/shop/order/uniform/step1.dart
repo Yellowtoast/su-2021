@@ -3,9 +3,10 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:schooluniform/configs/boxDeco.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
-import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/configs/color.dart';
+
 import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/routes/client/client.dart';
 

@@ -10,10 +10,10 @@ import 'package:schooluniform/widgets/loading/loading.dart';
 
 import 'package:schooluniform/routes/api/networkHandler.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 
 import 'package:schooluniform/pages/shop/show/page.dart';
-import 'package:schooluniform/widgets/pages/shop/filter/filteringBox.dart';
+import 'package:schooluniform/widgets/pages/shop/school/filteringBoxWidget.dart';
 
 class ShopListPage extends StatefulWidget {
   @override
@@ -307,7 +307,7 @@ class ShopListPageState extends State<ShopListPage> {
                       GestureDetector(
                           onTap: handleGenderFilter,
                           child: filterGender == null
-                              ? UnselectedFilteringBox(
+                              ? UnselectedFilterBox(
                                   backgroundColor: grey2,
                                   text: Text(
                                     "성별 선택",
@@ -315,7 +315,7 @@ class ShopListPageState extends State<ShopListPage> {
                                         fontSize: 12, color: Color(0xff444444)),
                                   ),
                                 )
-                              : SelectedFilteringBox(
+                              : SelectedFilterBox(
                                   text: Text(
                                     filterGender,
                                     style: GoogleFonts.notoSans(
@@ -328,7 +328,7 @@ class ShopListPageState extends State<ShopListPage> {
                       GestureDetector(
                         onTap: handleClothFilter,
                         child: filterSeason == null
-                            ? UnselectedFilteringBox(
+                            ? UnselectedFilterBox(
                                 backgroundColor: grey2,
                                 text: Text(
                                   "카테고리 선택",
@@ -336,7 +336,7 @@ class ShopListPageState extends State<ShopListPage> {
                                       fontSize: 12, color: Color(0xff444444)),
                                 ),
                               )
-                            : SelectedFilteringBox(
+                            : SelectedFilterBox(
                                 text: Text(
                                   filterClothType.length == 0
                                       ? "카테고리 선택"

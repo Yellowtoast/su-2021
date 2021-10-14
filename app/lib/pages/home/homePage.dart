@@ -10,7 +10,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:schooluniform/routes/client/client.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/configs/stores.dart';
 
 import 'package:schooluniform/utils/getMostDonateSchool.dart';
@@ -18,7 +18,7 @@ import 'package:schooluniform/utils/time/getCurrent.dart';
 import 'package:schooluniform/widgets/footer/footer.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/pages/home/appbarActionsWidget.dart';
-import 'package:schooluniform/widgets/pages/home/itemButtonWidget.dart';
+import 'package:schooluniform/widgets/pages/home/bannerButtonWidget.dart';
 import 'package:schooluniform/widgets/pages/home/countUpItemWidget.dart';
 import 'package:schooluniform/widgets/pages/home/drawerWidget.dart';
 import 'package:schooluniform/widgets/pages/home/slideBannerWidget.dart';
@@ -130,15 +130,17 @@ class HomePageState extends State<HomePage> {
         actions: [
           //홈화면 앱바 맨 오른쪽 유저 아이콘 생성
           AppbarIcon(
-              onPress: () {
-                _drawerKey.currentState.openEndDrawer();
-              },
-              drawerKey: _drawerKey,
-              icon: Image(
-                image: AssetImage("assets/icon/user.png"),
-                width: 32,
-                height: 32,
-              ))
+            onPress: () {
+              _drawerKey.currentState.openEndDrawer();
+            },
+            drawerKey: _drawerKey,
+            icon: Image(
+              image: AssetImage("assets/icon/user.png"),
+              width: 32,
+              height: 32,
+            ),
+            userInfoKey: "total",
+          )
         ],
       ),
       endDrawer: SideDrawer(),
@@ -239,7 +241,7 @@ class HomePageState extends State<HomePage> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
-                          child: itemButtonWidget(
+                          child: bannerButtonWidget(
                               bg: grey2,
                               url: Routes.donateStep1Url,
                               imageSrc: "assets/img/bookie-banner-1.png",
@@ -248,7 +250,7 @@ class HomePageState extends State<HomePage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
-                          child: itemButtonWidget(
+                          child: bannerButtonWidget(
                               bg: Color(0xffeae1f2),
                               url: Routes.shopFilterUrl,
                               imageSrc: "assets/img/bookie-banner-0.png",
@@ -256,7 +258,7 @@ class HomePageState extends State<HomePage> {
                               secondaryLabel: "기부된 교복을 무료로 나눠드려요"),
                         ),
                         Container(
-                          child: itemButtonWidget(
+                          child: bannerButtonWidget(
                               bg: Color(0xffE5DDCB),
                               url: Routes.supportUrl,
                               imageSrc: "assets/img/bookie-banner-2.png",

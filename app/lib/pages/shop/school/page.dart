@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/constants/data.dart';
 
-import 'package:schooluniform/widgets/pages/shop/filter/listView.dart';
-import 'package:schooluniform/widgets/pages/shop/filter/selectionTabview.dart';
+import 'package:schooluniform/widgets/pages/shop/school/listViewWidget.dart';
+import 'package:schooluniform/widgets/pages/shop/school/selecTabviewWidget.dart';
 
 class ShopFilterPage extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class ShopFilterPageState extends State<ShopFilterPage>
 
   @override
   Widget build(BuildContext context) {
-    return SelecttionTabView(
+    return SelectionTabView(
       tabController: _tabController,
       appbarText: Text(
         "학교 선택",

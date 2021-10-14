@@ -1,13 +1,14 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/configs/boxDeco.dart';
+
 import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 
 import 'package:schooluniform/configs/stores.dart';
 

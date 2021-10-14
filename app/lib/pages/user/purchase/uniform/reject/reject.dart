@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/widgets/header/header2.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
 

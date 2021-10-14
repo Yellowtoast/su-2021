@@ -13,7 +13,7 @@ import 'package:schooluniform/pages/home/homePage.dart';
 import 'package:schooluniform/pages/init/initPage.dart';
 import 'package:schooluniform/pages/policy/page.dart';
 import 'package:schooluniform/pages/ranking/school/page.dart';
-import 'package:schooluniform/pages/shop/filter/page.dart';
+import 'package:schooluniform/pages/shop/school/page.dart';
 import 'package:schooluniform/pages/shop/list/page.dart';
 import 'package:schooluniform/pages/shop/order/uniform/step1.dart';
 import 'package:schooluniform/pages/shop/order/uniform/step2.dart';

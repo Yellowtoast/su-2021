@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
 
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 
 class ShopUniformShowArg {
   ShopUniformShowArg({

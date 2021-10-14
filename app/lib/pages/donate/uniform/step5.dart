@@ -5,8 +5,8 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
-import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/configs/boxDeco.dart';
+import 'package:schooluniform/configs/color.dart';
 
 import 'package:schooluniform/routes/api/info.dart';
 import 'package:schooluniform/routes/api/uniform.dart';

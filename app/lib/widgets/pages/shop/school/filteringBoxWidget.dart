@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/shop_school_style.dart';
 
-class SelectedFilteringBox extends StatelessWidget {
-  const SelectedFilteringBox({
+class SelectedFilterBox extends StatelessWidget {
+  const SelectedFilterBox({
     Key key,
     @required this.text,
   }) : super(key: key);
@@ -15,18 +16,18 @@ class SelectedFilteringBox extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: gradSig,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        height: 28,
+        padding: filterBoxPadding,
+        height: filterBoxHeight,
         alignment: Alignment.center,
         child: Row(
           children: [
             text,
-            Container(
-              margin: EdgeInsets.only(right: 4),
+            SizedBox(
+              width: 4,
             ),
             Image(
-              width: 12,
-              height: 12,
+              width: filterBoxIconWidth,
+              height: filterBoxIconHeight,
               image: AssetImage("assets/icon/close-white.png"),
             )
           ],
@@ -34,8 +35,8 @@ class SelectedFilteringBox extends StatelessWidget {
   }
 }
 
-class UnselectedFilteringBox extends StatelessWidget {
-  const UnselectedFilteringBox({
+class UnselectedFilterBox extends StatelessWidget {
+  const UnselectedFilterBox({
     Key key,
     this.backgroundColor,
     this.text,
@@ -48,8 +49,8 @@ class UnselectedFilteringBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         color: backgroundColor,
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        height: 28,
+        padding: filterBoxPadding,
+        height: filterBoxHeight,
         alignment: Alignment.center,
         child: text);
   }

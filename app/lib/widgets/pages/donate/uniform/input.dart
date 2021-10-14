@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
-import 'package:schooluniform/configs/theme/decoration/boxDeco.dart';
+import 'package:schooluniform/configs/boxDeco.dart';
+import 'package:schooluniform/configs/color.dart';
 
 class InputWidget extends StatelessWidget {
   final String label;

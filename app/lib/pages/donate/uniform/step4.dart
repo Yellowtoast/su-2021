@@ -11,7 +11,7 @@ import 'package:schooluniform/widgets/pages/donate/uniform/selectDeliveryType.da
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 
 class DonateStep4 extends StatefulWidget {
   @override

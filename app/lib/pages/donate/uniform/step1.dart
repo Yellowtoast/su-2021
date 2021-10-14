@@ -2,12 +2,12 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/types/donateInfo.dart';
 import 'package:schooluniform/types/donateState1_4Data.dart';
 import 'package:schooluniform/types/uniform.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
 class DonateStep1 extends StatefulWidget {

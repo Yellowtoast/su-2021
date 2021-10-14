@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/widgets/header/header.dart';
 
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/widgets/pages/ranking/school/listView.dart';
 
 class RankingSchoolPage extends StatefulWidget {

@@ -1,8 +1,7 @@
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/theme/color/color.dart';
+import 'package:schooluniform/configs/home_style.dart';
 
 class CountUpItemWidget extends StatelessWidget {
   final String url;
@@ -18,7 +17,7 @@ class CountUpItemWidget extends StatelessWidget {
       flex: 1,
       fit: FlexFit.tight,
       child: Container(
-          height: 76,
+          height: countUpItemHeight,
           child: GestureDetector(
               onTap: () => Get.toNamed(url),
               child: Container(
@@ -27,34 +26,22 @@ class CountUpItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(bottom: 8),
-                      child: Text(
-                        label,
-                        style: GoogleFonts.notoSans(
-                            fontSize: 12, color: textGrey2, height: 1.17),
-                      ),
+                      margin: countUpItemMargin,
+                      child: Text(label, style: countUpItemLabelStyle1),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(condition == '' ? '' : condition,
-                            style: GoogleFonts.notoSans(
-                                fontSize: 12,
-                                color: textGrey2,
-                                fontWeight: FontWeight.bold)),
+                            style: countUpItemConditionLabelStyle),
                         Countup(
                           begin: 0,
                           end: secondaryLabel,
-                          duration: Duration(seconds: 2),
+                          duration: countUpDuration,
                           separator: ",",
-                          style: GoogleFonts.montserrat(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: textGrey2),
+                          style: countUpItemNumberStyle,
                         ),
-                        Text(" 회",
-                            style: GoogleFonts.notoSans(
-                                fontSize: 12, color: textGrey2)),
+                        Text(" 회", style: countUpItemLabelStyle2),
                       ],
                     ),
                   ],

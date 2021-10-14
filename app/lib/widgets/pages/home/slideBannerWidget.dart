@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/home_style.dart';
 
 class SlideBannerWidget extends StatelessWidget {
   const SlideBannerWidget(
@@ -30,15 +30,10 @@ class SlideBannerWidget extends StatelessWidget {
           right: 16,
           bottom: 16,
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-                color: Color(0x80000000),
-                borderRadius: BorderRadius.all(Radius.circular(14))),
+            padding: slideBannerIndexBoxPadding,
+            decoration: slideBannerIndexBoxStyle,
             child: Text("${bannerPage + 1} / $totalBannerPage",
-                style: GoogleFonts.montserrat(
-                  fontSize: 12,
-                  color: Colors.white,
-                )),
+                style: slideBannerIndexTextStyle),
           ),
         )
       ],
