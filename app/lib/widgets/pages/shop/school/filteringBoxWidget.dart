@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/shop_school_style.dart';
+import 'package:schooluniform/configs/style/shopStyle.dart';
 
 class SelectedFilterBox extends StatelessWidget {
   const SelectedFilterBox({
@@ -16,8 +16,8 @@ class SelectedFilterBox extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: gradSig,
         ),
-        padding: filterBoxPadding,
-        height: filterBoxHeight,
+        padding: ShopEdgeInsets.filterBoxPadding,
+        height: ShopWidgetSize.filterBoxHeight,
         alignment: Alignment.center,
         child: Row(
           children: [
@@ -26,8 +26,8 @@ class SelectedFilterBox extends StatelessWidget {
               width: 4,
             ),
             Image(
-              width: filterBoxIconWidth,
-              height: filterBoxIconHeight,
+              width: ShopWidgetSize.filterBoxIconWidth,
+              height: ShopWidgetSize.filterBoxIconHeight,
               image: AssetImage("assets/icon/close-white.png"),
             )
           ],
@@ -49,8 +49,8 @@ class UnselectedFilterBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         color: backgroundColor,
-        padding: filterBoxPadding,
-        height: filterBoxHeight,
+        padding: ShopEdgeInsets.filterBoxPadding,
+        height: ShopWidgetSize.filterBoxHeight,
         alignment: Alignment.center,
         child: text);
   }

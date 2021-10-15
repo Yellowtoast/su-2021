@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schooluniform/configs/shop_school_style.dart';
+import 'package:schooluniform/configs/style/shopStyle.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
 import 'package:schooluniform/configs/stores.dart';
@@ -27,19 +27,19 @@ class ListViewWidget extends StatelessWidget {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      height: listViewHeight,
+                      height: ShopWidgetSize.listViewHeight,
                       color: Colors.transparent,
-                      padding: listViewPadding,
+                      padding: ShopEdgeInsets.listViewPadding,
                       child: Text(
                         school,
-                        style: listViewTextStyle,
+                        style: ShopTextStyle.listViewTextStyle,
                       ),
                     ),
                     ListViewBadge(
                       text: Text(
                           infoStore.localInfo[ref][school]["totalStock"]
                               .toString(),
-                          style: numberBadgeTextStyle),
+                          style: ShopTextStyle.numberBadgeTextStyle),
                     ),
                   ],
                 ),
@@ -58,10 +58,10 @@ class ListViewBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.centerLeft,
-        padding: numberBadgePadding,
-        decoration: numberBadgeBoxStyle,
+        padding: ShopEdgeInsets.numberBadgePadding,
+        decoration: ShopBoxDecoration.numberBadgeBoxStyle,
         child: Container(
-          margin: numberBadgeMargin,
+          margin: ShopEdgeInsets.numberBadgeMargin,
           child: text,
         ));
   }

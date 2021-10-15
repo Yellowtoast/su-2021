@@ -1,38 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schooluniform/configs/home_style.dart';
+import 'package:schooluniform/configs/style/homeStyle.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/widgets/pages/home/drawerItemWidget.dart';
 
 import 'infoBadgeWidget.dart';
 
 class SideDrawer extends StatelessWidget {
-  const SideDrawer({
-    Key key,
-  }) : super(key: key);
+  const SideDrawer({Key key, this.drawerItems}) : super(key: key);
 
+  final List<Widget> drawerItems;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: sideDrawerWidth,
+      width: HomeWidgetSize.sideDrawerWidth,
       child: Drawer(
         child: ListView(
-          padding: sideDrawerListPadding,
+          padding: HomeEdgeInsets.sideDrawerListPadding,
           children: [
             Container(
               alignment: Alignment.centerRight,
-              padding: sideDrawerPadding,
-              margin: sideDrawerMargin,
+              padding: HomeEdgeInsets.sideDrawerPadding,
+              margin: HomeEdgeInsets.sideDrawerMargin,
               child: GestureDetector(
                   onTap: () => Get.back(),
                   child: Container(
                     width: 32,
                     height: 32,
-                    padding: sideDrawerIconBoxPadding,
+                    padding: HomeEdgeInsets.sideDrawerIconBoxPadding,
                     child: Image(
                         image: AssetImage("assets/icon/close.png"),
-                        width: sideDrawerIconImgWidth,
-                        height: sideDrawerIconImgHeight),
+                        width: HomeWidgetSize.sideDrawerIconImgWidth,
+                        height: HomeWidgetSize.sideDrawerIconImgHeight),
                   )),
             ),
             DrawerItemWidget(

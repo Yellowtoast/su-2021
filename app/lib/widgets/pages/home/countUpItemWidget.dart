@@ -1,7 +1,7 @@
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schooluniform/configs/home_style.dart';
+import 'package:schooluniform/configs/style/homeStyle.dart';
 
 class CountUpItemWidget extends StatelessWidget {
   final String url;
@@ -17,7 +17,7 @@ class CountUpItemWidget extends StatelessWidget {
       flex: 1,
       fit: FlexFit.tight,
       child: Container(
-          height: countUpItemHeight,
+          height: HomeWidgetSize.countUpItemHeight,
           child: GestureDetector(
               onTap: () => Get.toNamed(url),
               child: Container(
@@ -26,22 +26,24 @@ class CountUpItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: countUpItemMargin,
-                      child: Text(label, style: countUpItemLabelStyle1),
+                      margin: HomeEdgeInsets.countUpItemMargin,
+                      child: Text(label,
+                          style: HomeTextStyle.countUpItemLabelStyle1),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(condition == '' ? '' : condition,
-                            style: countUpItemConditionLabelStyle),
+                            style:
+                                HomeTextStyle.countUpItemConditionLabelStyle),
                         Countup(
                           begin: 0,
                           end: secondaryLabel,
                           duration: countUpDuration,
                           separator: ",",
-                          style: countUpItemNumberStyle,
+                          style: HomeTextStyle.countUpItemNumberStyle,
                         ),
-                        Text(" 회", style: countUpItemLabelStyle2),
+                        Text(" 회", style: HomeTextStyle.countUpItemLabelStyle2),
                       ],
                     ),
                   ],

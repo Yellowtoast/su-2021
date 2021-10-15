@@ -22,6 +22,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
     });
   }
 
+//옷 타입을 선택할때마다 쿼리 스트링에 추가되거나 삭제된다.
   void toggleClothType(v) {
     if (clothType.indexOf(v) == -1)
       setState(() {

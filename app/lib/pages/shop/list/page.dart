@@ -13,6 +13,7 @@ import 'package:schooluniform/routes/api/networkHandler.dart';
 import 'package:schooluniform/configs/color.dart';
 
 import 'package:schooluniform/pages/shop/show/page.dart';
+import 'package:schooluniform/widgets/pages/shop/list/productCard.dart';
 import 'package:schooluniform/widgets/pages/shop/school/filteringBoxWidget.dart';
 
 class ShopListPage extends StatefulWidget {
@@ -34,9 +35,11 @@ class ShopListPageState extends State<ShopListPage> {
 
   bool infiniteScrollRunnig = false;
 
-  void request() async {
+  void requestData() async {
     try {
+      //schoolName을 리턴값으로 받는다
       ShopListPageArg arg = ModalRoute.of(context).settings.arguments;
+
       var gender = '';
       var season = '';
       if (filterGender != null && filterGender != '') {
@@ -47,6 +50,8 @@ class ShopListPageState extends State<ShopListPage> {
       }
 
       print(filterClothType);
+
+      //특정 학교 > 교복보유중 > 옷 타입(리스트) + 젠더 + 시즌(동복/하복 ...)으로 api요청을 보냄
       List<Future<dynamic>> futures = [
         NetworkHandler().get(
             '${UniformApiRoutes.LIST}?school=${arg.schoolName}&status=교복보유중&clothType=${filterClothType.toString()}' +
@@ -54,6 +59,7 @@ class ShopListPageState extends State<ShopListPage> {
                 season),
       ];
 
+      //api 응답 기다림. 아마도 리스트 형태의 데이터가 날라오는듯?
       var res = await Future.wait(futures);
       List l = [];
       var _data;
@@ -84,21 +90,26 @@ class ShopListPageState extends State<ShopListPage> {
 
   void handleGenderFilter() async {
     if (filterGender != null) {
+      //성별 필터가 설정되었을 경우
       setState(() {
         filterGender = null;
         loading = true;
       });
-      request();
+      requestData();
     } else {
-      var res = await Get.toNamed(Routes.shopListGenderFilterUrl);
-      if (res != null) {
+      //성별 핉터가 설정되지 않았을 경우
+      //성별 필터를 고를 수 있는 페이지를 띄운다
+      var genderChoosen = await Get.toNamed(
+          Routes.shopListGenderFilterUrl); //선택한 젠더를 스트링 형태로 날려준다.
+      if (genderChoosen != null) {
+        //사용자가 성별 필터를 선택했다면
         setState(() {
-          filterGender = res;
+          filterGender = genderChoosen;
           filterSeason = null;
           filterClothType = [];
           loading = true;
         });
-        request();
+        requestData();
       }
     }
   }
@@ -110,10 +121,13 @@ class ShopListPageState extends State<ShopListPage> {
         filterClothType = [];
         loading = true;
       });
-      request();
+      requestData();
     } else {
-      var res = await Get.toNamed(Routes.shopListClothFilterUrl);
-      ShopListClothFilterData filteredClothesData = res;
+      var clothesTypeChoosen = await Get.toNamed(Routes.shopListClothFilterUrl);
+      ShopListClothFilterData filteredClothesData = clothesTypeChoosen;
+      //ShopListClothFilterData 클래스는 두가지의 리턴값을 받아온다.
+      //String season;
+      //List clothType;
       if (filteredClothesData.clothType != null &&
           filteredClothesData.clothType.length != 0) {
         setState(() {
@@ -121,7 +135,7 @@ class ShopListPageState extends State<ShopListPage> {
           filterClothType = filteredClothesData.clothType;
           loading = true;
         });
-        request();
+        requestData();
       }
     }
   }
@@ -177,7 +191,7 @@ class ShopListPageState extends State<ShopListPage> {
     super.initState();
 
     Future.delayed(Duration(microseconds: 100), () {
-      request();
+      requestData();
     });
 
     controller..addListener(scrollListener);
@@ -187,100 +201,6 @@ class ShopListPageState extends State<ShopListPage> {
   void dispose() {
     controller.removeListener(scrollListener);
     super.dispose();
-  }
-
-  Widget card(data) {
-    String title = "${data["filter-gender"]} / ${data["filter-season"]} - ";
-    List clothes = [];
-    for (var uniform in data["uniforms"]) {
-      title += "${uniform["clothType"]} (사이즈: ${uniform["size"]}), ";
-    }
-
-    if (data["filter-clothType"].indexOf("자켓") != -1) clothes.add("jacket");
-    if (data["filter-clothType"].indexOf("셔츠") != -1)
-      clothes.add("shirts-long");
-    if (data["filter-clothType"].indexOf("상의") != -1)
-      clothes.add(data["filter-season"] == "체육복" ? "jersey" : "shirts-short");
-    if (data["filter-clothType"].indexOf("바지") != -1) clothes.add("pants");
-    if (data["filter-clothType"].indexOf("하의") != -1) clothes.add("pants");
-    if (data["filter-clothType"].indexOf("치마") != -1) clothes.add("skirts");
-    if (data["filter-clothType"].indexOf("넥타이") != -1) clothes.add("necktie");
-    if (data["filter-clothType"].indexOf("조끼") != -1) clothes.add("vest");
-
-    if (clothes.length > 4) {
-      clothes.removeRange(4, clothes.length);
-      clothes.add("plus-extra");
-    }
-
-    return GestureDetector(
-      onTap: () => Get.toNamed(Routes.shopShowUrl,
-          arguments: ShopUniformShowArg(data: data)),
-      child: Column(
-        children: [
-          Container(
-            width: (MediaQuery.of(context).size.width / 2),
-            height: (MediaQuery.of(context).size.width / 2),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkHandler().getImage(data["images"][0]),
-                    fit: BoxFit.cover)),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 12, bottom: 12),
-                width: (MediaQuery.of(context).size.width / 2) - 24,
-                child: Text(
-                  title,
-                  style: GoogleFonts.notoSans(
-                      fontSize: 14, height: 1.57, color: Color(0xff444444)),
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (var t in clothes)
-                    t != "plus-extra"
-                        ? Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(horizontal: 3),
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: grey2,
-                            ),
-                            child: Image(
-                              image: AssetImage("assets/icon/$t-grey.png"),
-                            ),
-                          )
-                        : Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(horizontal: 3),
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image(
-                              image: AssetImage(
-                                "assets/icon/$t-grey.png",
-                              ),
-                              width: 8,
-                              height: 8,
-                            ),
-                          )
-                ],
-              ),
-            ],
-          )
-        ],
-      ),
-    );
   }
 
   @override
@@ -307,7 +227,7 @@ class ShopListPageState extends State<ShopListPage> {
                     children: [
                       GestureDetector(
                           onTap: handleGenderFilter,
-                          child: filterGender == null
+                          child: filterGender == null //성별 필터가 설정되지 않았을 경우
                               ? UnselectedFilterBox(
                                   backgroundColor: grey2,
                                   text: Text(
@@ -328,7 +248,7 @@ class ShopListPageState extends State<ShopListPage> {
                       ),
                       GestureDetector(
                         onTap: handleClothFilter,
-                        child: filterSeason == null
+                        child: filterSeason == null //카테고리 필터가 설정되지 않았을 경우,
                             ? UnselectedFilterBox(
                                 backgroundColor: grey2,
                                 text: Text(
@@ -352,23 +272,17 @@ class ShopListPageState extends State<ShopListPage> {
                 ),
                 Flexible(
                   child: uniformList.length == 0
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image(
-                                image:
-                                    AssetImage("assets/img/bookie-parking.png"),
-                                width: 100,
-                                height: 100),
-                            Container(
-                              margin: EdgeInsets.only(top: 8, bottom: 100),
-                              child: Text(
-                                "조건에 맞는 교복이 없습니다",
-                                style: GoogleFonts.notoSans(
-                                    fontSize: 14, color: Color(0xff444444)),
-                              ),
-                            )
-                          ],
+                      ? NoListResultPageWidget(
+                          image: Image(
+                              image:
+                                  AssetImage("assets/img/bookie-parking.png"),
+                              width: 100,
+                              height: 100),
+                          text: Text(
+                            "조건에 맞는 교복이 없습니다",
+                            style: GoogleFonts.notoSans(
+                                fontSize: 14, color: Color(0xff444444)),
+                          ),
                         )
                       : GridView.count(
                           controller: controller,
@@ -380,7 +294,7 @@ class ShopListPageState extends State<ShopListPage> {
                               ((MediaQuery.of(context).size.width / 2) + 116),
                           children: [
                               for (var uniformData in uniformList)
-                                card(uniformData),
+                                ProductCard(uniformData, context),
                             ]),
                 )
 
@@ -394,6 +308,28 @@ class ShopListPageState extends State<ShopListPage> {
                 // ))
               ],
             ),
+    );
+  }
+}
+
+class NoListResultPageWidget extends StatelessWidget {
+  const NoListResultPageWidget({Key key, this.image, this.text})
+      : super(key: key);
+
+  final Image image;
+  final Text text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        image,
+        Container(
+          margin: EdgeInsets.only(top: 8, bottom: 100),
+          child: text,
+        )
+      ],
     );
   }
 }

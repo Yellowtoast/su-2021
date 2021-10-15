@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schooluniform/configs/home_style.dart';
+import 'package:schooluniform/configs/style/homeStyle.dart';
 import 'infoBadgeWidget.dart';
 
 class AppbarIcon extends StatelessWidget {
@@ -20,7 +20,7 @@ class AppbarIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppbarIconWidth,
+      width: HomeWidgetSize.appbarIconWidth,
       alignment: Alignment.center,
       child: GestureDetector(
         onTap: onPress,
@@ -28,7 +28,7 @@ class AppbarIcon extends StatelessWidget {
           children: [
             Container(
               child: icon,
-              margin: AppbarIconMargin,
+              margin: HomeEdgeInsets.appbarIconMargin,
             ),
             Positioned(
                 top: 0, right: 0, child: InfoBadge(userInfoKey: userInfoKey))

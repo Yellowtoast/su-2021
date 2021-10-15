@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schooluniform/configs/home_style.dart';
+
+import 'package:schooluniform/configs/style/homeStyle.dart';
 
 class BannerButtonWidget extends StatelessWidget {
   final Color bg;
@@ -16,41 +17,41 @@ class BannerButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.toNamed(url),
       child: Container(
-        height: bannerButtonHeight,
+        height: HomeWidgetSize.bannerButtonHeight,
         decoration: BoxDecoration(
           color: bg,
-          borderRadius: bannerButtonRadius,
+          borderRadius: HomeBorderRadius.bannerButtonRadius,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: bannerButtonPadding,
+              padding: HomeEdgeInsets.bannerButtonPadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: bannerButtonTextPadding,
+                    margin: HomeEdgeInsets.bannerButtonTextPadding,
                     child: Text(
                       label,
-                      style: bannerButtonLabelStyle,
+                      style: HomeTextStyle.bannerButtonLabelStyle,
                     ),
                   ),
                   Text(
                     secondaryLabel,
-                    style: bannerButtonSecondaryLabelStyle,
+                    style: HomeTextStyle.bannerButtonSecondaryLabelStyle,
                   ),
                 ],
               ),
             ),
             Container(
-              margin: bannerButtonIconMagin,
-              width: bannerButtonIconWidth,
-              height: bannerButtonIconHight,
+              margin: HomeEdgeInsets.bannerButtonIconMagin,
+              width: HomeWidgetSize.bannerButtonIconWidth,
+              height: HomeWidgetSize.bannerButtonIconHight,
               decoration: BoxDecoration(
-                borderRadius: bannerButtonIconRadius,
+                borderRadius: HomeBorderRadius.bannerButtonIconRadius,
                 image: DecorationImage(
                   image: AssetImage(imageSrc),
                 ),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:schooluniform/configs/home_style.dart';
-
-import 'package:schooluniform/constants/size.dart';
+import 'package:schooluniform/configs/style/homeStyle.dart';
 
 class DrawerItemWidget extends StatelessWidget {
   final String label;
@@ -18,16 +16,16 @@ class DrawerItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.toNamed(url),
       child: Container(
-        height: drawerItemHeight,
+        height: HomeWidgetSize.drawerItemHeight,
         color: Colors.transparent,
-        padding: drawerItemPadding,
+        padding: HomeEdgeInsets.drawerItemPadding,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               label,
-              style: drawerItemFontStyle,
+              style: HomeTextStyle.drawerItemStyle,
             ),
             infoBadgeItem,
           ],

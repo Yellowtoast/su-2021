@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schooluniform/configs/home_style.dart';
+import 'package:schooluniform/configs/style/homeStyle.dart';
 
 class SlideBannerWidget extends StatelessWidget {
   const SlideBannerWidget(
@@ -30,8 +30,8 @@ class SlideBannerWidget extends StatelessWidget {
           right: 16,
           bottom: 16,
           child: Container(
-            padding: slideBannerIndexBoxPadding,
-            decoration: slideBannerIndexBoxStyle,
+            padding: HomeEdgeInsets.slideBannerIndexBoxPadding,
+            decoration: HomeBoxDecoration.slideBannerIndexBoxStyle,
             child: Text("${bannerPage + 1} / $totalBannerPage",
                 style: HomeTextStyle.slideBannerIndexStyle),
           ),
