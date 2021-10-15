@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/widgets/header/header2.dart';
-
-import 'package:schooluniform/widgets/pages/donate/uniform/selectGender.dart';
+import 'package:schooluniform/widgets/localWidgets/donateWidgets/uniform/selectGender.dart';
 
 class DonateStep1_2 extends StatefulWidget {
   @override

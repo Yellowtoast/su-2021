@@ -41,12 +41,12 @@ class DonateStep1_1State extends State<DonateStep1_1>
                 border: Border(
               bottom: BorderSide(
                 width: 1,
-                color: grey2,
+                color: BGColors.grey2,
               ),
             )),
             child: TabBar(
-              indicatorColor: colorSig1,
-              labelColor: colorSig1,
+              indicatorColor: BGColors.colorSig1,
+              labelColor: BGColors.colorSig1,
               labelStyle: GoogleFonts.notoSans(
                   fontSize: 14, fontWeight: FontWeight.bold),
               unselectedLabelColor: Color(0x80000000),

@@ -9,7 +9,7 @@ import 'package:schooluniform/routes/api/user.dart';
 
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
-import 'package:schooluniform/widgets/pages/user/cart/card.dart';
+import 'package:schooluniform/widgets/localWidgets/user/donate/uniform/card.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,8 +28,8 @@ class UserDonateUniformPageState extends State<UserDonateUniformPage> {
       var uid = prefs.getString('userId');
 
       Map userUpdateInfo = {
-        "total":
-            infoStore.userInfo["total"] - infoStore.userInfo["uniformDonate"],
+        "total": BGinfoStore.userInfo["total"] -
+            BGinfoStore.userInfo["uniformDonate"],
         "uniformDonate": 0
       };
 
@@ -41,9 +41,11 @@ class UserDonateUniformPageState extends State<UserDonateUniformPage> {
 
       var res = await Future.wait(futures);
 
-      infoStore.updateUserData("total",
-          infoStore.userInfo["total"] - infoStore.userInfo["uniformDonate"]);
-      infoStore.updateUserData("uniformDonate", 0);
+      BGinfoStore.updateUserData(
+          "total",
+          BGinfoStore.userInfo["total"] -
+              BGinfoStore.userInfo["uniformDonate"]);
+      BGinfoStore.updateUserData("uniformDonate", 0);
 
       if (res[0]['data'] != null) {
         var data = res[0]['data'];
@@ -73,7 +75,7 @@ class UserDonateUniformPageState extends State<UserDonateUniformPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: grey2,
+      backgroundColor: BGColors.grey2,
       appBar: Header(
         popButton: true,
         title: Text(

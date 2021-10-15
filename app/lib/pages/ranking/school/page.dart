@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/widgets/pages/ranking/school/listView.dart';
+import 'package:schooluniform/widgets/localWidgets/rankingWidgets/school/listView.dart';
 
 class RankingSchoolPage extends StatefulWidget {
   @override
@@ -42,12 +42,12 @@ class RankingSchoolPageState extends State<RankingSchoolPage>
                       border: Border(
                     bottom: BorderSide(
                       width: 1,
-                      color: grey2,
+                      color: BGColors.grey2,
                     ),
                   )),
                   child: TabBar(
-                    indicatorColor: colorSig1,
-                    labelColor: colorSig1,
+                    indicatorColor: BGColors.colorSig1,
+                    labelColor: BGColors.colorSig1,
                     labelStyle: GoogleFonts.notoSans(
                         fontSize: 14, fontWeight: FontWeight.bold),
                     unselectedLabelColor: Color(0x80000000),

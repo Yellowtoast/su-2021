@@ -9,7 +9,7 @@ import 'package:schooluniform/routes/client/client.dart';
 
 import 'package:schooluniform/types/donateInfo.dart';
 import 'package:schooluniform/widgets/header/header.dart';
-import 'package:schooluniform/widgets/pages/donate/uniform/imageHandler.dart';
+import 'package:schooluniform/widgets/localWidgets/donateWidgets/uniform/imageHandler.dart';
 
 class DonateStep3 extends StatefulWidget {
   @override
@@ -108,7 +108,7 @@ class DonateStep3State extends State<DonateStep3> {
                         width: 80,
                         height: 80,
                         decoration: BoxDecoration(
-                            color: grey2,
+                            color: BGColors.grey2,
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             image: DecorationImage(
                                 image: FileImage(File(images[i].path)),
@@ -131,7 +131,7 @@ class DonateStep3State extends State<DonateStep3> {
                           height: 80,
                           padding: EdgeInsets.all(30),
                           decoration: BoxDecoration(
-                              color: grey2,
+                              color: BGColors.grey2,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8))),
                           child: Image(
@@ -154,8 +154,8 @@ class DonateStep3State extends State<DonateStep3> {
                     child: Container(
                       width: 52,
                       height: 52,
-                      decoration:
-                          BoxDecoration(shape: BoxShape.circle, color: grey6),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: BGColors.grey6),
                       padding: EdgeInsets.all(18),
                       child: Image(
                         image: AssetImage("assets/icon/arrow-right-white.png"),
@@ -184,7 +184,7 @@ class DonateStep3State extends State<DonateStep3> {
                       height: 52,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                           boxShadow: [shadowSig]),
                       padding: EdgeInsets.all(18),
                       child: Image(

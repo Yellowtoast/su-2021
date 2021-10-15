@@ -85,13 +85,16 @@ class UserPurchaseUniformRejectPageState
                     Text(
                       "위 상품에 대한 구매 요청이 거절되었습니다",
                       style: GoogleFonts.notoSans(
-                          fontSize: 14, height: 1.57, color: colorRejectRed),
+                          fontSize: 14,
+                          height: 1.57,
+                          color: BGColors.colorRejectRed),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 17, bottom: 20),
                       decoration: BoxDecoration(
                           border: Border(
-                              bottom: BorderSide(width: 1, color: grey3))),
+                              bottom:
+                                  BorderSide(width: 1, color: BGColors.grey3))),
                     ),
                     Text(
                       "거절 사유",

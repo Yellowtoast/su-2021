@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/api/user.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
@@ -68,8 +69,8 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
       };
 
       Map userUpdateInfo = {
-        "total": infoStore.userInfo["total"] + 1,
-        "uniformCart": infoStore.userInfo["uniformCart"] + 1,
+        "total": BGinfoStore.userInfo["total"] + 1,
+        "uniformCart": BGinfoStore.userInfo["uniformCart"] + 1,
       };
 
       await Future.wait([
@@ -77,9 +78,9 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
         NetworkHandler()
             .put('${UserApiRoutes.UPDATE}?targetUid=$uid', userUpdateInfo),
       ]);
-      infoStore.updateUserData("total", infoStore.userInfo["total"] + 1);
-      infoStore.updateUserData(
-          "uniformCart", infoStore.userInfo["uniformCart"] + 1);
+      BGinfoStore.updateUserData("total", BGinfoStore.userInfo["total"] + 1);
+      BGinfoStore.updateUserData(
+          "uniformCart", BGinfoStore.userInfo["uniformCart"] + 1);
     }
   }
 
@@ -117,7 +118,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                       Stack(
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.width,
+                            height: MediaSize.screenWidth,
                             child: PageView(
                               controller: thumbnailController,
                               onPageChanged: (value) {
@@ -128,8 +129,8 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                               children: [
                                 for (var img in data["images"])
                                   Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.width,
+                                    width: MediaSize.screenWidth,
+                                    height: MediaSize.screenWidth,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             fit: BoxFit.cover,
@@ -207,7 +208,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                                 height: 24,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: grey2,
+                                  color: BGColors.grey2,
                                 ),
                                 child: Image(
                                   image: AssetImage("assets/icon/$c-grey.png"),
@@ -249,7 +250,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                       bottom: 0,
                       child: data["status"] == "교복보유중"
                           ? Container(
-                              width: MediaQuery.of(context).size.width,
+                              width: MediaSize.screenWidth,
                               height:
                                   MediaQuery.of(context).padding.bottom + 52,
                               child: Row(
@@ -308,8 +309,8 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                               ),
                             )
                           : Container(
-                              color: grey3,
-                              width: MediaQuery.of(context).size.width,
+                              color: BGColors.grey3,
+                              width: MediaSize.screenWidth,
                               height:
                                   MediaQuery.of(context).padding.bottom + 52,
                               alignment: Alignment.center,
@@ -325,7 +326,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                   Positioned(
                     top: 0,
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaSize.screenWidth,
                       height: MediaQuery.of(context).padding.top,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(

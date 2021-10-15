@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
 
-class ShopTextStyle {
+class BGShopTextStyle {
 // ListView Widget
   static TextStyle listViewTextStyle = GoogleFonts.notoSans(fontSize: 14);
 
@@ -18,7 +18,7 @@ class ShopTextStyle {
       GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold);
 }
 
-class ShopEdgeInsets {
+class BGShopEdgeInsets {
 // Filtering Box Widget
   static EdgeInsetsGeometry filterBoxPadding =
       EdgeInsets.symmetric(horizontal: 8);
@@ -37,7 +37,7 @@ class ShopEdgeInsets {
   static EdgeInsetsGeometry tabBarPadding = EdgeInsets.symmetric(vertical: 16);
 }
 
-class ShopWidgetSize {
+class BGShopWidgetSize {
 // Filtering Box Widget
   static double filterBoxHeight = 28;
   static double filterBoxIconWidth = 12;
@@ -48,10 +48,10 @@ class ShopWidgetSize {
   static double listViewHeight = 48;
 }
 
-class ShopBoxDecoration {
+class BGShopBoxDecoration {
 //ListView - ListViewBadge
   static BoxDecoration numberBadgeBoxStyle = BoxDecoration(
-    color: grey2,
+    color: BGColors.grey2,
     borderRadius: BorderRadius.all(Radius.circular(8)),
   );
 }

@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:schooluniform/configs/boxDeco.dart';
 import 'package:schooluniform/configs/color.dart';
-
 import 'package:schooluniform/routes/api/info.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/api/user.dart';
@@ -15,12 +14,12 @@ import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/types/donateInfo.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
-import 'package:schooluniform/widgets/pages/donate/uniform/input.dart';
+import 'package:schooluniform/widgets/localWidgets/donateWidgets/uniform/input.dart';
 import 'package:schooluniform/widgets/modal/requestModal.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:schooluniform/routes/api/networkHandler.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 class DonateStep5 extends StatefulWidget {
   @override
@@ -252,10 +251,10 @@ class DonateStep5State extends State<DonateStep5> {
                         "전문보기",
                         style: GoogleFonts.notoSans(
                             fontSize: 14,
-                            color: colorSig2,
+                            color: BGColors.colorSig2,
                             decoration: TextDecoration.underline,
                             height: 1,
-                            decorationColor: colorSig2),
+                            decorationColor: BGColors.colorSig2),
                       ),
                     )
                   ],
@@ -273,10 +272,10 @@ class DonateStep5State extends State<DonateStep5> {
                       child: GestureDetector(
                         child: Container(
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width - 32,
+                          width: MediaSize.screenWidth - 32,
                           height: 52,
                           decoration: BoxDecoration(
-                              color: grey6,
+                              color: BGColors.grey6,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8))),
                           child: Text(
@@ -295,12 +294,12 @@ class DonateStep5State extends State<DonateStep5> {
                         onTap: handleUpload,
                         child: Container(
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width - 32,
+                          width: MediaSize.screenWidth - 32,
                           height: 52,
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
-                              gradient: gradSig,
+                              gradient: BGColors.gradSig,
                               boxShadow: [shadowSig]),
                           child: Text(
                             "기부하기",

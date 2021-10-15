@@ -1,21 +1,18 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:schooluniform/routes/api/user.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
-import 'package:schooluniform/widgets/pages/user/cart/buyCart.dart';
-import 'package:schooluniform/widgets/pages/user/cart/card.dart';
-import 'package:schooluniform/widgets/pages/user/cart/deleteCart.dart';
-
+import 'package:schooluniform/widgets/localWidgets/userWidgets/cart/buyCart.dart';
+import 'package:schooluniform/widgets/localWidgets/userWidgets/cart/card.dart';
+import 'package:schooluniform/widgets/localWidgets/userWidgets/cart/deleteCart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:schooluniform/routes/api/networkHandler.dart';
-
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 class UserCartPage extends StatefulWidget {
   @override
@@ -34,7 +31,7 @@ class UserCartPageState extends State<UserCartPage> {
     try {
       Map userUpdateInfo = {
         "total":
-            infoStore.userInfo["total"] - infoStore.userInfo["uniformCart"],
+            BGinfoStore.userInfo["total"] - BGinfoStore.userInfo["uniformCart"],
         "uniformCart": 0,
       };
 
@@ -48,9 +45,9 @@ class UserCartPageState extends State<UserCartPage> {
 
       print(res[1]);
 
-      infoStore.updateUserData("total",
-          infoStore.userInfo["total"] - infoStore.userInfo["uniformCart"]);
-      infoStore.updateUserData("uniformCart", 0);
+      BGinfoStore.updateUserData("total",
+          BGinfoStore.userInfo["total"] - BGinfoStore.userInfo["uniformCart"]);
+      BGinfoStore.updateUserData("uniformCart", 0);
 
       if (res[0] != null) {
         var _data = res[0]['data'];
@@ -109,7 +106,7 @@ class UserCartPageState extends State<UserCartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: grey2,
+        backgroundColor: BGColors.grey2,
         appBar: Header(
           popButton: true,
           title: Text(
@@ -152,11 +149,11 @@ class UserCartPageState extends State<UserCartPage> {
                                 onClickToCancel: handleCancel,
                                 onClickToBuy: () => handleBuy(id: itemCode)),
                             child: Container(
-                              width: MediaQuery.of(context).size.width,
+                              width: MediaSize.screenWidth,
                               height:
                                   52 + MediaQuery.of(context).padding.bottom,
                               decoration: BoxDecoration(
-                                gradient: gradSig,
+                                gradient: BGColors.gradSig,
                               ),
                               child: Padding(
                                 padding: EdgeInsets.only(

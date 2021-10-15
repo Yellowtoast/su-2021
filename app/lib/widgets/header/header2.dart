@@ -46,8 +46,8 @@ class Header2 extends StatelessWidget implements PreferredSizeWidget {
                 preferredSize: Size.fromHeight(1),
                 child: Container(
                   decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(width: 1, color: grey2))),
+                      border: Border(
+                          bottom: BorderSide(width: 1, color: BGColors.grey2))),
                 ),
               )
             : PreferredSize(

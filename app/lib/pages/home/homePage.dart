@@ -14,12 +14,12 @@ import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 import 'package:schooluniform/widgets/footer/footer.dart';
 import 'package:schooluniform/widgets/header/header.dart';
-import 'package:schooluniform/widgets/pages/home/appbarIconWidget.dart';
-import 'package:schooluniform/widgets/pages/home/bannerButtonWidget.dart';
-import 'package:schooluniform/widgets/pages/home/countUpItemWidget.dart';
-import 'package:schooluniform/widgets/pages/home/drawerWidget.dart';
-import 'package:schooluniform/widgets/pages/home/slideBannerWidget.dart';
-import 'package:schooluniform/widgets/pages/home/swipeBannerItemWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/appbarIconWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/countUpItemWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/drawerWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/slideBannerWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/swipeBannerItemWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/home_widgets/bannerButtonWidget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -114,7 +114,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _drawerKey,
-      backgroundColor: grey2,
+      backgroundColor: BGColors.grey2,
       appBar: Header(
         title: Text("대구 북구 교복 나눔",
             style: GoogleFonts.notoSans(
@@ -181,23 +181,24 @@ class HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                        border: Border.all(color: grey2, width: 1)),
+                        border: Border.all(color: BGColors.grey2, width: 1)),
                     child: Text.rich(
                       TextSpan(children: [
                         TextSpan(
                             text: "${getCurrentTime()} 현재 ",
                             style: GoogleFonts.poppins(
-                                fontSize: 12, color: textGrey2)),
+                                fontSize: 12, color: BGColors.textGrey2)),
                         TextSpan(
-                            text: infoStore.localInfo["totalStock"].toString(),
+                            text:
+                                BGinfoStore.localInfo["totalStock"].toString(),
                             style: GoogleFonts.montserrat(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
-                                color: textGrey2)),
+                                color: BGColors.textGrey2)),
                         TextSpan(
                             text: "개 교복 구매 가능",
                             style: GoogleFonts.notoSans(
-                                fontSize: 12, color: textGrey2)),
+                                fontSize: 12, color: BGColors.textGrey2)),
                       ]),
                       textAlign: TextAlign.left,
                     ),
@@ -209,23 +210,23 @@ class HomePageState extends State<HomePage> {
                         label: "누적 교복 기부 횟수",
                         condition: '',
                         secondaryLabel:
-                            infoStore.localInfo["totalDonate"].toDouble(),
+                            BGinfoStore.localInfo["totalDonate"].toDouble(),
                       ),
                       Container(
                         width: 1,
                         height: 52,
-                        color: grey2,
+                        color: BGColors.grey2,
                         child: null,
                       ),
                       CountUpItemWidget(
                         url: Routes.rankingSchoolUrl,
                         label: "최다 기부 학교",
                         condition: getMostDonateSchool(
-                            infoStore.localInfo["middleSchools"],
-                            infoStore.localInfo["highSchools"])["school"],
+                            BGinfoStore.localInfo["middleSchools"],
+                            BGinfoStore.localInfo["highSchools"])["school"],
                         secondaryLabel: getMostDonateSchool(
-                                infoStore.localInfo["middleSchools"],
-                                infoStore
+                                BGinfoStore.localInfo["middleSchools"],
+                                BGinfoStore
                                     .localInfo["highSchools"])["totalDonate"]
                             .toDouble(),
                       ),
@@ -239,7 +240,7 @@ class HomePageState extends State<HomePage> {
                         Container(
                           margin: EdgeInsets.only(bottom: 16),
                           child: BannerButtonWidget(
-                              bg: grey2,
+                              bg: BGColors.grey2,
                               url: Routes.donateStep1Url,
                               imageSrc: "assets/img/bookie-banner-1.png",
                               label: "중고 교복 기부 바로가기",

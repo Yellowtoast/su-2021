@@ -2,10 +2,8 @@ import 'package:clipboard/clipboard.dart';
 import "package:flutter/material.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:schooluniform/configs/color.dart';
-
-import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/modal/recModal.dart';
 import 'package:schooluniform/widgets/modal/supportModal.dart';
@@ -303,7 +301,7 @@ class SupportPageState extends State<SupportPage> {
                         bottom: MediaQuery.of(context).padding.bottom + 24,
                         top: 24),
                     decoration: BoxDecoration(color: Colors.white),
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaSize.screenWidth,
                     alignment: Alignment.center,
                     child: Column(
                       children: [
@@ -314,7 +312,7 @@ class SupportPageState extends State<SupportPage> {
                                   context: context,
                                   onClick: () => handleCopy()),
                               child: Container(
-                                width: MediaQuery.of(context).size.width - 32,
+                                width: MediaSize.screenWidth - 32,
                                 height: 52,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
@@ -341,11 +339,11 @@ class SupportPageState extends State<SupportPage> {
                         GestureDetector(
                             onTap: () => openRecModal(context: context),
                             child: Container(
-                              width: MediaQuery.of(context).size.width - 32,
+                              width: MediaSize.screenWidth - 32,
                               height: 52,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: grey6,
+                                color: BGColors.grey6,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8)),
                               ),

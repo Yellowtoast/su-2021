@@ -9,7 +9,7 @@ import 'package:schooluniform/routes/api/user.dart';
 
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
-import 'package:schooluniform/widgets/pages/user/cart/card.dart';
+import 'package:schooluniform/widgets/localWidgets/user/donate/uniform/card.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +28,7 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
     try {
       Map userUpdateInfo = {
         "total":
-            infoStore.userInfo["total"] - infoStore.userInfo["uniformShop"],
+            BGinfoStore.userInfo["total"] - BGinfoStore.userInfo["uniformShop"],
         "uniformShop": 0,
       };
 
@@ -45,9 +45,9 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
       print('request res[1]');
       print(res[1]);
 
-      infoStore.updateUserData("total",
-          infoStore.userInfo["total"] - infoStore.userInfo["uniformShop"]);
-      infoStore.updateUserData("uniformShop", 0);
+      BGinfoStore.updateUserData("total",
+          BGinfoStore.userInfo["total"] - BGinfoStore.userInfo["uniformShop"]);
+      BGinfoStore.updateUserData("uniformShop", 0);
 
       if (res[0]['data'] != null) {
         var data = res[0]['data'];
@@ -82,7 +82,7 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: grey2,
+      backgroundColor: BGColors.grey2,
       appBar: Header(
         popButton: true,
         title: Text(

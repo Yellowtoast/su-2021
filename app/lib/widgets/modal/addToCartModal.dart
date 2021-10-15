@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:get/get.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 void addToCartModal({context}) {
   showDialog(
@@ -15,7 +16,7 @@ void addToCartModal({context}) {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         child: Container(
-          width: MediaQuery.of(context).size.width - 32,
+          width: MediaSize.screenWidth - 32,
           padding: EdgeInsets.only(top: 36, bottom: 24, left: 16, right: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -51,11 +52,11 @@ void addToCartModal({context}) {
                         Get.offNamed(Routes.userCartUrl);
                       },
                       child: Container(
-                        width: (MediaQuery.of(context).size.width / 2) - 40,
+                        width: (MediaSize.screenWidth / 2) - 40,
                         alignment: Alignment.center,
                         height: 52,
                         decoration: BoxDecoration(
-                          color: grey3,
+                          color: BGColors.grey3,
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Text(
@@ -68,7 +69,7 @@ void addToCartModal({context}) {
                     GestureDetector(
                       onTap: () => Get.back(),
                       child: Container(
-                        width: (MediaQuery.of(context).size.width / 2) - 40,
+                        width: (MediaSize.screenWidth / 2) - 40,
                         alignment: Alignment.center,
                         height: 52,
                         decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'dart:async';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 class LoadingPage extends StatefulWidget {
   @override
@@ -25,8 +26,8 @@ class LoadingPageState extends State<LoadingPage> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+      width: MediaSize.screenWidth,
+      height: MediaSize.screenHeight,
       decoration: BoxDecoration(color: Color(0xcc000000)),
       child: Container(
         width: 64,

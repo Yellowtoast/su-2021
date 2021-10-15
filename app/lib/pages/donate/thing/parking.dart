@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
 class DonateThingParking extends StatefulWidget {
@@ -21,8 +22,8 @@ class DonateThingParkingState extends State<DonateThingParking> {
       ),
       body: SafeArea(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaSize.screenWidth,
+          height: MediaSize.screenHeight,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

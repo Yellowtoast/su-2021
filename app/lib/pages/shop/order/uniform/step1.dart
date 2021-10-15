@@ -4,12 +4,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:schooluniform/configs/boxDeco.dart';
-
 import 'package:schooluniform/configs/color.dart';
-
 import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/routes/client/client.dart';
-
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
 class OrderStep1 extends StatefulWidget {
@@ -76,7 +74,7 @@ class OrderStep1State extends State<OrderStep1> {
   Widget build(BuildContext context) {
     var code = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-        backgroundColor: step == 1 ? grey1 : Colors.white,
+        backgroundColor: step == 1 ? BGColors.grey1 : Colors.white,
         appBar: Header(
           title: Text("구매하기 / 학생증등록",
               style: GoogleFonts.notoSans(fontSize: 14, color: Colors.black)),
@@ -122,7 +120,8 @@ class OrderStep1State extends State<OrderStep1> {
                           padding: EdgeInsets.only(bottom: 24),
                           decoration: BoxDecoration(
                               border: Border(
-                                  bottom: BorderSide(color: grey2, width: 1))),
+                                  bottom: BorderSide(
+                                      color: BGColors.grey2, width: 1))),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -137,11 +136,8 @@ class OrderStep1State extends State<OrderStep1> {
                                   ? Container()
                                   : Container(
                                       margin: EdgeInsets.only(top: 12),
-                                      width: MediaQuery.of(context).size.width -
-                                          32,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              32,
+                                      width: MediaSize.screenWidth - 32,
+                                      height: MediaSize.screenWidth - 32,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: FileImage(
@@ -160,11 +156,11 @@ class OrderStep1State extends State<OrderStep1> {
                                       handleImageChange("front");
                                   },
                                   child: Container(
-                                    width: MediaQuery.of(context).size.width,
+                                    width: MediaSize.screenWidth,
                                     height: 50,
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                        color: grey2,
+                                        color: BGColors.grey2,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(8))),
                                     child: Text(
@@ -182,7 +178,8 @@ class OrderStep1State extends State<OrderStep1> {
                           padding: EdgeInsets.only(bottom: 24),
                           decoration: BoxDecoration(
                               border: Border(
-                                  bottom: BorderSide(color: grey2, width: 1))),
+                                  bottom: BorderSide(
+                                      color: BGColors.grey2, width: 1))),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -197,11 +194,8 @@ class OrderStep1State extends State<OrderStep1> {
                                   ? Container()
                                   : Container(
                                       margin: EdgeInsets.only(top: 12),
-                                      width: MediaQuery.of(context).size.width -
-                                          32,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              32,
+                                      width: MediaSize.screenWidth - 32,
+                                      height: MediaSize.screenWidth - 32,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image:
@@ -220,11 +214,11 @@ class OrderStep1State extends State<OrderStep1> {
                                       handleImageChange("back");
                                   },
                                   child: Container(
-                                    width: MediaQuery.of(context).size.width,
+                                    width: MediaSize.screenWidth,
                                     height: 50,
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                        color: grey2,
+                                        color: BGColors.grey2,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(8))),
                                     child: Text(
@@ -271,7 +265,8 @@ class OrderStep1State extends State<OrderStep1> {
                                       width: 52,
                                       height: 52,
                                       decoration: BoxDecoration(
-                                          shape: BoxShape.circle, color: grey6),
+                                          shape: BoxShape.circle,
+                                          color: BGColors.grey6),
                                       padding: EdgeInsets.all(18),
                                       child: Image(
                                         image: AssetImage(
@@ -330,7 +325,8 @@ class OrderStep1State extends State<OrderStep1> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 14),
                           decoration: BoxDecoration(
-                              border: Border.all(width: 1, color: grey3)),
+                              border:
+                                  Border.all(width: 1, color: BGColors.grey3)),
                           child: TextField(
                             onChanged: (text) {
                               setState(() {
@@ -339,7 +335,7 @@ class OrderStep1State extends State<OrderStep1> {
                             },
                             cursorColor: colorSig1,
                             keyboardType: TextInputType.text,
-                            decoration: deco("입학 예정자 이름을 적어주세요"),
+                            decoration: inputDecoStyle("입학 예정자 이름을 적어주세요"),
                             maxLength: 10,
                           ),
                         ),
@@ -357,7 +353,8 @@ class OrderStep1State extends State<OrderStep1> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 14),
                           decoration: BoxDecoration(
-                              border: Border.all(width: 1, color: grey3)),
+                              border:
+                                  Border.all(width: 1, color: BGColors.grey3)),
                           child: TextField(
                             onChanged: (text) {
                               setState(() {
@@ -366,7 +363,7 @@ class OrderStep1State extends State<OrderStep1> {
                             },
                             cursorColor: colorSig1,
                             keyboardType: TextInputType.phone,
-                            decoration: deco("예: 20050101"),
+                            decoration: inputDecoStyle("예: 20050101"),
                             maxLength: 8,
                           ),
                         ),
@@ -384,7 +381,8 @@ class OrderStep1State extends State<OrderStep1> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 14),
                           decoration: BoxDecoration(
-                              border: Border.all(width: 1, color: grey3)),
+                              border:
+                                  Border.all(width: 1, color: BGColors.grey3)),
                           child: TextField(
                             onChanged: (text) {
                               setState(() {
@@ -393,7 +391,7 @@ class OrderStep1State extends State<OrderStep1> {
                             },
                             cursorColor: colorSig1,
                             keyboardType: TextInputType.streetAddress,
-                            decoration: deco("입학예정학교를 입력해주세요"),
+                            decoration: inputDecoStyle("입학예정학교를 입력해주세요"),
                           ),
                         ),
                       ),
@@ -434,7 +432,8 @@ class OrderStep1State extends State<OrderStep1> {
                                       width: 52,
                                       height: 52,
                                       decoration: BoxDecoration(
-                                          shape: BoxShape.circle, color: grey6),
+                                          shape: BoxShape.circle,
+                                          color: BGColors.grey6),
                                       padding: EdgeInsets.all(18),
                                       child: Image(
                                         image: AssetImage(

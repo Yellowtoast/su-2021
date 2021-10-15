@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 void openSupportModal({context, onClick}) {
   showDialog(
@@ -20,7 +21,7 @@ void openSupportModal({context, onClick}) {
               children: [
                 Container(
                     margin: EdgeInsets.only(bottom: 10),
-                    width: MediaQuery.of(context).size.width - 32,
+                    width: MediaSize.screenWidth - 32,
                     child: GestureDetector(
                       onTap: () => Get.back(),
                       child: Row(
@@ -43,7 +44,7 @@ void openSupportModal({context, onClick}) {
                       ),
                     )),
                 Container(
-                  width: MediaQuery.of(context).size.width - 32,
+                  width: MediaSize.screenWidth - 32,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.white,
@@ -79,7 +80,7 @@ void openSupportModal({context, onClick}) {
                           onTap: onClick,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: grey2,
+                              color: BGColors.grey2,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(4)),
                             ),

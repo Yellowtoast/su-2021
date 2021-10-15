@@ -35,19 +35,19 @@ class HomeTextStyle {
   static TextStyle bannerButtonLabelStyle = GoogleFonts.notoSans(
       fontSize: 14,
       fontWeight: FontWeight.bold,
-      color: textHeading1,
+      color: BGColors.textHeading1,
       height: 1);
-  static TextStyle bannerButtonSecondaryLabelStyle =
-      GoogleFonts.notoSans(fontSize: 10, color: textContent1, height: 1);
+  static TextStyle bannerButtonSecondaryLabelStyle = GoogleFonts.notoSans(
+      fontSize: 10, color: BGColors.textContent1, height: 1);
 //countUpItem
-  static TextStyle countUpItemLabelStyle1 =
-      GoogleFonts.notoSans(fontSize: 12, color: textGrey2, height: 1.17);
+  static TextStyle countUpItemLabelStyle1 = GoogleFonts.notoSans(
+      fontSize: 12, color: BGColors.textGrey2, height: 1.17);
   static TextStyle countUpItemLabelStyle2 =
-      GoogleFonts.notoSans(fontSize: 12, color: textGrey2);
+      GoogleFonts.notoSans(fontSize: 12, color: BGColors.textGrey2);
   static TextStyle countUpItemConditionLabelStyle = GoogleFonts.notoSans(
-      fontSize: 12, color: textGrey2, fontWeight: FontWeight.bold);
+      fontSize: 12, color: BGColors.textGrey2, fontWeight: FontWeight.bold);
   static TextStyle countUpItemNumberStyle = GoogleFonts.montserrat(
-      fontSize: 14, fontWeight: FontWeight.bold, color: textGrey2);
+      fontSize: 14, fontWeight: FontWeight.bold, color: BGColors.textGrey2);
 }
 
 class HomeEdgeInsets {
@@ -118,6 +118,6 @@ class HomeBoxDecoration {
   //Info Badge
   static Decoration infoBadgeBoxStyle = BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(8)),
-    color: colorAlert,
+    color: BGColors.colorAlert,
   );
 }

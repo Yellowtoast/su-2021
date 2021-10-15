@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/types/donateInfo.dart';
 import 'package:schooluniform/types/donateState1_4Data.dart';
@@ -133,11 +134,11 @@ class DonateStep1State extends State<DonateStep1> {
                     onTap: () => handleSchool(),
                     child: Container(
                       alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width - 32,
+                      width: MediaSize.screenWidth - 32,
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        color: grey2,
+                        color: BGColors.grey2,
                       ),
                       child: Text(
                         school == '' ? "+ 학교 등록하기" : "학교 변경하기",
@@ -162,12 +163,12 @@ class DonateStep1State extends State<DonateStep1> {
                           onTap: handleGender,
                           child: Container(
                             alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width - 32,
+                            width: MediaSize.screenWidth - 32,
                             height: 50,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
-                              color: grey2,
+                              color: BGColors.grey2,
                             ),
                             child: Text(
                               gender == '' ? "+ 성별 등록하기" : "성별 변경하기",
@@ -193,12 +194,12 @@ class DonateStep1State extends State<DonateStep1> {
                           onTap: handleSeason,
                           child: Container(
                             alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width - 32,
+                            width: MediaSize.screenWidth - 32,
                             height: 50,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
-                              color: grey2,
+                              color: BGColors.grey2,
                             ),
                             child: Text(
                               season == '' ? "+ 계절복 등록하기" : "계절복 변경하기",
@@ -212,7 +213,7 @@ class DonateStep1State extends State<DonateStep1> {
                   Container(
                     margin: EdgeInsets.only(bottom: 12),
                     decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: grey6)),
+                        border: Border.all(width: 1, color: BGColors.grey6)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -243,12 +244,12 @@ class DonateStep1State extends State<DonateStep1> {
                           onTap: handleClothType,
                           child: Container(
                             alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width - 32,
+                            width: MediaSize.screenWidth - 32,
                             height: 50,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
-                              color: grey2,
+                              color: BGColors.grey2,
                             ),
                             child: Text(
                               "+ 교복 등록하기",
@@ -273,10 +274,10 @@ class DonateStep1State extends State<DonateStep1> {
                         padding: EdgeInsets.only(
                             bottom: MediaQuery.of(context).padding.bottom),
                         alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaSize.screenWidth,
                         height: 52 + MediaQuery.of(context).padding.bottom,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                         child: Text(
                           "등록한 교복 기부하기",

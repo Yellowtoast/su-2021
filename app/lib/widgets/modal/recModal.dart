@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/color.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 void openRecModal({
   context,
@@ -24,7 +25,7 @@ void openRecModal({
               children: [
                 Container(
                     margin: EdgeInsets.only(bottom: 10),
-                    width: MediaQuery.of(context).size.width - 32,
+                    width: MediaSize.screenWidth - 32,
                     child: GestureDetector(
                       onTap: () => Get.back(),
                       child: Row(
@@ -47,7 +48,7 @@ void openRecModal({
                       ),
                     )),
                 Container(
-                  width: MediaQuery.of(context).size.width - 32,
+                  width: MediaSize.screenWidth - 32,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.white,
@@ -80,12 +81,12 @@ void openRecModal({
                         ),
                         GestureDetector(
                           onTap: () => launch(
-                              "tel:${infoStore.localInfo["officePhoneDonation"]}"),
+                              "tel:${BGinfoStore.localInfo["officePhoneDonation"]}"),
                           child: Text(
-                            infoStore.localInfo["officePhoneDonation"],
+                            BGinfoStore.localInfo["officePhoneDonation"],
                             style: GoogleFonts.notoSans(
                                 fontSize: 14,
-                                color: colorSubBlue,
+                                color: BGColors.colorSubBlue,
                                 decoration: TextDecoration.underline),
                           ),
                         )

@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:schooluniform/configs/boxDeco.dart';
-
-
 import 'package:schooluniform/routes/api/info.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/api/user.dart';
@@ -13,12 +11,10 @@ import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
 import 'package:schooluniform/widgets/modal/alarmModal.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:schooluniform/routes/api/networkHandler.dart';
-
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 class ShopUniformInputData {
   ShopUniformInputData(
@@ -207,8 +203,8 @@ class OrderStep3State extends State<OrderStep3> {
                 margin: EdgeInsets.only(bottom: 24),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: grey3)),
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: BGColors.grey3)),
                   child: TextField(
                     controller: nameController,
                     onChanged: (text) {
@@ -218,7 +214,7 @@ class OrderStep3State extends State<OrderStep3> {
                     },
                     cursorColor: colorSig1,
                     keyboardType: TextInputType.text,
-                    decoration: deco("구매자 이름을 적어주세요"),
+                    decoration: inputDecoStyle("구매자 이름을 적어주세요"),
                     maxLength: 10,
                   ),
                 ),
@@ -234,8 +230,8 @@ class OrderStep3State extends State<OrderStep3> {
                 margin: EdgeInsets.only(bottom: 24),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: grey3)),
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: BGColors.grey3)),
                   child: TextField(
                     onChanged: (text) {
                       setState(() {
@@ -244,7 +240,7 @@ class OrderStep3State extends State<OrderStep3> {
                     },
                     cursorColor: colorSig1,
                     keyboardType: TextInputType.phone,
-                    decoration: deco("- 생략"),
+                    decoration: inputDecoStyle("- 생략"),
                     maxLength: 11,
                   ),
                 ),
@@ -266,7 +262,8 @@ class OrderStep3State extends State<OrderStep3> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 14),
                             decoration: BoxDecoration(
-                                border: Border.all(width: 1, color: grey3)),
+                                border: Border.all(
+                                    width: 1, color: BGColors.grey3)),
                             child: TextField(
                               onChanged: (text) {
                                 setState(() {
@@ -275,7 +272,7 @@ class OrderStep3State extends State<OrderStep3> {
                               },
                               cursorColor: colorSig1,
                               keyboardType: TextInputType.streetAddress,
-                              decoration: deco("배송을 요청할 주소를 입력해주세요"),
+                              decoration: inputDecoStyle("배송을 요청할 주소를 입력해주세요"),
                             ),
                           ),
                         ),
@@ -334,10 +331,10 @@ class OrderStep3State extends State<OrderStep3> {
                       child: GestureDetector(
                         child: Container(
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width - 32,
+                          width: MediaSize.screenWidth - 32,
                           height: 52,
                           decoration: BoxDecoration(
-                              color: grey6,
+                              color: BGColors.grey6,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8))),
                           child: Text(
@@ -356,7 +353,7 @@ class OrderStep3State extends State<OrderStep3> {
                         onTap: handleUpload,
                         child: Container(
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width - 32,
+                          width: MediaSize.screenWidth - 32,
                           height: 52,
                           decoration: BoxDecoration(
                               borderRadius:

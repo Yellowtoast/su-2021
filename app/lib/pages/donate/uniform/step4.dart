@@ -7,7 +7,8 @@ import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/types/donateInfo.dart';
 
 import 'package:schooluniform/widgets/header/header.dart';
-import 'package:schooluniform/widgets/pages/donate/uniform/selectDeliveryType.dart';
+
+import 'package:schooluniform/widgets/localWidgets/donateWidgets/uniform/selectDeliveryType.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:schooluniform/configs/stores.dart';
@@ -65,11 +66,11 @@ class DonateStep4State extends State<DonateStep4> {
                               margin: EdgeInsets.only(left: 4),
                               child: GestureDetector(
                                 onTap: () => launch(
-                                    infoStore.localInfo["centerAddress"]),
+                                    BGinfoStore.localInfo["centerAddress"]),
                                 child: Text(
                                   "위치보기",
                                   style: GoogleFonts.notoSans(
-                                      color: colorSig1,
+                                      color: BGColors.colorSig1,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12),
                                 ),
@@ -120,7 +121,7 @@ class DonateStep4State extends State<DonateStep4> {
                               height: 52,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  gradient: gradSig,
+                                  gradient: BGColors.gradSig,
                                   boxShadow: [shadowSig]),
                               padding: EdgeInsets.all(18),
                               child: Image(

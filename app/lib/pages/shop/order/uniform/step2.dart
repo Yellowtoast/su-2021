@@ -68,7 +68,7 @@ class OrderStep2State extends State<OrderStep2> {
                                 border: Border.all(
                                     color: deliveryType == "봉사센터 방문"
                                         ? Colors.black
-                                        : grey6)),
+                                        : BGColors.grey6)),
                             child: deliveryType == "봉사센터 방문"
                                 ? Container(
                                     width: 8,
@@ -94,8 +94,8 @@ class OrderStep2State extends State<OrderStep2> {
                                   Container(
                                     margin: EdgeInsets.only(left: 4),
                                     child: GestureDetector(
-                                      onTap: () => launch(
-                                          infoStore.localInfo["centerAddress"]),
+                                      onTap: () => launch(BGinfoStore
+                                          .localInfo["centerAddress"]),
                                       child: Text(
                                         "위치보기",
                                         style: GoogleFonts.notoSans(
@@ -143,7 +143,7 @@ class OrderStep2State extends State<OrderStep2> {
                                 border: Border.all(
                                     color: deliveryType == "배송 요청"
                                         ? Colors.black
-                                        : grey6)),
+                                        : BGColors.grey6)),
                             child: deliveryType == "배송 요청"
                                 ? Container(
                                     width: 8,

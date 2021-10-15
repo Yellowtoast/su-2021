@@ -7,7 +7,7 @@ import 'package:schooluniform/configs/color.dart';
 
 import 'package:schooluniform/types/donateState1_4Data.dart';
 import 'package:schooluniform/widgets/header/header.dart';
-import 'package:schooluniform/widgets/pages/donate/uniform/selectClothType.dart';
+import 'package:schooluniform/widgets/localWidgets/donateWidgets/uniform/selectClothType.dart';
 
 class DonateStep1_4 extends StatefulWidget {
   @override
@@ -103,8 +103,8 @@ class DonateStep1_4State extends State<DonateStep1_4> {
                     margin: EdgeInsets.only(top: 20),
                     padding: EdgeInsets.only(top: 20),
                     decoration: BoxDecoration(
-                        border:
-                            Border(top: BorderSide(color: grey2, width: 1))),
+                        border: Border(
+                            top: BorderSide(color: BGColors.grey2, width: 1))),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -121,16 +121,17 @@ class DonateStep1_4State extends State<DonateStep1_4> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 14),
                             decoration: BoxDecoration(
-                                border: Border.all(width: 1, color: grey3)),
+                                border: Border.all(
+                                    width: 1, color: BGColors.grey3)),
                             child: TextField(
                               onChanged: (text) {
                                 setState(() {
                                   size = text;
                                 });
                               },
-                              cursorColor: colorSig1,
+                              cursorColor: BGColors.colorSig1,
                               keyboardType: TextInputType.text,
-                              decoration: deco("옷 사이즈를 입력해주세요"),
+                              decoration: inputDecoStyle("옷 사이즈를 입력해주세요"),
                               maxLength: 50,
                             ),
                           ),

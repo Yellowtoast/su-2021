@@ -3,10 +3,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
 import 'package:schooluniform/configs/stores.dart';
-import 'package:schooluniform/widgets/pages/init/updateMessageModal.dart';
+import 'package:schooluniform/widgets/localWidgets/initWidgets/updateMessageModal.dart';
 
 class InitPage extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class InitPageState extends State<InitPage> {
   void handleAuth() async {
     try {
       await Firebase.initializeApp();
-      await infoStore.initData();
+      await BGinfoStore.initData();
       print('pass1');
       setState(() {
         authCheck = true;
@@ -48,7 +49,7 @@ class InitPageState extends State<InitPage> {
 
       print('pass4');
 
-      if (infoStore.localInfo["shouldBeUpdated"]) {
+      if (BGinfoStore.localInfo["shouldBeUpdated"]) {
         updateMessageModal(context: context);
         print('pass5');
       } else {
@@ -62,6 +63,7 @@ class InitPageState extends State<InitPage> {
   @override
   void initState() {
     super.initState();
+    MediaSize().setMediaSize(context);
     handleAuth();
   }
 

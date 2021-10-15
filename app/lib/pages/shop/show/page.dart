@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/routes/api/user.dart';
 import 'package:schooluniform/widgets/modal/addToCartModal.dart';
 
@@ -41,8 +42,8 @@ class ShopShowPageState extends State<ShopShowPage> {
     Map cartAddInfo = {"uniformId": data.data["code"]};
 
     Map userUpdateInfo = {
-      "total": infoStore.userInfo["total"] + 1,
-      "uniformCart": infoStore.userInfo["uniformCart"] + 1,
+      "total": BGinfoStore.userInfo["total"] + 1,
+      "uniformCart": BGinfoStore.userInfo["uniformCart"] + 1,
     };
 
     await Future.wait([
@@ -51,9 +52,9 @@ class ShopShowPageState extends State<ShopShowPage> {
           .put('${UserApiRoutes.UPDATE}?targetUid=$uid', userUpdateInfo),
     ]);
 
-    infoStore.updateUserData("total", infoStore.userInfo["total"] + 1);
-    infoStore.updateUserData(
-        "uniformCart", infoStore.userInfo["uniformCart"] + 1);
+    BGinfoStore.updateUserData("total", BGinfoStore.userInfo["total"] + 1);
+    BGinfoStore.updateUserData(
+        "uniformCart", BGinfoStore.userInfo["uniformCart"] + 1);
   }
 
   void buyNow() async {
@@ -91,7 +92,7 @@ class ShopShowPageState extends State<ShopShowPage> {
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.width,
+                  height: MediaSize.screenWidth,
                   child: PageView(
                     controller: thumbnailController,
                     onPageChanged: (value) {
@@ -102,8 +103,8 @@ class ShopShowPageState extends State<ShopShowPage> {
                     children: [
                       for (var img in data.data["images"])
                         Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.width,
+                          width: MediaSize.screenWidth,
+                          height: MediaSize.screenWidth,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   fit: BoxFit.cover,
@@ -177,7 +178,7 @@ class ShopShowPageState extends State<ShopShowPage> {
                       height: 24,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: grey2,
+                        color: BGColors.grey2,
                       ),
                       child: Image(
                         image: AssetImage("assets/icon/$c-grey.png"),
@@ -219,7 +220,7 @@ class ShopShowPageState extends State<ShopShowPage> {
             bottom: 0,
             child: data.data["status"] == "교복보유중"
                 ? Container(
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaSize.screenWidth,
                     height: MediaQuery.of(context).padding.bottom + 52,
                     child: Row(
                       children: [
@@ -275,8 +276,8 @@ class ShopShowPageState extends State<ShopShowPage> {
                     ),
                   )
                 : Container(
-                    color: grey3,
-                    width: MediaQuery.of(context).size.width,
+                    color: BGColors.grey3,
+                    width: MediaSize.screenWidth,
                     height: MediaQuery.of(context).padding.bottom + 52,
                     alignment: Alignment.center,
                     padding: EdgeInsets.only(
@@ -290,7 +291,7 @@ class ShopShowPageState extends State<ShopShowPage> {
         Positioned(
           top: 0,
           child: Container(
-            width: MediaQuery.of(context).size.width,
+            width: MediaSize.screenWidth,
             height: MediaQuery.of(context).padding.top,
             decoration: BoxDecoration(
                 gradient: LinearGradient(

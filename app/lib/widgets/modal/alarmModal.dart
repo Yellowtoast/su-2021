@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 
 void alarmModal({context}) {
   showDialog(
@@ -14,7 +15,7 @@ void alarmModal({context}) {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         child: Container(
-          width: MediaQuery.of(context).size.width - 32,
+          width: MediaSize.screenWidth - 32,
           padding: EdgeInsets.only(top: 36, bottom: 24, left: 16, right: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -46,7 +47,7 @@ void alarmModal({context}) {
                     GestureDetector(
                       onTap: () => Get.back(),
                       child: Container(
-                        width: MediaQuery.of(context).size.width - 64,
+                        width: MediaSize.screenWidth - 64,
                         alignment: Alignment.center,
                         height: 52,
                         decoration: BoxDecoration(
