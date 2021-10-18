@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:schooluniform/configs/style/homeStyle.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
-import 'drawerItemWidget.dart';
-import 'infoBadgeWidget.dart';
+import 'drawerItem.dart';
+import 'infoBadge.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({Key key, this.drawerItems}) : super(key: key);

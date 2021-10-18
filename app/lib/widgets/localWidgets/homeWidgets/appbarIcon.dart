@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schooluniform/configs/style/homeStyle.dart';
-import 'infoBadgeWidget.dart';
+import 'infoBadge.dart';
 
 class AppbarIcon extends StatelessWidget {
   const AppbarIcon(

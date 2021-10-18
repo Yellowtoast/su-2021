@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/constants/data.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/client/client.dart';
@@ -22,11 +21,6 @@ class ShopListPage extends StatefulWidget {
 
 class ShopListPageState extends State<ShopListPage> {
   var controller = ScrollController();
-
-  // String filterGender;
-  // String filterSeason;
-  // List filterClothType = [];
-  // List<String> filterLabel = ["성별 선택", "카테고리 선택"];
 
   bool loading = true;
   var uniformList = [];

@@ -1,4 +1,3 @@
-import "dart:io";
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,8 +6,12 @@ import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/configs/inputDeco.dart';
 import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/widgets/header/header.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/order/backStepButton.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/order/freshManOrNot.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/order/inputTextField.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/order/nextStepButton.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/order/uploadImage.dart';
 
 class OrderStep1 extends StatefulWidget {
   @override
@@ -85,13 +88,13 @@ class OrderStep1State extends State<OrderStep1> {
             ? ListView(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 children: [
-                  OrderSetStepButton(
+                  FreshmanOrNotButton(
                     onTapHandler: () {
                       handleStep2("입학");
                     },
                     text: "학생증이 없습니다 (올해 입학합니다)",
                   ),
-                  OrderSetStepButton(
+                  FreshmanOrNotButton(
                     onTapHandler: () {
                       handleStep2("재학");
                     },
@@ -104,197 +107,51 @@ class OrderStep1State extends State<OrderStep1> {
                     controller: _controller,
                     padding: EdgeInsets.symmetric(vertical: 32),
                     children: [
-                      Container(
-                          margin:
-                              EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                          padding: EdgeInsets.only(bottom: 24),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: BGColors.grey2, width: 1))),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "학생증 앞면",
-                                style: GoogleFonts.notoSans(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color(0xff444444)),
-                              ),
-                              imageFront == null
-                                  ? Container()
-                                  : Container(
-                                      margin: EdgeInsets.only(top: 12),
-                                      width: MediaSize.screenWidth - 32,
-                                      height: MediaSize.screenWidth - 32,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: FileImage(
-                                                File(imageFront.path)),
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
-                              Container(
-                                margin: EdgeInsets.only(top: 12),
-                              ),
-                              GestureDetector(
-                                  onTap: () {
-                                    if (imageFront == null)
-                                      addStudentIdImage("front");
-                                    else
-                                      handleImageChange("front");
-                                  },
-                                  child: Container(
-                                    width: MediaSize.screenWidth,
-                                    height: 50,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color: BGColors.grey2,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8))),
-                                    child: Text(
-                                      imageFront == null
-                                          ? "학생증 앞면 업로드"
-                                          : "사진변경",
-                                      style: GoogleFonts.notoSans(fontSize: 14),
-                                    ),
-                                  ))
-                            ],
-                          )),
-                      Container(
-                          margin:
-                              EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                          padding: EdgeInsets.only(bottom: 24),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: BGColors.grey2, width: 1))),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "학생증 뒷면",
-                                style: GoogleFonts.notoSans(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color(0xff444444)),
-                              ),
-                              imageBack == null
-                                  ? Container()
-                                  : Container(
-                                      margin: EdgeInsets.only(top: 12),
-                                      width: MediaSize.screenWidth - 32,
-                                      height: MediaSize.screenWidth - 32,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image:
-                                                FileImage(File(imageBack.path)),
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
-                              Container(
-                                margin: EdgeInsets.only(top: 12),
-                              ),
-                              GestureDetector(
-                                  onTap: () {
-                                    if (imageBack == null)
-                                      addStudentIdImage("back");
-                                    else
-                                      handleImageChange("back");
-                                  },
-                                  child: Container(
-                                    width: MediaSize.screenWidth,
-                                    height: 50,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color: BGColors.grey2,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8))),
-                                    child: Text(
-                                      imageBack == null ? "학생증 뒷면 업로드" : "사진변경",
-                                      style: GoogleFonts.notoSans(fontSize: 14),
-                                    ),
-                                  ))
-                            ],
-                          )),
+                      UploadImageBox(
+                        image: imageFront,
+                        label: "학생증 앞면",
+                        textBeforeUpload: "사진변경",
+                        textAfterUpload: "학생증 앞면 업로드",
+                        funcAfterUpload: () {
+                          handleImageChange("front");
+                        },
+                        funcBeforeUpload: () {
+                          addStudentIdImage("front");
+                        },
+                      ),
+                      UploadImageBox(
+                        image: imageBack,
+                        label: "학생증 뒷면",
+                        textBeforeUpload: "사진변경",
+                        textAfterUpload: "학생증 뒷면 업로드",
+                        funcAfterUpload: () {
+                          handleImageChange("back");
+                        },
+                        funcBeforeUpload: () {
+                          addStudentIdImage("back");
+                        },
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            margin: EdgeInsets.only(top: 24, left: 16),
-                            child: GestureDetector(
-                              onTap: () => setState(() {
-                                step = 1;
-                              }),
-                              child: Container(
-                                width: 52,
-                                height: 52,
-                                padding: EdgeInsets.all(18),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.black,
-                                ),
-                                child: Image(
-                                  image: AssetImage(
-                                      "assets/icon/arrow-left-white.png"),
-                                ),
-                              ),
-                            ),
-                          ),
+                          BackStepButton(activeFunction: () {
+                            setState(() {
+                              step = 1;
+                            });
+                          }),
                           (imageFront == null || imageBack == null)
-                              ? Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                  ),
-                                  alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(top: 24),
-                                  child: GestureDetector(
-                                    child: Container(
-                                      width: 52,
-                                      height: 52,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: BGColors.grey6),
-                                      padding: EdgeInsets.all(18),
-                                      child: Image(
-                                        image: AssetImage(
-                                            "assets/icon/arrow-right-white.png"),
-                                        width: 16,
-                                        height: 16,
-                                      ),
-                                    ),
-                                  ))
-                              : Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                  ),
-                                  alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(top: 24),
-                                  child: GestureDetector(
-                                    onTap: () => Get.toNamed(
-                                        Routes.shopStep2Url,
-                                        arguments: ShopUniformInputData(
-                                            code: code,
-                                            certFront: imageFront,
-                                            certBack: imageBack)),
-                                    child: Container(
-                                      width: 52,
-                                      height: 52,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          gradient: BGColors.gradSig,
-                                          boxShadow: [shadowSig]),
-                                      padding: EdgeInsets.all(18),
-                                      child: Image(
-                                        image: AssetImage(
-                                            "assets/icon/arrow-right-white.png"),
-                                        width: 16,
-                                        height: 16,
-                                      ),
-                                    ),
-                                  ))
+                              ? NextStepButton(
+                                  active: false,
+                                )
+                              : NextStepButton(
+                                  active: true,
+                                  activeFunction: () => Get.toNamed(
+                                      Routes.shopStep2Url,
+                                      arguments: ShopUniformInputData(
+                                          code: code,
+                                          certFront: imageFront,
+                                          certBack: imageBack)),
+                                )
                         ],
                       )
                     ],
@@ -302,192 +159,71 @@ class OrderStep1State extends State<OrderStep1> {
                 : ListView(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "이름",
-                          style: GoogleFonts.notoSans(fontSize: 12),
-                        ),
+                      InputLabel(
+                        text: "이름",
                       ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 24),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 14),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1, color: BGColors.grey3)),
-                          child: TextField(
-                            onChanged: (text) {
-                              setState(() {
-                                certName = text;
-                              });
-                            },
-                            cursorColor: BGColors.colorSig1,
-                            keyboardType: TextInputType.text,
-                            decoration: BGinputDecoStyle("입학 예정자 이름을 적어주세요"),
-                            maxLength: 10,
-                          ),
-                        ),
+                      InputTextField(
+                        onChanged: (text) {
+                          setState(() {
+                            certName = text;
+                          });
+                        },
+                        inputDecoration: BGinputDecoStyle("입학 예정자 이름을 적어주세요"),
+                        maxTextLength: 10,
                       ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "생일",
-                          style: GoogleFonts.notoSans(fontSize: 12),
-                        ),
+                      InputLabel(
+                        text: "생일",
                       ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 24),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 14),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1, color: BGColors.grey3)),
-                          child: TextField(
-                            onChanged: (text) {
-                              setState(() {
-                                certBirth = text;
-                              });
-                            },
-                            cursorColor: BGColors.colorSig1,
-                            keyboardType: TextInputType.phone,
-                            decoration: BGinputDecoStyle("예: 20050101"),
-                            maxLength: 8,
-                          ),
-                        ),
+                      InputTextField(
+                        onChanged: (text) {
+                          setState(() {
+                            certBirth = text;
+                          });
+                        },
+                        inputDecoration: BGinputDecoStyle("예: 20050101"),
+                        maxTextLength: 8,
                       ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "입학 예정 학교",
-                          style: GoogleFonts.notoSans(fontSize: 12),
-                        ),
+                      InputLabel(
+                        text: "입학 예정 학교",
                       ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 24),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 14),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1, color: BGColors.grey3)),
-                          child: TextField(
-                            onChanged: (text) {
-                              setState(() {
-                                certSchool = text;
-                              });
-                            },
-                            cursorColor: BGColors.colorSig1,
-                            keyboardType: TextInputType.streetAddress,
-                            decoration: BGinputDecoStyle("입학예정학교를 입력해주세요"),
-                          ),
-                        ),
+                      InputTextField(
+                        onChanged: (text) {
+                          setState(() {
+                            certSchool = text;
+                          });
+                        },
+                        inputDecoration: BGinputDecoStyle("입학예정학교를 입력해주세요"),
                       ),
+
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            margin: EdgeInsets.only(top: 24),
-                            child: GestureDetector(
-                              onTap: () => setState(() {
-                                step = 1;
-                              }),
-                              child: Container(
-                                width: 52,
-                                height: 52,
-                                padding: EdgeInsets.all(18),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.black,
-                                ),
-                                child: Image(
-                                  image: AssetImage(
-                                      "assets/icon/arrow-left-white.png"),
-                                ),
-                              ),
-                            ),
-                          ),
+                          BackStepButton(activeFunction: () {
+                            setState(() {
+                              step = 1;
+                            });
+                          }),
                           (certName == null ||
                                   certBirth == null ||
                                   certBirth.length != 8 ||
                                   certSchool == null)
-                              ? Container(
-                                  alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(top: 24),
-                                  child: GestureDetector(
-                                    child: Container(
-                                      width: 52,
-                                      height: 52,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: BGColors.grey6),
-                                      padding: EdgeInsets.all(18),
-                                      child: Image(
-                                        image: AssetImage(
-                                            "assets/icon/arrow-right-white.png"),
-                                        width: 16,
-                                        height: 16,
-                                      ),
-                                    ),
-                                  ))
-                              : Container(
-                                  alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(top: 24),
-                                  child: GestureDetector(
-                                    onTap: () => Get.toNamed(
-                                        Routes.shopStep2Url,
-                                        arguments: ShopUniformInputData(
-                                            code: code,
-                                            certName: certName,
-                                            certBirth: certBirth,
-                                            certSchool: certSchool,
-                                            certFront: imageFront,
-                                            certBack: imageBack)),
-                                    child: Container(
-                                      width: 52,
-                                      height: 52,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          gradient: BGColors.gradSig,
-                                          boxShadow: [shadowSig]),
-                                      padding: EdgeInsets.all(18),
-                                      child: Image(
-                                        image: AssetImage(
-                                            "assets/icon/arrow-right-white.png"),
-                                        width: 16,
-                                        height: 16,
-                                      ),
-                                    ),
-                                  ))
+                              ? NextStepButton(active: false)
+                              : NextStepButton(
+                                  active: true,
+                                  activeFunction: () => Get.toNamed(
+                                      Routes.shopStep2Url,
+                                      arguments: ShopUniformInputData(
+                                          code: code,
+                                          certName: certName,
+                                          certBirth: certBirth,
+                                          certSchool: certSchool,
+                                          certFront: imageFront,
+                                          certBack: imageBack)),
+                                )
                         ],
                       ),
                     ],
                   ));
-  }
-}
-
-class OrderSetStepButton extends StatelessWidget {
-  const OrderSetStepButton({Key key, this.text, this.onTapHandler})
-      : super(key: key);
-
-  final String text;
-  final Function onTapHandler;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTapHandler,
-      child: Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(16),
-        child: Text(
-          text,
-          style: GoogleFonts.notoSans(fontSize: 14),
-        ),
-      ),
-    );
   }
 }

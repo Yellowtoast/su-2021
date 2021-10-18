@@ -14,12 +14,12 @@ import 'package:schooluniform/utils/getMostDonateSchool.dart';
 import 'package:schooluniform/utils/time/getCurrent.dart';
 import 'package:schooluniform/widgets/footer/footer.dart';
 import 'package:schooluniform/widgets/header/header.dart';
-import 'package:schooluniform/widgets/localWidgets/homeWidgets/appbarIconWidget.dart';
-import 'package:schooluniform/widgets/localWidgets/homeWidgets/bannerButtonWidget.dart';
-import 'package:schooluniform/widgets/localWidgets/homeWidgets/countUpItemWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/appbarIcon.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/bannerButton.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/countUpItem.dart';
 import 'package:schooluniform/widgets/localWidgets/homeWidgets/drawerWidget.dart';
-import 'package:schooluniform/widgets/localWidgets/homeWidgets/slideBannerWidget.dart';
-import 'package:schooluniform/widgets/localWidgets/homeWidgets/swipeBannerItemWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/slideBanner.dart';
+import 'package:schooluniform/widgets/localWidgets/homeWidgets/slideBannerItem.dart';
 
 class HomePage extends StatefulWidget {
   @override
