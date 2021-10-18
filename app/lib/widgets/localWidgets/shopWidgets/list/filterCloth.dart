@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/types/clothFilterData.dart';
 import 'package:schooluniform/widgets/header/header2.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 class ShopListClothFilter extends StatefulWidget {
   @override
@@ -127,7 +127,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             fontSize: 14,
                                             color: clothType.indexOf("자켓") == -1
                                                 ? Colors.black
-                                                : colorSig2),
+                                                : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -159,7 +159,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             color:
                                                 clothType.indexOf("넥타이") == -1
                                                     ? Colors.black
-                                                    : colorSig2),
+                                                    : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -190,7 +190,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             fontSize: 14,
                                             color: clothType.indexOf("조끼") == -1
                                                 ? Colors.black
-                                                : colorSig2),
+                                                : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -221,7 +221,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             fontSize: 14,
                                             color: clothType.indexOf("셔츠") == -1
                                                 ? Colors.black
-                                                : colorSig2),
+                                                : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -252,7 +252,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             fontSize: 14,
                                             color: clothType.indexOf("셔츠") == -1
                                                 ? Colors.black
-                                                : colorSig2),
+                                                : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -283,7 +283,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             fontSize: 14,
                                             color: clothType.indexOf("상의") == -1
                                                 ? Colors.black
-                                                : colorSig2),
+                                                : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -314,7 +314,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             fontSize: 14,
                                             color: clothType.indexOf("상의") == -1
                                                 ? Colors.black
-                                                : colorSig2),
+                                                : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -355,7 +355,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                                   : "하의") ==
                                               -1
                                           ? Colors.black
-                                          : colorSig2),
+                                          : BGColors.colorSig2),
                                 ),
                               ],
                             )),
@@ -385,7 +385,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                             fontSize: 14,
                                             color: clothType.indexOf("치마") == -1
                                                 ? Colors.black
-                                                : colorSig2),
+                                                : BGColors.colorSig2),
                                       ),
                                     ],
                                   )),
@@ -424,7 +424,7 @@ class ShopListClothFilterState extends State<ShopListClothFilter> {
                                 season: season, clothType: clothType)),
                         child: Container(
                           decoration: BoxDecoration(
-                            gradient: gradSig,
+                            gradient: BGColors.gradSig,
                           ),
                           padding: EdgeInsets.only(
                               bottom: MediaQuery.of(context).padding.bottom),

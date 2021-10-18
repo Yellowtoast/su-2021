@@ -14,7 +14,7 @@ class SelectedFilterBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          gradient: gradSig,
+          gradient: BGColors.gradSig,
         ),
         padding: BGShopEdgeInsets.filterBoxPadding,
         height: BGShopWidgetSize.filterBoxHeight,

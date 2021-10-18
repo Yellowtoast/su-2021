@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 showModal({context, label1, onClickForLabel1, label2, onClickForLabel2}) {
   showModalBottomSheet(
@@ -51,7 +51,7 @@ showModal({context, label1, onClickForLabel1, label2, onClickForLabel2}) {
                     alignment: Alignment.center,
                     height: 46,
                     decoration: BoxDecoration(
-                        color: colorSig2,
+                        color: BGColors.colorSig2,
                         borderRadius: BorderRadius.circular(8)),
                     child: Text(label2,
                         style: GoogleFonts.notoSans(

@@ -18,8 +18,8 @@ import 'package:schooluniform/widgets/localWidgets/donateWidgets/uniform/input.d
 import 'package:schooluniform/widgets/modal/requestModal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 class DonateStep5 extends StatefulWidget {
   @override
@@ -300,7 +300,7 @@ class DonateStep5State extends State<DonateStep5> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                               gradient: BGColors.gradSig,
-                              boxShadow: [shadowSig]),
+                              boxShadow: [BGBoxShadow.shadowSig]),
                           child: Text(
                             "기부하기",
                             style: GoogleFonts.notoSans(

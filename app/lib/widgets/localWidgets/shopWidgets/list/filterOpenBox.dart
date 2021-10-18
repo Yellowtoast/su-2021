@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/school/filteringBoxWidget.dart';
 
 class FilterOpenBox extends StatelessWidget {
   const FilterOpenBox(

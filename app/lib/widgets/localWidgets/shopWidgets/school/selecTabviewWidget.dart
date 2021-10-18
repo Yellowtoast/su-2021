@@ -40,8 +40,8 @@ class SelectionTabView extends StatelessWidget {
                     ),
                   )),
                   child: TabBar(
-                    indicatorColor: colorSig1,
-                    labelColor: colorSig1,
+                    indicatorColor: BGColors.colorSig1,
+                    labelColor: BGColors.colorSig1,
                     labelStyle: BGShopTextStyle.tabBarLabelStyle,
                     unselectedLabelColor: Color(0x80000000),
                     unselectedLabelStyle:

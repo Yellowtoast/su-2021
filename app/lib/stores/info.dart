@@ -26,7 +26,8 @@ abstract class InfoStoreBase with Store {
     ];
 
     String fcmToken = await FirebaseMessaging.instance.getToken();
-    final prefs = await SharedPreferences.getInstance();
+    // print(fcmToken);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userInitialData = {
       "total": 0,
@@ -41,7 +42,9 @@ abstract class InfoStoreBase with Store {
     };
 
     var token = prefs.getString('x-access-token');
+    print(token);
     var uid = prefs.getString('userId');
+    print(uid);
 
     try {
       if (token != '' || uid != '') {
@@ -49,9 +52,9 @@ abstract class InfoStoreBase with Store {
             await NetworkHandler().get('${UserApiRoutes.GET}?targetUid=$uid');
 
         if (user == null) {
-          var newUser =
-              await NetworkHandler().post(UserApiRoutes.SIGN_IN, signInInfo);
-
+          var newUser = await NetworkHandler()
+              .signinPost(UserApiRoutes.SIGN_IN, signInInfo);
+          print(newUser);
           prefs.setString('x-access-token', newUser["token"]);
           prefs.setString('userId', newUser["userId"]);
           userInfo = userInitialData;

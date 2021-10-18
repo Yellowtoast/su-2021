@@ -13,7 +13,7 @@ import 'package:schooluniform/pages/home/homePage.dart';
 import 'package:schooluniform/pages/init/initPage.dart';
 import 'package:schooluniform/pages/policy/page.dart';
 import 'package:schooluniform/pages/ranking/school/page.dart';
-import 'package:schooluniform/pages/shop/school/page.dart';
+import 'package:schooluniform/pages/shop/school/shopSchoolpage.dart';
 import 'package:schooluniform/pages/shop/list/shopListpage.dart';
 import 'package:schooluniform/pages/shop/order/uniform/step1.dart';
 import 'package:schooluniform/pages/shop/order/uniform/step2.dart';
@@ -26,8 +26,8 @@ import 'package:schooluniform/pages/user/donate/uniform/page.dart';
 import 'package:schooluniform/pages/user/purchase/uniform/page.dart';
 import 'package:schooluniform/pages/user/purchase/uniform/reject/reject.dart';
 import 'package:schooluniform/pages/user/support/page.dart';
-import 'package:schooluniform/widgets/localWidgets/shop/list/filterClothPage.dart';
-import 'package:schooluniform/widgets/localWidgets/shop/list/filterGender.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/list/filterCloth.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/list/filterGender.dart';
 
 class Routes {
   static const String initUrl = "/init";

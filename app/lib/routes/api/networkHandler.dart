@@ -36,6 +36,26 @@ class NetworkHandler {
     }
   }
 
+  Future signinPost(String url, Map<dynamic, dynamic> body) async {
+    url = formater(url);
+    print(body);
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          // "x-access-token": token,
+        },
+        body: json.encode(body),
+      );
+      return jsonDecode(response.body);
+    } catch (err) {
+      print('err message post');
+      print(err);
+      return null;
+    }
+  }
+
   Future post(String url, Map<dynamic, dynamic> body) async {
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("x-access-token");

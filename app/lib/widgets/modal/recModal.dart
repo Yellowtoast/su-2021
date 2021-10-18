@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/color.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 void openRecModal({
   context,

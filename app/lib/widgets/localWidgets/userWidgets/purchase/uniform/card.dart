@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
 

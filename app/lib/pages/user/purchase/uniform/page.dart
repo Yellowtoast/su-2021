@@ -9,7 +9,7 @@ import 'package:schooluniform/routes/api/user.dart';
 
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
-import 'package:schooluniform/widgets/localWidgets/user/donate/uniform/card.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/list/productCard.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,7 +95,7 @@ class UserPurchaseUniformPageState extends State<UserPurchaseUniformPage> {
           ? LoadingPage()
           : ListView(
               children: [
-                for (var d in list) card(context: context, data: d),
+                for (var d in list) ProductCard(d),
               ],
             ),
     );

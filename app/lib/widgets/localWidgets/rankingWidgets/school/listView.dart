@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/utils/getRankingSchool.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 class RankingSchoolListViewWidget extends StatelessWidget {
   final String ref;
@@ -31,7 +31,7 @@ class RankingSchoolListViewWidget extends StatelessWidget {
                             style: GoogleFonts.montserrat(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: colorSig2),
+                                color: BGColors.colorSig2),
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 12),
@@ -71,7 +71,7 @@ class RankingSchoolListViewWidget extends StatelessWidget {
                                 (school["total"] / school["maxValue"]),
                         height: 8,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                           borderRadius: BorderRadius.all(Radius.circular(2)),
                         ),
                       ),

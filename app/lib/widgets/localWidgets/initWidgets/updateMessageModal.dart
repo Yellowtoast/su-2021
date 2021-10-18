@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 void updateMessageModal({context}) {
   showDialog(
@@ -56,7 +56,7 @@ void updateMessageModal({context}) {
                             alignment: Alignment.center,
                             height: 52,
                             decoration: BoxDecoration(
-                              gradient: gradSig,
+                              gradient: BGColors.gradSig,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                             ),

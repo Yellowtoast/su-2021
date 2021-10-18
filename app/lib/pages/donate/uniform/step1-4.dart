@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/boxDeco.dart';
 
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/inputDeco.dart';
 
 import 'package:schooluniform/types/donateState1_4Data.dart';
 import 'package:schooluniform/widgets/header/header.dart';
@@ -131,7 +132,7 @@ class DonateStep1_4State extends State<DonateStep1_4> {
                               },
                               cursorColor: BGColors.colorSig1,
                               keyboardType: TextInputType.text,
-                              decoration: inputDecoStyle("옷 사이즈를 입력해주세요"),
+                              decoration: BGinputDecoStyle("옷 사이즈를 입력해주세요"),
                               maxLength: 50,
                             ),
                           ),
@@ -153,8 +154,8 @@ class DonateStep1_4State extends State<DonateStep1_4> {
                         height: 52,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            gradient: gradSig,
-                            boxShadow: [shadowSig]),
+                            gradient: BGColors.gradSig,
+                            boxShadow: [BGBoxShadow.shadowSig]),
                         padding: EdgeInsets.all(18),
                         child: Image(
                           image:

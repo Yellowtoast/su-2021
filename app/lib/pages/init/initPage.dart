@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
 import 'package:schooluniform/routes/client/client.dart';
 
 import 'package:schooluniform/configs/stores.dart';
@@ -63,7 +62,6 @@ class InitPageState extends State<InitPage> {
   @override
   void initState() {
     super.initState();
-    MediaSize().setMediaSize(context);
     handleAuth();
   }
 

@@ -1,9 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:schooluniform/constants/data.dart';
-
-import 'package:schooluniform/widgets/localWidgets/shop/school/listViewWidget.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/school/listViewWidget.dart';
 import 'package:schooluniform/widgets/localWidgets/shopWidgets/school/selecTabviewWidget.dart';
 
 class ShopFilterPage extends StatefulWidget {

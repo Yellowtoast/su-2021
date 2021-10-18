@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/widgets/localWidgets/shopWidgets/list/productCard.dart';
 
 class ListGridView extends StatelessWidget {

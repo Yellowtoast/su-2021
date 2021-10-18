@@ -5,7 +5,7 @@ import 'package:schooluniform/routes/api/networkHandler.dart';
 
 import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 Widget card({context, data, itemCode, onClickToItem, onClickToDeleteWidget}) {
   print(itemCode);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/boxDeco.dart';
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/inputDeco.dart';
 
 class InputWidget extends StatelessWidget {
   final String label;
@@ -29,9 +30,9 @@ class InputWidget extends StatelessWidget {
                 border: Border.all(width: 1, color: BGColors.grey3)),
             child: TextField(
               onChanged: onChanged,
-              cursorColor: colorSig1,
+              cursorColor: BGColors.colorSig1,
               keyboardType: TextInputType.streetAddress,
-              decoration: inputDecoStyle(placeholder),
+              decoration: BGinputDecoStyle(placeholder),
               maxLength: maxLength,
             ),
           ),

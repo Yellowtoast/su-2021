@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
+import 'package:schooluniform/constants/data.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/types/clothFilterData.dart';
@@ -10,11 +11,9 @@ import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
 
 import 'package:schooluniform/routes/api/networkHandler.dart';
-import 'package:schooluniform/widgets/localWidgets/shop/school/filteringBoxWidget.dart';
 import 'package:schooluniform/widgets/localWidgets/shopWidgets/list/filterOpenBox.dart';
 import 'package:schooluniform/widgets/localWidgets/shopWidgets/list/listGridView.dart';
-
-import 'local_widgets/noResultPage.dart';
+import 'package:schooluniform/widgets/localWidgets/shopWidgets/list/noResultPage.dart';
 
 class ShopListPage extends StatefulWidget {
   @override
@@ -24,9 +23,10 @@ class ShopListPage extends StatefulWidget {
 class ShopListPageState extends State<ShopListPage> {
   var controller = ScrollController();
 
-  String filterGender;
-  String filterSeason;
-  List filterClothType = [];
+  // String filterGender;
+  // String filterSeason;
+  // List filterClothType = [];
+  // List<String> filterLabel = ["성별 선택", "카테고리 선택"];
 
   bool loading = true;
   var uniformList = [];
@@ -228,7 +228,7 @@ class ShopListPageState extends State<ShopListPage> {
                       FilterOpenBox(
                         filterHandler: handleGenderFilter,
                         firstFilter: filterGender,
-                        labelText: "성별 선택",
+                        labelText: filterLabel[0],
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 16),
@@ -237,7 +237,7 @@ class ShopListPageState extends State<ShopListPage> {
                         filterHandler: handleClothFilter,
                         firstFilter: filterSeason,
                         secondFilter: filterClothType,
-                        labelText: "카테고리 선택",
+                        labelText: filterLabel[1],
                       )
                     ],
                   ),

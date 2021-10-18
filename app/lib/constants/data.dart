@@ -42,3 +42,8 @@ var highSchools = [
   "학남고등학교",
   "함지고등학교",
 ];
+
+String filterGender;
+String filterSeason;
+List filterClothType = [];
+List<String> filterLabel = ["성별 선택", "카테고리 선택"];

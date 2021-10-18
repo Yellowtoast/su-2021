@@ -5,7 +5,7 @@ import 'package:schooluniform/configs/color.dart';
 import 'package:schooluniform/pages/shop/show/page.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 Widget ProductCard(data) {
   String title = "${data["filter-gender"]} / ${data["filter-season"]} - ";

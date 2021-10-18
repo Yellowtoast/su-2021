@@ -31,9 +31,9 @@ class Footer extends StatelessWidget {
                   margin: EdgeInsets.only(left: 8),
                   child: GestureDetector(
                     onTap: () =>
-                        launch("tel://${infoStore.localInfo["officePhone"]}"),
+                        launch("tel://${BGinfoStore.localInfo["officePhone"]}"),
                     child: Text(
-                      "${infoStore.localInfo["officePhone"]}",
+                      "${BGinfoStore.localInfo["officePhone"]}",
                       style: footerStyle,
                     ),
                   ),
@@ -42,9 +42,9 @@ class Footer extends StatelessWidget {
                   margin: EdgeInsets.only(left: 8),
                   child: GestureDetector(
                     onTap: () => launch(
-                        "tel://${infoStore.localInfo["officePhoneDonation"]}"),
+                        "tel://${BGinfoStore.localInfo["officePhoneDonation"]}"),
                     child: Text(
-                      "${infoStore.localInfo["officePhoneDonation"]}",
+                      "${BGinfoStore.localInfo["officePhoneDonation"]}",
                       style: footerStyle,
                     ),
                   ),
@@ -53,9 +53,9 @@ class Footer extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => launch("tel://${infoStore.localInfo["centerPhone"]}"),
+            onTap: () => launch("tel://${BGinfoStore.localInfo["centerPhone"]}"),
             child: Text(
-              "북구자원봉사센터 ${infoStore.localInfo["centerPhone"]}",
+              "북구자원봉사센터 ${BGinfoStore.localInfo["centerPhone"]}",
               style: footerStyle,
             ),
           )

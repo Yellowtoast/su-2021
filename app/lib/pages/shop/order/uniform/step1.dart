@@ -3,11 +3,11 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:schooluniform/configs/boxDeco.dart';
 import 'package:schooluniform/configs/color.dart';
+import 'package:schooluniform/configs/inputDeco.dart';
 import 'package:schooluniform/pages/shop/order/uniform/step3.dart';
 import 'package:schooluniform/routes/client/client.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 
 class OrderStep1 extends StatefulWidget {
@@ -34,7 +34,7 @@ class OrderStep1State extends State<OrderStep1> {
   final picker = ImagePicker();
   ScrollController _controller = ScrollController();
 
-  addImage(type) async {
+  addStudentIdImage(type) async {
     final pickedFile = await picker.getImage(
         source: ImageSource.camera, maxHeight: 600, maxWidth: 600);
     if (pickedFile != null) {
@@ -52,7 +52,7 @@ class OrderStep1State extends State<OrderStep1> {
     }
   }
 
-  removeImage(type) {
+  removeStudentIdImage(type) {
     setState(() {
       if (type == "front") imageFront = null;
       if (type == "back") imageBack = null;
@@ -85,27 +85,17 @@ class OrderStep1State extends State<OrderStep1> {
             ? ListView(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 children: [
-                  GestureDetector(
-                    onTap: () => handleStep2("입학"),
-                    child: Container(
-                      color: Colors.white,
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        "학생증이 없습니다 (올해 입학합니다)",
-                        style: GoogleFonts.notoSans(fontSize: 14),
-                      ),
-                    ),
+                  OrderSetStepButton(
+                    onTapHandler: () {
+                      handleStep2("입학");
+                    },
+                    text: "학생증이 없습니다 (올해 입학합니다)",
                   ),
-                  GestureDetector(
-                    onTap: () => handleStep2("재학"),
-                    child: Container(
-                      color: Colors.white,
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        "학생증이 있습니다 (이미 재학중입니다)",
-                        style: GoogleFonts.notoSans(fontSize: 14),
-                      ),
-                    ),
+                  OrderSetStepButton(
+                    onTapHandler: () {
+                      handleStep2("재학");
+                    },
+                    text: "학생증이 있습니다 (이미 재학중입니다)",
                   ),
                 ],
               )
@@ -151,7 +141,7 @@ class OrderStep1State extends State<OrderStep1> {
                               GestureDetector(
                                   onTap: () {
                                     if (imageFront == null)
-                                      addImage("front");
+                                      addStudentIdImage("front");
                                     else
                                       handleImageChange("front");
                                   },
@@ -209,7 +199,7 @@ class OrderStep1State extends State<OrderStep1> {
                               GestureDetector(
                                   onTap: () {
                                     if (imageBack == null)
-                                      addImage("back");
+                                      addStudentIdImage("back");
                                     else
                                       handleImageChange("back");
                                   },
@@ -294,7 +284,7 @@ class OrderStep1State extends State<OrderStep1> {
                                       height: 52,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          gradient: gradSig,
+                                          gradient: BGColors.gradSig,
                                           boxShadow: [shadowSig]),
                                       padding: EdgeInsets.all(18),
                                       child: Image(
@@ -333,9 +323,9 @@ class OrderStep1State extends State<OrderStep1> {
                                 certName = text;
                               });
                             },
-                            cursorColor: colorSig1,
+                            cursorColor: BGColors.colorSig1,
                             keyboardType: TextInputType.text,
-                            decoration: inputDecoStyle("입학 예정자 이름을 적어주세요"),
+                            decoration: BGinputDecoStyle("입학 예정자 이름을 적어주세요"),
                             maxLength: 10,
                           ),
                         ),
@@ -361,9 +351,9 @@ class OrderStep1State extends State<OrderStep1> {
                                 certBirth = text;
                               });
                             },
-                            cursorColor: colorSig1,
+                            cursorColor: BGColors.colorSig1,
                             keyboardType: TextInputType.phone,
-                            decoration: inputDecoStyle("예: 20050101"),
+                            decoration: BGinputDecoStyle("예: 20050101"),
                             maxLength: 8,
                           ),
                         ),
@@ -389,9 +379,9 @@ class OrderStep1State extends State<OrderStep1> {
                                 certSchool = text;
                               });
                             },
-                            cursorColor: colorSig1,
+                            cursorColor: BGColors.colorSig1,
                             keyboardType: TextInputType.streetAddress,
-                            decoration: inputDecoStyle("입학예정학교를 입력해주세요"),
+                            decoration: BGinputDecoStyle("입학예정학교를 입력해주세요"),
                           ),
                         ),
                       ),
@@ -461,7 +451,7 @@ class OrderStep1State extends State<OrderStep1> {
                                       height: 52,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          gradient: gradSig,
+                                          gradient: BGColors.gradSig,
                                           boxShadow: [shadowSig]),
                                       padding: EdgeInsets.all(18),
                                       child: Image(
@@ -476,5 +466,28 @@ class OrderStep1State extends State<OrderStep1> {
                       ),
                     ],
                   ));
+  }
+}
+
+class OrderSetStepButton extends StatelessWidget {
+  const OrderSetStepButton({Key key, this.text, this.onTapHandler})
+      : super(key: key);
+
+  final String text;
+  final Function onTapHandler;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTapHandler,
+      child: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(16),
+        child: Text(
+          text,
+          style: GoogleFonts.notoSans(fontSize: 14),
+        ),
+      ),
+    );
   }
 }

@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/widgets/header/header.dart';
 import 'package:schooluniform/widgets/modal/recModal.dart';
 import 'package:schooluniform/widgets/modal/supportModal.dart';
@@ -24,7 +24,7 @@ class SupportPageState extends State<SupportPage> {
       padding: EdgeInsets.only(top: 10, right: 24, bottom: 10, left: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22.0),
-        gradient: gradSig,
+        gradient: BGColors.gradSig,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -104,7 +104,7 @@ class SupportPageState extends State<SupportPage> {
                         width: 3,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                       ),
                       Text(
@@ -132,7 +132,7 @@ class SupportPageState extends State<SupportPage> {
                         width: 3,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                       ),
                       Text(
@@ -160,7 +160,7 @@ class SupportPageState extends State<SupportPage> {
                         width: 3,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                       ),
                       Text(
@@ -188,7 +188,7 @@ class SupportPageState extends State<SupportPage> {
                         width: 3,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                       ),
                       Text(
@@ -216,7 +216,7 @@ class SupportPageState extends State<SupportPage> {
                         width: 3,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                       ),
                       Text(
@@ -244,7 +244,7 @@ class SupportPageState extends State<SupportPage> {
                         width: 3,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                       ),
                       Text(
@@ -272,7 +272,7 @@ class SupportPageState extends State<SupportPage> {
                         width: 3,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                         ),
                       ),
                       Text(
@@ -316,13 +316,13 @@ class SupportPageState extends State<SupportPage> {
                                 height: 52,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  gradient: gradSig,
+                                  gradient: BGColors.gradSig,
                                   boxShadow: [
                                     BoxShadow(
                                         offset: Offset(0, 12),
                                         blurRadius: 16,
                                         spreadRadius: -8,
-                                        color: colorSig2)
+                                        color: BGColors.colorSig2)
                                   ],
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8)),

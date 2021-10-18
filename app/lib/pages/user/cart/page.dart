@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
 import 'package:schooluniform/configs/stores.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 class UserCartPage extends StatefulWidget {
   @override

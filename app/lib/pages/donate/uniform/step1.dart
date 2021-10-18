@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/routes/client/client.dart';
 import 'package:schooluniform/types/donateInfo.dart';
 import 'package:schooluniform/types/donateState1_4Data.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 void buy({context, onClickToCancel, onClickToBuy}) {
   showDialog(
@@ -68,7 +68,7 @@ void buy({context, onClickToCancel, onClickToBuy}) {
                         alignment: Alignment.center,
                         height: 52,
                         decoration: BoxDecoration(
-                          gradient: gradSig,
+                          gradient: BGColors.gradSig,
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Text(

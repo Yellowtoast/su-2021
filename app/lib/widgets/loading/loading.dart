@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'dart:async';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 class LoadingPage extends StatefulWidget {
   @override

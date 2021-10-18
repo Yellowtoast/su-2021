@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:schooluniform/configs/boxDeco.dart';
+import 'package:schooluniform/configs/inputDeco.dart';
 import 'package:schooluniform/routes/api/info.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/api/user.dart';
@@ -14,7 +15,7 @@ import 'package:schooluniform/widgets/modal/alarmModal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:schooluniform/routes/api/networkHandler.dart';
 import 'package:schooluniform/configs/color.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 
 class ShopUniformInputData {
   ShopUniformInputData(
@@ -212,9 +213,9 @@ class OrderStep3State extends State<OrderStep3> {
                         name = text;
                       });
                     },
-                    cursorColor: colorSig1,
+                    cursorColor: BGColors.colorSig1,
                     keyboardType: TextInputType.text,
-                    decoration: inputDecoStyle("구매자 이름을 적어주세요"),
+                    decoration: BGinputDecoStyle("구매자 이름을 적어주세요"),
                     maxLength: 10,
                   ),
                 ),
@@ -238,9 +239,9 @@ class OrderStep3State extends State<OrderStep3> {
                         phone = text;
                       });
                     },
-                    cursorColor: colorSig1,
+                    cursorColor: BGColors.colorSig1,
                     keyboardType: TextInputType.phone,
-                    decoration: inputDecoStyle("- 생략"),
+                    decoration: BGinputDecoStyle("- 생략"),
                     maxLength: 11,
                   ),
                 ),
@@ -270,9 +271,10 @@ class OrderStep3State extends State<OrderStep3> {
                                   address = text;
                                 });
                               },
-                              cursorColor: colorSig1,
+                              cursorColor: BGColors.colorSig1,
                               keyboardType: TextInputType.streetAddress,
-                              decoration: inputDecoStyle("배송을 요청할 주소를 입력해주세요"),
+                              decoration:
+                                  BGinputDecoStyle("배송을 요청할 주소를 입력해주세요"),
                             ),
                           ),
                         ),
@@ -312,10 +314,10 @@ class OrderStep3State extends State<OrderStep3> {
                         "전문보기",
                         style: GoogleFonts.notoSans(
                             fontSize: 14,
-                            color: colorSig2,
+                            color: BGColors.colorSig2,
                             decoration: TextDecoration.underline,
                             height: 1,
-                            decorationColor: colorSig2),
+                            decorationColor: BGColors.colorSig2),
                       ),
                     )
                   ],
@@ -358,8 +360,8 @@ class OrderStep3State extends State<OrderStep3> {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
-                              gradient: gradSig,
-                              boxShadow: [shadowSig]),
+                              gradient: BGColors.gradSig,
+                              boxShadow: [BGBoxShadow.shadowSig]),
                           child: Text(
                             "구매하기 - 무료",
                             style: GoogleFonts.notoSans(

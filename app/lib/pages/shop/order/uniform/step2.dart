@@ -99,7 +99,7 @@ class OrderStep2State extends State<OrderStep2> {
                                       child: Text(
                                         "위치보기",
                                         style: GoogleFonts.notoSans(
-                                            color: colorSig1,
+                                            color: BGColors.colorSig1,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12),
                                       ),
@@ -199,8 +199,8 @@ class OrderStep2State extends State<OrderStep2> {
                               height: 52,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  gradient: gradSig,
-                                  boxShadow: [shadowSig]),
+                                  gradient: BGColors.gradSig,
+                                  boxShadow: [BGBoxShadow.shadowSig]),
                               padding: EdgeInsets.all(18),
                               child: Image(
                                 image: AssetImage(

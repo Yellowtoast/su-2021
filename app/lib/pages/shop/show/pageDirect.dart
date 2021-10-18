@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schooluniform/configs/style/mediaQuerySize.dart';
+import 'package:schooluniform/configs/style/mediaSize.dart';
 import 'package:schooluniform/routes/api/uniform.dart';
 import 'package:schooluniform/routes/api/user.dart';
 import 'package:schooluniform/widgets/loading/loading.dart';
@@ -289,7 +289,7 @@ class ShopShowDirectPageState extends State<ShopShowDirectPage> {
                                         onTap: buyNow,
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            gradient: gradSig,
+                                            gradient: BGColors.gradSig,
                                           ),
                                           padding: EdgeInsets.only(
                                               bottom: MediaQuery.of(context)
